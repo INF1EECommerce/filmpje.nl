@@ -8,7 +8,7 @@
    <title>Filmpje</title>
    <link rel="stylesheet" href="css/main.css">
    <link rel="stylesheet" href="css/reserveren.css">
-   
+   <?php include_once '/icepay/icepay.php' ?>;
    <script>
     
 ​</script>
@@ -134,7 +134,9 @@
                 </td>
             </tr>
             <tr><td>&nbsp;</td></tr>
-            <tr><td><input type="hidden" name="amount" value="15.00"><input type="submit" value="Bestelling plaatsen"></td>
+            <tr><td><input type="hidden" name="payurl" value="<?php FilmpjeIDeal ?>">
+                    <input type="hidden" name="amount" value="15.00">
+                    <input type="submit" value="Bestelling plaatsen"></td>
         </table>
         </form>
         </div>
