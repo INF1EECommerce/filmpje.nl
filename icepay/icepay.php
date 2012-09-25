@@ -2,7 +2,22 @@
 class FilmpjeIdeal
 {
 
-public Pay($amount, $reference, $description) {
+    
+public function ParseReservernPostValues($postvalues)
+{
+    $result = array (
+        "amount" => $postvalues['amount'],
+        "orderId" => $postvalues['orderId'],
+        "issuer" => $postvalues['issuer'],
+        "description" => $postvalues['description'],
+        "reference" => $postvalues['reference']
+    );
+    
+    return $result;
+}
+    
+public function Pay($amount, $reference, $description, $issuer, $orderId) 
+{
 
 define('MERCHANTID',17164);//<--- Change this into your own merchant ID
 define('SECRETCODE',"Ty84RqXj79BtNa65Awf3J4Qxr7E8Scs5GDb93Ygm");//<--- Change this into your own merchant ID
@@ -30,7 +45,6 @@ $ideal = new $paymentmethods["ideal"](); //The same as: $ideal = new Icepay_Paym
 // Retrieve the paymentmethod issuers for this example
 $issuers = $ideal->getSupportedIssuers();
 
-try {
 
     /* Set the payment */
     $paymentObj = new Icepay_PaymentObject();
@@ -41,8 +55,8 @@ try {
                 ->setReference($reference)
                 ->setDescription($description)
                 ->setCurrency("EUR")
-                ->setIssuer($issuers[0])
-                ->setOrderID(1);
+                ->setIssuer($issuers[$issuer])
+                ->setOrderID($orderId);
     
     // Merchant Settings
     $basicmode = Icepay_Basicmode::getInstance();
@@ -55,10 +69,7 @@ try {
     // In this testscript we're printing the url on screen.
     return $basicmode->getURL();
     
-} catch (Exception $e){
-    return;($e->getMessage());
-  
 }
 }
-}
+
 ?>

@@ -6,20 +6,8 @@ footer {
 text-align:center;
 }
 
-/* Toegevoegd door chivan 23-9-2012 */
-
-body
-{
-    font-family: verdana;
-    font-size: 10px;
-}
-
-/* Aangepast door chivan 23-9-2012 */
-
 img {
 float:left;
-margin-bottom: 15px;
-margin-left: -15px;
 }
 
 nav ul {
@@ -28,9 +16,6 @@ float:right;
 
 hr { 
 clear:both;
-border-style: solid;
-color: black;
-
 }
 
 nav ul li { 
@@ -60,8 +45,8 @@ section.content {
   margin: 0 auto;
   text-align: center;
   float:right;
-  margin-right:-70px;
-  margin-top: 30px;
+  margin-right:-125px;
+  margin-top:-10px;
   display:inline;
 }
 
@@ -110,7 +95,6 @@ nav ul a:hover, nav ul a:active {
   color:#FFFFFF;
   background-color:#F60;
 }
-
 nav li ul {
   display:none;
   margin: 0;
@@ -140,6 +124,197 @@ font-size:14px;
 color:#000000;
 }
 
+form {
+clear:left;
+float:left;
+width:400px;
+margin-top:20px;
+background-color:#FF6600;
+outline:none;
+-webkit-border-radius: 5px;
+border-radius: 5px;}
+
+form h4 {
+float:left;
+clear:left;
+margin-left:20px; }
+
+form select {
+float:right;
+clear:right;
+margin-right:100px;
+margin-top:20px;
+}
+
+form select option {
+min-width:250px;
+}
+
+form h2 {
+float:left;
+clear:left;
+margin-left:20px;
+color:#FFFFFF; }
+
+form button {
+float:right;
+clear:both;
+margin:0 30px 20px 0px;
+background-color:#FFF;}
+
+#slideshow {
+clear:right;	
+float:right;
+width:650px
+height:200px;
+border:1px solid #F60;
+-webkit-border-radius: 5px;
+border-radius: 5px;
+margin-top:20px; }
+
+#slideshow img {
+height:295px; 
+width:650px;
+-webkit-border-radius: 5px;
+border-radius: 5px;}
+
+h3 {
+width:550px;
+float:left;
+clear:left;
+text-align:center;
+font-style:bold;
+font-size:18px;
+background-color:#F60;
+color:#FFFFFF;
+-webkit-border-radius: 5px;
+border-radius: 5px; }
+
+#zaalinformatie {
+width:547px;
+border:2px solid #F60;
+float:left;
+clear:left;
+-webkit-border-radius: 5px;
+border-radius: 5px;
+}
+
+#zaalinformatie img {
+width:290px;
+height:390px;
+float:left;
+clear:left;
+-webkit-border-radius: 5px;
+border-radius: 5px;
+margin:15px 0px 15px 10px;
+}
+
+#zaalinformatie .foto {
+width:200px;
+height:110px;
+float:right;
+clear:right;
+margin:15px 20px;
+}
+
+.nacht {
+margin-top:-15px;
+width:550px;
+float:left;
+clear:left;
+text-align:center;
+font-style:bold;
+font-size:18px;
+background-color:#F60;
+color:#FFFFFF;
+-webkit-border-radius: 5px;
+border-radius: 5px; 
+}
+
+.marathon{
+margin-top:-15px;
+width:550px;
+float:left;
+clear:left;
+text-align:center;
+font-style:bold;
+font-size:18px;
+background-color:#F60;
+color:#FFFFFF;
+-webkit-border-radius: 5px;
+border-radius: 5px; 
+}
+
+#films{
+width:525px;
+height:552px;
+border:2px solid #F60;
+position:absolute;
+top:478px;
+left:772px;
+-webkit-border-radius: 5px;
+border-radius: 5px;
+}
+
+.films_vandaag {
+margin-top:0px;
+width:525px;
+float:right;
+clear:right;
+text-align:center;
+font-style:bold;
+font-size:18px;
+background-color:#F60;
+color:#FFFFFF;
+}
+
+#films ul .tab{
+display:inline;
+list-style:none; }
+ 
+#facebook {
+width:300px;
+height:275px;
+border:2px solid #000066;
+float:left;
+clear:left;
+margin-bottom:20px;
+-webkit-border-radius: 5px;
+border-radius: 5px;
+}
+
+#twitter {
+width:300px;
+height:275px;
+border:2px solid #000066;
+float:left;
+margin-left:100px;
+margin-bottom:20px;
+-webkit-border-radius: 5px;
+border-radius: 5px;
+}
+
+#top_tien {
+width:300px;
+height:275px;
+border:2px solid #000066;
+float:right;
+clear:right;
+margin-bottom:20px;
+-webkit-border-radius: 5px;
+border-radius: 5px;
+}
+
+#facebook h2, #twitter h2, #top_tien h2 {
+width:300px;
+text-align:center;
+font-style:bold;
+font-size:18px;
+background-color:#000066;
+color:#FFFFFF;
+margin-top:0px;
+-webkit-border-radius: 5px 5px 0px 0px;
+border-radius: 5px 5px 0px 0px;}
 
 
 

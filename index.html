@@ -1,0 +1,283 @@
+<!doctype html>
+
+<html lang="nl">
+
+<head>
+
+   <meta charset="utf-8" />
+   <title>Filmpje</title>
+   <link rel="stylesheet" type='text/css' href="css/main.css">
+	<link rel="stylesheet" type="text/css" href="css/style.css" />
+
+
+	<meta name="description" content="Filmpje, Bioscoop">
+	<meta name="keywords" content="">
+
+<!--[if lt IE 9]>
+<script src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+<![endif]-->
+
+<!-- Modrnizr.com -->
+
+</head>
+
+<body>
+<div id="wrapper">
+   <header>
+
+      <img src="image/Logo.png" />
+
+   </header>
+   
+ <section class="content">
+    
+        <header>
+
+        <nav>
+        <ul id="menu">
+            <li><a href="index.html">Home</a></li>
+            <li><a href="#">Films</a>
+                <ul class="submenu">
+                    <li><a href="#">Films binnekort</a></li>
+                    <li><a href="#">Films vandaag</a></li>
+                    <li><a href="#">Alle films</a></li>
+                </ul>
+            </li>
+            <li><a href="#">Informatie</a>
+                <ul class="submenu">
+                    <li><a href="#">Routebeschrijving</a></li>
+                    <li><a href="#">Events</a></li>
+                    <li><a href="#">Hoe kom ik er?</a></li>
+                    <li><a href="#">Prijzen</a></li>
+                </ul>
+             </li>
+            <li><a href="#">Contact</a></li>
+        </ul>    
+        </nav>
+         
+    </section>
+   
+   <section>
+
+      <article>
+
+         <form>
+            <h2>Reserveer direct</h2>	
+               	<h4>Film:</h4>
+                <select>
+         			<option>Selecteer.</option>
+         			<option>Being Flynn</option>
+                    <option>Ted</option>
+                    <option>De Verbouwing</option>
+                    <option>The Possession</option>
+                    <option>The Bourne Legacy</option>
+                    <option>Bait</option>
+         		</select>
+                <h4>Datum:</h4>
+                <select>
+         			<option>Selecteer.</option>
+         			<option>morgen</option>
+                    <option>overmorgen</option>
+                    <option>4</option>
+                    <option>5</option>
+                    <option>6</option>
+                    <option>7</option>
+         		</select>
+                <h4>Tijd:</h4>
+                <select>
+         			<option>Selecteer.</option>
+         			<option>13:00</option>
+                    <option>14:00</option>
+                    <option>15:00</option>
+                    <option>16:00</option>
+                    <option>17:00</option>
+                    <option>18:00</option>
+                    <option>19:00</option>
+                    <option>20:00</option>
+                    <option>21:00</option>
+                    <option>22:00</option>
+                    <option>23:00</option>
+                    <option>24:00</option>
+                    <option>01:00</option>
+         		</select>
+
+                <button type="button">Reserveer</button>
+         </form>
+
+
+         </header>
+
+         <div id="slideshow">
+         <img src="image/ted.jpg" />
+         
+         </div>
+
+         <footer>
+
+         </footer>
+
+
+      </article>
+      
+      <article>
+		<h3>Zalen</h3>
+            
+            <div id="zaalinformatie">
+            <img src="image/Zaalaanzicht.jpg"/>
+            <img class="foto" src="image/Zaalaanzicht.jpg"/>
+            <img class="foto" src="image/zaalaanzicht2.jpg"/>
+            <img class="foto" src="image/zaalinzicht3.png"/>
+   			</div>
+
+        
+         
+         <h3>Ladies Night</h3>
+         <h3 class="nacht">Nacht van de Nederlandse films</h3>
+         <h3 class="marathon">LOTR Marathon</h3>
+	 </article>
+      <article>
+      		
+            
+			<div id="films">
+            <h3 class="films_vandaag">Films</h3>
+           <!-- 	<ul>
+                	<li class="tab"><a href="#">Vandaag</a>
+                		<ul class="movies_today">
+                            <li><a href="#">Films binnekort</a></li>
+                            <li><a href="#">Films vandaag</a></li>
+                            <li><a href="#">Alle films</a></li>
+                		</ul>
+                     </li> 
+                    <li class="tab"><a href="#">Morgen</a>
+                		<ul class="movies_tomorrow">
+                            <li><a href="#">Films binnekort</a></li>
+                            <li><a href="#">Films vandaag</a></li>
+                            <li><a href="#">Alle films</a></li>
+                		</ul>
+                     </li> 
+                    <li class="tab"><a href="#">Overmorgen</a>
+                		<ul class="movies_tomorrow">
+                            <li><a href="#">Films binnekort</a></li>
+                            <li><a href="#">Films vandaag</a></li>
+                            <li><a href="#">Alle films</a></li>
+                		</ul>
+                     </li> 
+                </ul>-->
+                <div id="tabs">
+			<ul>
+				<li id="One"><a href="#One" id="first">Vandaag</a>
+					<div>
+                		<ul class="movies_today">
+                            <li><a href="#">Films binnekort</a></li>
+                            <li><a href="#">Films vandaag</a></li>
+                            <li><a href="#">Alle films</a></li>
+                		</ul>
+					</div>
+				</li>
+				<li id="Two"><a href="#Two" id="sec">Morgen</a>
+					<div>
+						<p>While reading more about HTML5 & CSS3 I just found an amazing css3 button styling. This time I wanted to do something which I was doing from past 2 years using JQuery. In this tutorial I am going to teach you how to make a toggle slideDown and slideUp function using CSS3 and HTML5. To</p>
+					</div>
+				</li>
+				<li id="Three"><a href="#Three" id="third">Overmorgen</a>
+					<div>
+						<p>Lets start learning CSS3 before its too late, I just saw a website which amazed me with its animation effects. First I thought that the site is using some JQuery libraries but when I actually went into the code, I found it is CSS3. So I started learning it, and today I made my first Read more...</p>
+					</div>
+				</li>
+			</ul>
+		</div>
+
+           
+            	
+            </div>
+	</article>
+    
+          <article>
+      		
+            
+			<div id="facebook">
+            <h2>Facebook</h2>
+            <img src="image/facebook.png"/>
+           
+            	
+            </div>
+	</article>
+    
+          <article>
+      		
+            
+			<div id="twitter">
+            <h2>Twitter</h2>
+				<img src="image/twitter.png"/>
+
+
+           
+            	
+            </div>
+	</article>
+    
+          <article>
+      		
+            
+			<div id="top_tien">
+            <h2>Top 10</h2>
+            	<ol>
+                	<li><a href="#">Ted</a></li>
+                    <li><a href="#">The Possession</a></li>
+                    <li><a href="#">The Bourne Legacy</a></li>
+                    <li><a href="#">Madagascar 3</a></li>
+                    <li><a href="#">De Verbouwing</a></li>
+                    <li><a href="#">Brave(NL</a>)</li>
+                    <li><a href="#">Ice Age 4</a></li>
+                    <li><a href="#">Bait</a></li>
+                    <li><a href="#">The Expendables 2</a></li>
+                    <li><a href="#">Sammy 2</a></li>
+                 </ol>
+           
+            	
+            </div>
+	</article>
+   </section>
+   
+   <aside>
+
+      <h4></h4>
+
+
+   </aside>
+   <br/>
+   <br/>
+   <br/>
+   <br/>
+   <br/>
+   <br/>
+   <br/>
+   <br/>
+   <br/>
+   <br/>
+   <br/>
+   <br/>
+   <br/>
+   <br/>
+   <br/>
+   <br/>
+   <br/>
+   <br/>
+   <br/>
+   <br/>
+   <br/>
+
+   
+  	<footer>
+        <hr />
+        <ul>
+            <li><a href="index.html">Home</a></li>
+            <li><a href="films.html">Films</a></li>
+            <li><a href="informatie.html">Informatie</a></li>
+            <li><a href="contact.html">Contact</a></li>
+        </ul>
+	</footer>
+</div>
+</body>
+
+</html>

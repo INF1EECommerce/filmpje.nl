@@ -8,7 +8,6 @@
    <title>Filmpje</title>
    <link rel="stylesheet" href="css/main.css">
    <link rel="stylesheet" href="css/reserveren.css">
-   <?php include_once '/icepay/icepay.php' ?>;
    <script>
     
 ​</script>
@@ -126,16 +125,25 @@
             <tr>
             
                 <td><label>Uw bank:</label></td>
-                <td><select name="bank">
-                <option>ABN-Amro</option>
-                <option>ING</option>
-                <option>Rabobank</option>
+                <td><select name="issuer">
+                <option value="0">ABN-Amro</option>
+                <option value="1">ASN Bank</option>
+                <option value="2">Friesland Bank</option>
+                <option value="3">ING</option>
+                <option value="4">Rabobank</option>
+                <option value="5">SNS Bank</option>
+                <option value="5">SNS Regiobank</option>
+                <option value="6">Tridios Bank</option>
+                <option value="7">Van Lanschot Bankiers</option>
             </select>
                 </td>
             </tr>
             <tr><td>&nbsp;</td></tr>
-            <tr><td><input type="hidden" name="payurl" value="<?php FilmpjeIDeal ?>">
-                    <input type="hidden" name="amount" value="15.00">
+            <tr><td>
+                    <input type="hidden" name="amount" value="1500">
+                    <input type="hidden" name="reference" value ="Dit is een test referemce">
+                    <input type="hidden" name="description" value="Dit is een test description">
+                    <input type="text" name="orderId"> 
                     <input type="submit" value="Bestelling plaatsen"></td>
         </table>
         </form>
