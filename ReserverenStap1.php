@@ -38,6 +38,9 @@
                                                         
                                                     BeschikbareStoelen = data;
                                                     
+                                                    
+                                                    
+                                                    
                                                     //teken de stoelen
                                                     TekenStoelen(Rijen, Stoelen, BeschikbareStoelen);
 
