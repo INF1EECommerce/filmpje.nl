@@ -1,43 +1,79 @@
 <?php require_once(dirname(__FILE__).'/backend/DBFunctions.php'); ?>
-<html>
+<!doctype html>
+
+<html lang="nl">
+
 <head>
-<title></title>
-<link rel="stylesheet" href="css/stylesheet.css">
+
+   <meta charset="utf-8" />
+   <title>Filmpje</title>
+   <link rel="stylesheet" href="css/main.css">
+   <link rel="stylesheet" href="css/reserveren.css">
+   <script>
+    
+​</script>
+
+	<meta name="description" content="Filmpje, Bioscoop">
+	<meta name="keywords" content="">
+
+<!--[if lt IE 9]>
+<script src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+<![endif]-->
+
+<!-- Modrnizr.com -->
+
 </head>
+
 <body>
-	<div id="header">
-		<div id="banner">
-			<ul>
-				<li><a href="#">Home</a></li>
-				<li><a href="#">Films</a></li>
-				<li><a href="#">Agenda</a></li>
-				<li><a href="#">Contact</a></li>
-				<li><a href="#">Specials</a></li>
-			</ul>
-		
-		</div>
-	</div>
-	
-	<div id="outerDiv">
-        <div id="sideContent">
-            <div id="filmPoosterEnInfo">
-                <img src="image/apooster.jpg">
-                <div id="filmInfo">
-                    <h2>The Avengers</h2>
-                    <div id="tijdEnZaal">15:00 uur <br>
-                    Zaal 1
-                    </div>
-                </div>
-            </div>               
-         </div>
-        <div id="mainContent">
-       <div id="ss">
+<div id="wrapper">
+
+      <img src="image/Logo.png" />
+
+   
+    <section class="content">
+        <nav>
+        <ul id="menu">
+            <li><a href="index.html">Home</a></li>
+            <li><a href="#">Films</a>
+                <ul class="submenu">
+                    <li><a href="#">Films binnekort</a></li>
+                    <li><a href="#">Films vandaag</a></li>
+                    <li><a href="#">Alle films</a></li>
+                </ul>
+            </li>
+            <li><a href="#">Informatie</a>
+                <ul class="submenu">
+                    <li><a href="#">Routebeschrijving</a></li>
+                    <li><a href="#">Events</a></li>
+                    <li><a href="#">Hoe kom ik er?</a></li>
+                    <li><a href="#">Prijzen</a></li>
+                </ul>
+            <li><a href="#">Contact</a></li>
+        </ul>
+        </nav>
+    </section>
+    <br>
+    <br>
+    <hr>
+   <div id="ReserverenMainContent">    
+    <div id="CoverAndMovieInfo">
+        <img src="image/cover.jpg" id="coverImage" alt="Cover">
+        <br>
+        <br>
+        <p>        
+            <span class="filmtitel">The planet of the apes</span><br>
+            <span>☆</span><span>☆</span><span>☆</span><span>☆</span><br>
+            <span class="filmtijd">16-2-2012 - 13:00 UUR</span><br>
+            <span class="filmbeschrijving">Een geweldige film met apen.</span><br>
+        </p>
+    </div>
+    <div id="PrijzenEnForm">
         <div id="ReserverenHeader">
-        <h2>Reservering afronden</h2>
-        The Avengers - 20-9-2010 - 15:00 UUR
+        <h1>Reservering afronden</h1>
+        The planet of the apes - 16-2-2010 - 13:00 UUR
         </div>
         <div id="StoelPrijzen">
-            <h3>Ticketoverzicht</h3>    
+            <h2>Ticketoverzicht</h2>    
             <table>
                 <thead>
                 <th>Rij</th><th>Stoel</th><th>Type</th><th>Prijs</th>
@@ -61,13 +97,13 @@
                 </tbody>
                 <tfoot>
 
-                    <tr style="background-color: #999999; color: #FFFFFF;"><td>Totaal:</td><td></td><td></td><td><?php echo $totaalPrijs ?></td></tr>
+                    <tr><td></td><td></td><td>Totaal:</td><td><?php echo $totaalPrijs ?></td></tr>
                 </tfoot>
             </table>
             
         </div>
         <div id="formulier">
-        <h3>Uw contactinformatie</h3>
+        <h2>Uw contactinformatie:</h2>
         <form method="POST" id="ReserverenForm" action="ReserverenStap3.php">
             <table>
                 <tr>
@@ -113,38 +149,26 @@
             </tr>
             <tr><td>&nbsp;</td></tr>
             <tr><td>
-                    <input type="hidden" name="amount" value="<?php echo $totaalPrijs ?>">
+                    <input type="hidden" name="amount" value="1500">
                     <input type="hidden" name="reference" value ="Dit is een test referemce">
                     <input type="hidden" name="description" value="Dit is een test description">
-                    <input type="hidden" name="orderId"> 
+                    <input type="text" name="orderId"> 
                     <input type="submit" value="Bestelling plaatsen"></td>
         </table>
         </form>
         </div>
-            </div>
+    </div>
         </div>
-		
-<footer>
-<p>Contact</p>
-<ul>
-	<li>Klantenservice</li>
-	<li>Contact opnemen</li>
-	<li>Adverteren bij FIlmpje</li>
-	<li>Route</li>
-	<li>Terms of Service</li>
-</ul>
-</footer>
-
-	
-
-
-
-
-	
-	
-
-	
-	</div>
-	
+    <footer>
+        <hr />
+        <ul>
+            <li><a href="index.html">Home</a></li>
+            <li><a href="films.html">Films</a></li>
+            <li><a href="informatie.html">Informatie</a></li>
+            <li><a href="contact.html">Contact</a></li>
+        </ul>
+	</footer>
+</div>
 </body>
+
 </html>

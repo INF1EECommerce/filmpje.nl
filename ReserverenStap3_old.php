@@ -80,7 +80,7 @@ $icepayInfo = $filmpjeIdeal->ParseReservernPostValues($_POST);
 try {
     $filmpjeIdeal->Pay($icepayInfo['amount'], $icepayInfo['reference'], $icepayInfo['description'], $icepayInfo['issuer'], $icepayInfo['orderId']);
 } catch (Exception $e) {
-    $error = $e->getMessage();
+    $error = $e->getMessage(); //blaat
 }
 if (isset($url)) {
 ?>
