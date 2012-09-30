@@ -51,6 +51,7 @@
                             }
                             
                             
+                            
                             function TekenStoelen(Rijen, Stoelen, BeschikareStoelen) {
                                 
                                 //maak de tabel aan
