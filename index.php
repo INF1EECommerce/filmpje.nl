@@ -1,7 +1,10 @@
+<?php require_once('/Views/VandaagMorgenOvermorgenFilmsViewControler.php'); ?>
 <html>
 <head>
 <title></title>
 <link rel="stylesheet" href="css/stylesheet.css">
+<script src="javascript/jquery.js" type="text/javascript"></script>
+<script src="javascript/FilmTabs.js" type="text/javascript"></script>
 </head>
 <body>
 	<div id="header">
@@ -77,116 +80,26 @@
 
 <div id="schedule">
 <p>Nu bij Filmpje</p>
-
-<table id="timeTable">
-<tr id="dateRow">
+<table class="timeHeaderTable">
+<tr class="dateRow">
 	<th id="dateTh">
-		<button class="currentDate">Vandaag</button>
-		<button>Morgen</button>
-		<button>Overmorgen</button>
+		<button id="vandaagButton" class="currentDate" onClick="DagButtonClick('Vandaag')">Vandaag</button>
+		<button id="morgenButton" onClick="DagButtonClick('Morgen')">Morgen</button>
+		<button id="overmorgenButton" onClick="DagButtonClick('Overmorgen')">Overmorgen</button>
 	</th>
+        <tr>
 	<td id="fillerTd"></td>
-</tr>
-<tr>
-	<th>
-		Ted
-	</th>
-	<td class="timeClass"><button>18:30</button>
-	<button>19:00</button>
-	<button>21:30</button></td>
-
-</tr>
-<tr>
-	<th>
-		The Expendables 2
-	</th>
-	<td class="timeClass"><button>18:30</button>
-	<button>19:00</button>
-	<button>21:30</button></td>
-
-</tr>
-<tr>
-	<th>
-		Savages
-	</th>
-	<td class="timeClass"><button>18:30</button>
-	<button>19:00</button>
-	<button>21:30</button></td>
-
-</tr><tr>
-<tr>
-	<th>
-		Hope Springs
-	</th>
-	<td class="timeClass"><button>18:30</button>
-	<button>19:00</button>
-	<button>21:30</button></td>
-
-</tr>
-<tr>
-	<th>
-		The Watch
-	</th>
-	<td class="timeClass"><button>18:30</button>
-	<button>19:00</button>
-	<button>21:30</button></td>
-
-</tr>
-<tr>
-	<th>
-		The Possesion
-	</th>
-	<td class="timeClass"><button>18:30</button>
-	<button>19:00</button>
-	<button>21:30</button></td>
-
-</tr>
-<tr>
-	<th>
-		Brave (NL)
-	</th>
-	<td class="timeClass"><button>18:30</button>
-	<button>19:00</button>
-	<button>21:30</button></td>
-
-</tr>
-<tr>
-	<th>
-		The Bourne Legacy
-	</th>
-	<td class="timeClass"><button>18:30</button>
-	<button>19:00</button>
-	<button>21:30</button></td>
-
-</tr>
-<tr>
-	<th>
-		The Dark Knight Rises
-	</th>
-	<td class="timeClass"><button>18:30</button>
-	<button>19:00</button>
-	<button>21:30</button></td>
-
-</tr>
-<tr>
-	<th>
-		Intouchables
-	</th>
-	<td class="timeClass"><button>18:30</button>
-	<button>19:00</button>
-	<button>21:30</button></td>
-
-</tr>
-<tr>
-	<th>
-		De Verbouwing
-	</th>
-	<td class="timeClass"><button>18:30</button>
-	<button>19:00</button>
-	<button>21:30</button></td>
-
+        </tr>
 </tr>
 </table>
+
+<?php $vandaagMorgenOvermorgenFilmsViewControler = new VandaagMorgenOvermorgenFilmsViewControler();
+      $vandaagMorgenOvermorgenFilmsViewControler ->Render();
+?>
+
+<form method="post" id="voorstellingForm" action="ReserverenStap1.php">
+    <input type="hidden" id="voorstelling" name="voorstelling" value="">
+</form>
 </div>	
 <div id="specialsDiv">
 <div id="mainSpecialsDiv">
@@ -198,9 +111,7 @@
 <img src="image/ladiesnight.jpg">
 </div>
 </div>
-	
-		</div>
-		
+</div>		
 <footer>
 <p>Contact</p>
 <ul>
@@ -211,17 +122,6 @@
 	<li>Terms of Service</li>
 </ul>
 </footer>
-
-	
-
-
-
-
-	
-	
-
-	
-	</div>
-	
+</div>	
 </body>
 </html>

@@ -2,31 +2,26 @@
      {
          background-color: #0000ff;
 	 height:20px;
-	 width:30px;
      }
          
       .PrimiumStoel
       {
          background-color: #ff9900;
 	 height:20px;
-	 width:30px;
       }
       
       .VIPStoel
       {
           background-color: #cc0000;
 	 height:20px;
-	 width:30px;
       }
       .onbeschikbaar
       { 
           background-color:  #999999;
-                height:20px;
-                width:20px;	 
+                height:20px;	 
       }
       .geselecteerd
       { 
           background-color:  #9900ff; 
-                height:20px;
-                width:20px;                
+                height:20px;               
       }

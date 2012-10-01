@@ -172,9 +172,9 @@ body {
 
 #schedule {
 	width: 640px;
-	height: 442px;
 	background: #660000;
 	box-shadow: 0 0 5px 5px #440000;
+        padding-bottom: 4px;
 }
 
 #schedule p {
@@ -189,7 +189,19 @@ body {
 
 }
 
-#timeTable  {
+.timeTable  {
+        display: block;
+        clear: both;
+	background: #fff;
+	margin-left: 0px;
+	color: #000;
+	border-collapse: collapse;
+	width: 640px;
+	font-family: arial;
+
+}
+
+.timeHeaderTable  {
 	background: #fff;
 	margin-left: 0px;
 	color: #000;
@@ -197,7 +209,6 @@ body {
 	width: 640px;
 	margin-top: -16px;
 	font-family: arial;
-	
 
 }
 
@@ -214,7 +225,7 @@ body {
 	
 }
 
-#timeTable .currentDate {
+.timeHeaderTable .currentDate {
 	background: #660000;
 }
 
@@ -226,27 +237,38 @@ body {
 	color: #fff;
 }
 
-#timeTable  th {
+.timeTable  th {
+	padding-right: 20px;
+        height: 30px;
+	text-align: left;
+	padding-left: 10px;
+        width: 375px;   
+}
+
+.timeHeaderTable  th {
 	width: 325px;
+        height: 35px;
 	text-align: left;
 	padding-left: 10px;
 }
 
-#timeTable  tr {
+.timeTable  tr {
 	border-bottom: 1px solid #DDDDDD;
 }
 
-#dateRow {
+.dateRow {
 	border-bottom: 1px solid #DDDDDD;
 	width: 640px;
 	background: #cccccc;
 }
 
-#dateRow th {
+.dateRow th {
 	width: 300px;
+        height: 35px;
 }
 
-#timeTable  th button {
+
+.timeHeaderTable  th button {
 	width: 100px;
 	height: 25px;
 	background: #888888;
@@ -368,6 +390,11 @@ body {
 .timeClass button:hover {
 	background: #660000;
 	color: #fff;
+}
+
+.timeClass
+{
+    width: 265px;    
 }
 
 footer {
@@ -503,7 +530,7 @@ footer ul {
 {
      font-family: Arial;
      color: #FFFFFF;
-     margin-left: 25px;
+     
      width: 100%
 }
 
