@@ -6,7 +6,7 @@ class VandaagMorgenOvermorgenFilmsViewControler
     {
         require_once('/Helpers/DateHelper.php');
         require_once('/Helpers/ArrayGrouper.php');
-        require_once('/Backend/DBFunctions.php');
+        require_once('/backend/DBFunctions.php');
     }
     
     public function Render()
@@ -24,12 +24,12 @@ class VandaagMorgenOvermorgenFilmsViewControler
         //lus door de datum groepen heen en maak div aan.
         
                 foreach ($datumGroepen as $datum) {
-                $visibility = "collapse";
+                $display = "none;";
                 $vertaaldeDatum = DateHelper::VertaalDatumNaarVandaagMorgenOvermorgen($datum['KeyItem']);
-                if ($vertaaldeDatum == "Vandaag") { $visibility = "visible"; }
+                if ($vertaaldeDatum == "Vandaag") { $display = "block;"; }
 
                 echo ("    
-                <div id =\"" . $vertaaldeDatum . "films\" style=\"visibility:". $visibility ."\">
+                <div id =\"" . $vertaaldeDatum . "films\" style=\"display:". $display ."\">
                 <table class=\"timeTable\">    
                 ");
                 

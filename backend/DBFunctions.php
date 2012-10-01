@@ -69,10 +69,10 @@ class DBFunctions
       
       
       $this -> connection -> dbConnect();
-      $query = mysql_query("SELECT Stoelen.Nummer AS StoelNummer, Rijen.Nummer AS RijNummer, StoelTypes.Naam AS StoelType, StoelTypes.Prijs AS StoelPrijs FROM Stoelen 
-          INNER JOIN StoelTypes on StoelTypes.StoelTypeID = Stoelen.StoelTypeID     
-          INNER JOIN Rijen on Rijen.RijID = Stoelen.RijID
-          WHERE Stoelen.StoelID IN (
+      $query = mysql_query("SELECT stoelen.Nummer AS StoelNummer, rijen.Nummer AS RijNummer, stoelTypes.Naam AS StoelType, stoelTypes.Prijs AS StoelPrijs FROM stoelen 
+          INNER JOIN stoeltypes on stoeltypes.StoelTypeID = stoelen.StoelTypeID     
+          INNER JOIN rijen on rijen.RijID = stoelen.RijID
+          WHERE stoelen.StoelID IN (
       " . $stoelnummers . "
       )") or die (mysql_error());
       $result = array(); 
@@ -89,9 +89,9 @@ class DBFunctions
   public function AlleVoorstellingen()
   {
       $this -> connection -> dbConnect();
-      $query = mysql_query("SELECT Films.FilmID, Films.Naam, Voorstellingen.VoorstellingID, Voorstellingen.Datum, Voorstellingen.Tijd 
-          FROM Films 
-          INNER JOIN Voorstellingen ON Voorstellingen.FilmID = Films.FilmID") or die (mysql_error());
+      $query = mysql_query("SELECT Films.FilmID, films.Naam, voorstellingen.VoorstellingID, voorstellingen.Datum, voorstellingen.Tijd 
+          FROM films 
+          INNER JOIN voorstellingen ON voorstellingen.FilmID = films.FilmID") or die (mysql_error());
       $result = array(); 
       
      while ($row = mysql_fetch_array($query)) {
@@ -133,19 +133,19 @@ class DBFunctions
   public function BeschikbareStoelenVoorVoorstelling($voorstelling)
   {
       $this -> connection -> dbConnect();
-      $query = mysql_query("SELECT Stoelen.StoelID, Stoelen.Nummer AS StoelNummer, Rijen.Nummer AS RijNummer, StoelTypes.Naam AS StoelType 
-                            FROM Voorstellingen
-                            INNER JOIN Zalen ON Zalen.ZaalID = Voorstellingen.ZaalID
-                            INNER JOIN Stoelen ON Stoelen.ZaalID = Zalen.ZaalID
-                            INNER JOIN StoelTypes ON StoelTypes.StoelTypeID = Stoelen.StoelTypeID
-                            INNER JOIN Rijen ON Rijen.RijID = Stoelen.RijID
-                            WHERE Stoelen.StoelID NOT IN 
+      $query = mysql_query("SELECT stoelen.StoelID, stoelen.Nummer AS StoelNummer, rijen.Nummer AS RijNummer, stoeltypes.Naam AS StoelType 
+                            FROM voorstellingen
+                            INNER JOIN zalen ON zalen.ZaalID = voorstellingen.ZaalID
+                            INNER JOIN stoelen ON stoelen.ZaalID = zalen.ZaalID
+                            INNER JOIN stoeltypes ON stoeltypes.StoelTypeID = stoelen.StoelTypeID
+                            INNER JOIN rijen ON rijen.RijID = stoelen.RijID
+                            WHERE stoelen.StoelID NOT IN 
                             (
-                                SELECT StoelID FROM BestellingStoelen
-                                INNER JOIN Bestellingen on Bestellingen.BestellingID = BestellingStoelen.BestellingID AND Bestellingen.BestellingStatusID = 3 
-                                AND Bestellingen.VoorstellingID = " . $voorstelling . "
+                                SELECT StoelID FROM bestellingstoelen
+                                INNER JOIN bestellingen on bestellingen.BestellingID = bestellingstoelen.BestellingID AND bestellingen.BestellingStatusID = 3 
+                                AND bestellingen.VoorstellingID = " . $voorstelling . "
                             )
-                            AND Voorstellingen.VoorstellingID = " . $voorstelling . " ") 
+                            AND voorstellingen.VoorstellingID = " . $voorstelling . " ") 
               or die (mysql_error());
      
      $result = array(); 
@@ -162,10 +162,10 @@ class DBFunctions
     public function ZaalInfo($voorstelling)
   {
       $this -> connection -> dbConnect();
-      $query = mysql_query("SELECT Zalen.Rijen, Zalen.MaxStoelenPerRij 
-                            FROM Voorstellingen
-                            INNER JOIN Zalen ON Zalen.ZaalID = Voorstellingen.ZaalID
-                            AND Voorstellingen.VoorstellingID = " . $voorstelling . " ") 
+      $query = mysql_query("SELECT zalen.Rijen, zalen.MaxStoelenPerRij 
+                            FROM voorstellingen
+                            INNER JOIN zalen ON zalen.ZaalID = voorstellingen.ZaalID
+                            AND voorstellingen.VoorstellingID = " . $voorstelling . " ") 
               or die (mysql_error());
      
      $result = array(); 
