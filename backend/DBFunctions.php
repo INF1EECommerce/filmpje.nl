@@ -132,8 +132,11 @@ class DBFunctions
   
   public function BeschikbareStoelenVoorVoorstelling($voorstelling)
   {
+      if (!is_int($voorstelling)) {
+          throw new Exception("Voorstelling is geen nummer.");
+      }
       $this -> connection -> dbConnect();
-      $query = mysql_query("SELECT stoelen.StoelID, stoelen.Nummer AS StoelNummer, rijen.Nummer AS RijNummer, stoeltypes.Naam AS StoelType 
+      $query = mysql_query("SELECT stoelen.StoelID, stoelen.Nummer AS StoelNummer, rijen.Nummer AS RijNummer, stoeltypes.Naam AS StoelType, stoeltypes.Prijs AS StoelPrijs 
                             FROM voorstellingen
                             INNER JOIN zalen ON zalen.ZaalID = voorstellingen.ZaalID
                             INNER JOIN stoelen ON stoelen.ZaalID = zalen.ZaalID
@@ -161,6 +164,10 @@ class DBFunctions
   
     public function ZaalInfo($voorstelling)
   {
+      if (!is_int($voorstelling)) {
+          throw new Exception("Voorstelling is geen nummer.");
+      }
+        
       $this -> connection -> dbConnect();
       $query = mysql_query("SELECT zalen.Rijen, zalen.MaxStoelenPerRij 
                             FROM voorstellingen
@@ -177,6 +184,30 @@ class DBFunctions
      }
       $this -> connection -> dbClose();
       return $result;
+  }
+  
+  public function FilmInfoVanVoorstelling($voorstelling)
+  {
+      if (!is_int($voorstelling)) {
+          throw new Exception("Voortselling is geen nummer.");
+      }
+      $this -> connection -> dbConnect();
+      $query = mysql_query("SELECT films.*, voorstellingen.*, zalen.Naam AS ZaalNaam 
+                            FROM voorstellingen
+                            INNER JOIN films on films.FilmID = voorstellingen.FilmID
+                            INNER JOIN zalen on zalen.ZaalID = voorstellingen.ZaalID
+                            WHERE voorstellingen.VoorstellingID = " . $voorstelling . " ") 
+              or die (mysql_error());
+     
+     $result = array(); 
+      
+     while ($row = mysql_fetch_array($query)) {
+     
+         $result[] = $row;
+         
+     }
+      $this -> connection -> dbClose();
+      return $result[0];
   }
        
 }

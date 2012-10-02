@@ -1,27 +1,42 @@
     .NormaalStoel
      {
-         background-color: #0000ff;
-	 height:20px;
+         background-image: url('../image/seatnormal.png');
+         background-repeat: no-repeat;
+         background-size: 19px 19px;
+	 height:19px;
+         min-width: 18px;
      }
          
       .PrimiumStoel
       {
-         background-color: #ff9900;
-	 height:20px;
+         background-image: url('../image/seatpremium.png');
+         background-repeat: no-repeat;
+         background-size: 19px 19px;
+	 height:19px;
+         min-width: 18px;
       }
       
       .VIPStoel
       {
-          background-color: #cc0000;
-	 height:20px;
+         background-image: url('../image/seatvip.png');
+		 min-height:19px;
+         min-width: 18px;
+                  background-repeat: no-repeat;
+         background-size: 19px 19px;
       }
       .onbeschikbaar
       { 
-          background-color:  #999999;
-                height:20px;	 
+          background-image: url('../image/seatunavailable.png');
+         height:19px;
+         min-width: 18px; 
+         background-repeat: no-repeat;
+         background-size: 19px 19px;
       }
-      .geselecteerd
+/*      .geselecteerd
       { 
-          background-color:  #9900ff; 
-                height:20px;               
-      }
+          background-color:  #009900; 
+         height:19px;
+         min-width: 19px;    
+                          background-repeat: no-repeat;
+         background-size: 19px 19px;
+      }*/
