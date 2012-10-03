@@ -119,7 +119,7 @@ class DBFunctions
                             WHERE stoelen.StoelID NOT IN 
                             (
                                 SELECT StoelID FROM bestellingstoelen
-                                INNER JOIN bestellingen on bestellingen.BestellingID = bestellingstoelen.BestellingID AND bestellingen.BestellingStatusID = 3 
+                                INNER JOIN bestellingen on bestellingen.BestellingID = bestellingstoelen.BestellingID AND bestellingen.BestellingStatusID != 4 
                                 AND bestellingen.VoorstellingID = " . $voorstelling . "
                             )
                             AND voorstellingen.VoorstellingID = " . $voorstelling . " ") 
