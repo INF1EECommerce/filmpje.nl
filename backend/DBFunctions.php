@@ -33,33 +33,7 @@ class DBFunctions
       $this -> connection -> dbClose();
       return $result;
   }
-  
-//  public function VoorstellingenVanFilmInKomendeXDagen($filmID, $dagenPlusMin)
-//  {
-//              if (!is_int($dagenPlusMin)) {
-//          throw new Exception("dagenPlusMin is geen nummer.");
-//      }
-//      
-//        $this -> connection -> dbConnect();
-//      $query = mysql_query("SELECT voorstellingen.VoorstellingID AS VoorstellingID, 
-//                            voorstellingen.Datum AS VoorstellingDatum,
-//                            voorstellingen.Tijd AS VoorstellingTijd,
-//                            voorstellingen.FilmID AS FilmID 
-//                            FROM voorstellingen
-//                            WHERE voorstellingen.FilmID = " . $filmID ."
-//                            AND voorstellingen.Datum <= DATE_ADD(NOW(), INTERVAL + ". $dagenPlusMin ." DAY)") or die (mysql_error());
-//      $result = array(); 
-//      
-//     while ($row = mysql_fetch_array($query)) {
-//     
-//         $result[] = $row;
-//         
-//     }
-//      $this -> connection -> dbClose();
-//      return $result;
-//  }
-  
-  
+   
   public function StoelInfo($stoelnummers)
   {
       
@@ -69,7 +43,7 @@ class DBFunctions
       
       
       $this -> connection -> dbConnect();
-      $query = mysql_query("SELECT stoelen.Nummer AS StoelNummer, rijen.Nummer AS RijNummer, stoelTypes.Naam AS StoelType, stoelTypes.Prijs AS StoelPrijs FROM stoelen 
+      $query = mysql_query("SELECT stoelen.Nummer AS StoelNummer, rijen.Nummer AS RijNummer, stoeltypes.Naam AS StoelType, stoeltypes.Prijs AS StoelPrijs FROM stoelen 
           INNER JOIN stoeltypes on stoeltypes.StoelTypeID = stoelen.StoelTypeID     
           INNER JOIN rijen on rijen.RijID = stoelen.RijID
           WHERE stoelen.StoelID IN (

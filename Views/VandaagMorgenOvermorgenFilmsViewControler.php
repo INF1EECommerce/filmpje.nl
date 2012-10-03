@@ -4,9 +4,13 @@ class VandaagMorgenOvermorgenFilmsViewControler
 
     public function VandaagMorgenOvermorgenFilmsViewControler()
     {
-        require_once('/Helpers/DateHelper.php');
-        require_once('/Helpers/ArrayGrouper.php');
-        require_once('/backend/DBFunctions.php');
+        require_once('/var/www/filmpje.nl/Helpers/DateHelper.php');
+        require_once('/var/www/filmpje.nl/Helpers/ArrayGrouper.php');
+        require_once('/var/www/filmpje.nl/backend/DBFunctions.php');
+        
+//        require_once('/Helpers/DateHelper.php');
+//        require_once('/Helpers/ArrayGrouper.php');
+//        require_once('/backend/DBFunctions.php');
     }
     
     public function Render()

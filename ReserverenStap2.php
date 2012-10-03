@@ -1,8 +1,29 @@
-<?php require_once(dirname(__FILE__).'/backend/DBFunctions.php'); ?>
+<?php 
+
+include_once '/var/www/filmpje.nl/Views/FilmPoosterEnInfoView.php'; 
+include_once '/var/www/filmpje.nl/Views/BestellingOverzichtView.php';
+include_once '/var/www/filmpje.nl/Views/BestellingOverzichtHeaderView.php';
+include_once '/var/www/filmpje.nl/Helpers/ReferenceGenerator.php';
+
+//include_once '/Views/FilmPoosterEnInfoView.php'; 
+//include_once '/Views/BestellingOverzichtView.php';
+//include_once '/Views/BestellingOverzichtHeaderView.php';
+//include_once '/Helpers/ReferenceGenerator.php';
+
+$voorstelling = intval($_POST['voorstellingid']);
+$geselecteerdeStoelen = $_POST['GeselecteerdeStoelen'];
+if ($voorstelling == 0 || strlen($geselecteerdeStoelen) == 0) {
+    header('Location: index.php');
+}
+?>
 <html>
 <head>
 <title></title>
 <link rel="stylesheet" href="css/stylesheet.css">
+<link href="css/SpryValidationTextField.css" rel="stylesheet" type="text/css">
+<link href="css/SpryValidationSelect.css" rel="stylesheet" type="text/css">
+<script src="javascript/SpryValidationTextField.js" type="text/javascript"></script>
+<script src="javascript/SpryValidationSelect.js" type="text/javascript"></script>
 </head>
 <body>
 	<div id="header">
@@ -20,103 +41,91 @@
 	
 	<div id="outerDiv">
         <div id="sideContent">
-            <div id="filmPoosterEnInfo">
-                <img src="image/apooster.jpg">
-                <div id="filmInfo">
-                    <h2>The Avengers</h2>
-                    <div id="tijdEnZaal">15:00 uur <br>
-                    Zaal 1
-                    </div>
-                </div>
-            </div>               
+        <?php $filmPoosterEnInfoView = new FilmPoosterEnInfoView(); $filmPoosterEnInfoView ->Render($voorstelling); ?>
          </div>
         <div id="mainContent">
        <div id="ss">
+       <p class="blockheader">STAP2 - Uw gegevens</p>
         <div id="ReserverenHeader">
-        <h2>Reservering afronden</h2>
-        The Avengers - 20-9-2010 - 15:00 UUR
+        <?php $bestellingOverzichtHeader = new BestellingOverzichtHeaderView(); $bestellingOverzichtHeader ->Render($voorstelling); ?>    
         </div>
         <div id="StoelPrijzen">
-            <h3>Ticketoverzicht</h3>    
-            <table>
-                <thead>
-                <th>Rij</th><th>Stoel</th><th>Type</th><th>Prijs</th>
-                </thead>
-                <tbody>
-                    <?php
-                    $totaalPrijs = 0;
-                     $geselecteerdeStoelen = $_POST['GeselecteerdeStoelen'];
-                     
-                     $dbfunctions = new DBFunctions();
-                     
-                     $stoelInfo = $dbfunctions -> StoelInfo($geselecteerdeStoelen);
-                     
-                     foreach ($stoelInfo as $stoel) { 
-                     $totaalPrijs = $totaalPrijs + $stoel['StoelPrijs'];
-                     ?>
-                         
-                    <tr><td><?php echo $stoel['RijNummer'] ?></td><td><?php echo $stoel['StoelNummer'] ?></td><td><?php echo $stoel['StoelType'] ?></td><td><?php echo $stoel['StoelPrijs'] ?></td></tr>      
-                         
-                    <?php } ?>
-                </tbody>
-                <tfoot>
-
-                    <tr style="background-color: #999999; color: #FFFFFF;"><td>Totaal:</td><td></td><td></td><td><?php echo $totaalPrijs ?></td></tr>
-                </tfoot>
-            </table>
-            
+         <?php $bestellingOverzichtView = new BestellingOverzichtView(); $bestellingOverzichtView ->Render($geselecteerdeStoelen) ?> 
         </div>
         <div id="formulier">
-        <h3>Uw contactinformatie</h3>
+        
         <form method="POST" id="ReserverenForm" action="ReserverenStap3.php">
             <table>
+                <caption>Uw contactinformatie</caption>
                 <tr>
                     <td><label>Voornaam:</label></td>
-                    <td><input type="text" value="" name="voornaam"><td>
+                    <td><span id="voornaamText">
+                      <input type="text" value="" name="voornaam">
+                      <span class="textfieldRequiredMsg">Voornaam is verplicht.</span></span>
+                  <td>
             </tr>
             <tr>
                 <td><label>Achternaam:</label></td>
-                <td><input type="text" value="" name="achternaam"></td>
+                <td><span id="achternaamText">
+                  <input type="text" value="" name="achternaam">
+                <span class="textfieldRequiredMsg">Achternaam is verplicht.</span></span></td>
             </tr>
             <tr>
                 <td><label>Adres:</label></td>
-                <td><input type="text" value="" name="adres"></td>
+                <td><span id="adresText">
+                  <input type="text" value="" name="adres">
+                <span class="textfieldRequiredMsg">Adres is verplicht.</span></span></td>
             </tr>
             <tr>
                 <td><label>Postcode:</label></td>
-                <td><input type="text" value="" name="postcode"></td>
+                <td><span id="postcodeText">
+                  <input type="text" value="" name="postcode">
+                <span class="textfieldRequiredMsg">Postcode is verplicht.</span></span></td>
+            </tr>
+            <tr>
+                <td><label>Plaats:</label></td>
+                <td><span id="plaatsText">
+                  <input type="text" value="" name="plaats">
+                <span class="textfieldRequiredMsg">Plaats is verplicht.</span></span></td>
             </tr>
             <tr>
                 <td><label>Email:</label></td>
-                <td><input type="text" value="" name="email"></td>
+                <td><span id="emailText">
+                  <input type="text" value="" name="email">
+                <span class="textfieldRequiredMsg">Email is verplicht.</span></span></td>
             </tr>
             <tr>
-                <td><label>Telefoon:</label></td>
-                <td><input type="text" value="" name="telefoon"></td>
+                <td><label>Telefoonnummer:</label></td>
+                <td><span id="telefoonnummerText">
+                  <input type="text" value="" name="telefoon">
+                <span class="textfieldRequiredMsg">Telefoonnummer is verplicht.</span></span></td>
             </tr>
             <tr><td>&nbsp;</td></tr>
             <tr>
             
                 <td><label>Uw bank:</label></td>
-                <td><select name="issuer">
-                <option value="0">ABN-Amro</option>
-                <option value="1">ASN Bank</option>
-                <option value="2">Friesland Bank</option>
-                <option value="3">ING</option>
-                <option value="4">Rabobank</option>
-                <option value="5">SNS Bank</option>
-                <option value="5">SNS Regiobank</option>
-                <option value="6">Tridios Bank</option>
-                <option value="7">Van Lanschot Bankiers</option>
-            </select>
-                </td>
+                <td><span id="bankSelect">
+                  <select name="issuer">
+                    <option value="-1">Selecteer uw bank a.u.b</option>
+                    <option value="0">ABN-Amro</option>
+                    <option value="1">ASN Bank</option>
+                    <option value="2">Friesland Bank</option>
+                    <option value="3">ING</option>
+                    <option value="4">Rabobank</option>
+                    <option value="5">SNS Bank</option>
+                    <option value="6">SNS Regiobank</option>
+                    <option value="7">Tridios Bank</option>
+                    <option value="8">Van Lanschot Bankiers</option>
+                  </select>
+                <span class="selectRequiredMsg">Selecteer uw bank a.u.b.</span></span></td>
             </tr>
             <tr><td>&nbsp;</td></tr>
             <tr><td>
-                    <input type="hidden" name="amount" value="<?php echo $totaalPrijs ?>">
-                    <input type="hidden" name="reference" value ="Dit is een test referemce">
-                    <input type="hidden" name="description" value="Dit is een test description">
-                    <input type="hidden" name="orderId"> 
+                    <input type="hidden" name="amount" value="<?php echo $bestellingOverzichtView -> totaalPrijs; ?>">
+                    <input type="hidden" name="reference" value ="<?php echo ReferenceGenerator::Genereer(); ?>">
+                    <input type="hidden" name="stoelen" value="<?php echo $geselecteerdeStoelen; ?>">
+                    <input type="hidden" name="voorstelling" value="<?php echo $voorstelling; ?>">
+                    <input type="hidden" name="description" value="Uw bestelling bij Filmpje.">
                     <input type="submit" value="Bestelling plaatsen"></td>
         </table>
         </form>
@@ -134,17 +143,16 @@
 	<li>Terms of Service</li>
 </ul>
 </footer>
-
-	
-
-
-
-
-	
-	
-
-	
 	</div>
-	
+<script type="text/javascript">
+var voornaamText = new Spry.Widget.ValidationTextField("voornaamText");
+var achternaamText = new Spry.Widget.ValidationTextField("achternaamText");
+var adresText = new Spry.Widget.ValidationTextField("adresText");
+var postcodeText = new Spry.Widget.ValidationTextField("postcodeText");
+var emailText = new Spry.Widget.ValidationTextField("emailText", "email");
+var telefoonnummerText = new Spry.Widget.ValidationTextField("telefoonnummerText");
+var plaatsText = new Spry.Widget.ValidationTextField("plaatsText");
+var bankSelect = new Spry.Widget.ValidationSelect("bankSelect", { invalidValue:"-1" });
+</script>
 </body>
 </html>

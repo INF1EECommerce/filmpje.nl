@@ -3,7 +3,8 @@ class FilmPoosterEnInfoView
 {
     public function FilmPoosterEnInfoView()
     {
-        require_once('/backend/DBFunctions.php');
+        require_once('/var/www/filmpje.nl/backend/DBFunctions.php');
+        //require_once('/backend/DBFunctions.php');
     }
     
     public function Render($voortstelling)

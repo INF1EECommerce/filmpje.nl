@@ -1,6 +1,18 @@
                            var geselecteerdeStoelen = new Array();
                            var totaalPrijs = 0;
                            
+                            function VolgendeKnopAanUitBepalen()
+                            {
+                                var submitButton = document.getElementById('submitB');
+                                if (geselecteerdeStoelen.length > 0) {
+                                   document.GeselecteerdeStoelenForm.submitB.disabled=false;
+                                }
+                                else
+                                {
+                                    document.GeselecteerdeStoelenForm.submitB.disabled=true;
+                                }
+                            }
+                           
                             function WerkStoelenInFormBij()
                             {
                                 document.getElementById('gs').value = geselecteerdeStoelen.toString();
@@ -130,14 +142,14 @@
                         {
                             //alert(event.data.stoelId);
                                 var stoel = document.getElementById(event.data.stoelId);
-                                
-                                if (stoel.getAttribute("style") == "background-color:green;") {
+                                //alert(stoel.getAttribute("style"));
+                                if (stoel.getAttribute("style") == "background-color: green;") {
                                             
-                                    geselecteerdeStoelen.splice(geselecteerdeStoelen.indexOf(event.data.stoelId), 1);
+                                            geselecteerdeStoelen.splice(geselecteerdeStoelen.indexOf(event.data.stoelId), 1);
                                             VerwijderenOverzichtTabelRij(event.data.stoelId);
                                             WerkTotaalPrijsBij(parseFloat(event.data.stoelPrijs) * -1);
                                             WerkStoelenInFormBij();
-                                            
+                                            VolgendeKnopAanUitBepalen();
                                             stoel.setAttribute("style", "");
                                 }
                                 else
@@ -146,7 +158,8 @@
                                         ToevoegenOverzichtTabelRij(event.data.stoelRij, event.data.stoelNummer, event.data.stoelType, event.data.stoelPrijs, event.data.stoelId);
                                         WerkTotaalPrijsBij(parseFloat(event.data.stoelPrijs));
                                         WerkStoelenInFormBij();
-                                        stoel.setAttribute("style", "background-color:green;");
+                                        VolgendeKnopAanUitBepalen();    
+                                        stoel.setAttribute("style", "background-color: green;");
                                     }
                                 
                                     
@@ -167,8 +180,9 @@
                             var TypeText = document.createTextNode(Type);
                             TypeCell.appendChild(TypeText);
                             var PrijsCell = document.createElement('td');
-                            var PrijsText = document.createTextNode(Prijs.replace('.', ','));
-                            PrijsCell.appendChild(PrijsText);
+                            PrijsCell.innerHTML = '&euro; ' + Prijs.replace('.', ',');
+                            //var PrijsText = document.createTextNode('€ ' + Prijs.replace('.', ','));
+                            //PrijsCell.appendChild(PrijsText);
                             
                             
                             dataRow.appendChild(RijCell);

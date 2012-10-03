@@ -1,4 +1,6 @@
-<?php include_once '/Views/FilmPoosterEnInfoView.php'; 
+<?php 
+include_once '/var/www/filmpje.nl/Views/FilmPoosterEnInfoView.php'; 
+//include_once '/Views/FilmPoosterEnInfoView.php'; 
 $voorstelling = intval($_POST['voorstelling']);
 if ($voorstelling == 0) {
     header('Location: index.php');
@@ -74,7 +76,8 @@ var Voorstelling = ". $voorstelling. ";
                     </table>
                       <form method="post" action="ReserverenStap2.php" name="GeselecteerdeStoelenForm">
                             <input type="hidden" id="gs" name="GeselecteerdeStoelen" value="">
-                            <input type="submit" value="Volgene Stap">
+                            <input type="hidden" id="voortsellingid" name="voorstellingid" value="<?php echo $voorstelling; ?>">
+                            <input type="submit" disabled="disabled" name="submitB" id="submitB" value="Volgene Stap">
                         </form>
 
         </div>
