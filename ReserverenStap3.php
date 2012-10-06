@@ -4,10 +4,10 @@
 //include_once '/backend/DTO/BestellingFactory.php';
 //include_once '/icepay/icepay.php';
 
-include_once '/var/www/filmpje.nl/Views/FilmPoosterEnInfoView.php';
-include_once '/var/www/filmpje.nl/backend/Bestellingen.php';
-include_once '/var/www/filmpje.nl/backend/DTO/BestellingFactory.php';
-include_once '/var/www/filmpje.nl/icepay/icepay.php';
+include_once 'Views/FilmPoosterEnInfoView.php';
+include_once 'backend/Bestellingen.php';
+include_once 'backend/DTO/BestellingFactory.php';
+include_once 'icepay/icepay.php';
 
 $voorstelling = intval($_POST['voorstelling']);
 if ($voorstelling == 0) {

@@ -1,9 +1,9 @@
 <?php 
 
-include_once '/var/www/filmpje.nl/Views/FilmPoosterEnInfoView.php'; 
-include_once '/var/www/filmpje.nl/Views/BestellingOverzichtView.php';
-include_once '/var/www/filmpje.nl/Views/BestellingOverzichtHeaderView.php';
-include_once '/var/www/filmpje.nl/Helpers/ReferenceGenerator.php';
+include_once 'Views/FilmPoosterEnInfoView.php'; 
+include_once 'Views/BestellingOverzichtView.php';
+include_once 'Views/BestellingOverzichtHeaderView.php';
+include_once 'Helpers/ReferenceGenerator.php';
 
 //include_once '/Views/FilmPoosterEnInfoView.php'; 
 //include_once '/Views/BestellingOverzichtView.php';

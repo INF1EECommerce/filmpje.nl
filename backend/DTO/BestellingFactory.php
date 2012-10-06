@@ -3,8 +3,8 @@ class BestellingFactory
 {
   public function BuildBestellingWithNewStatus($postvalues)
   {
-     include_once('/var/www/filmpje.nl/backend/DTO/Bestelling.php');
-     include_once('/var/www/filmpje.nl/backend/Bestellingen.php');
+     include_once('backend/DTO/Bestelling.php');
+     include_once('backend/Bestellingen.php');
      
 //     include_once('/backend/DTO/Bestelling.php');
 //     include_once('/backend/Bestellingen.php');

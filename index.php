@@ -1,5 +1,5 @@
 <?php 
-require_once('/var/www/filmpje.nl/Views/VandaagMorgenOvermorgenFilmsViewControler.php'); 
+require_once('Views/VandaagMorgenOvermorgenFilmsViewControler.php'); 
 //require_once('/Views/VandaagMorgenOvermorgenFilmsViewControler.php'); 
 ?>
 <html>

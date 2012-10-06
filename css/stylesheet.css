@@ -379,6 +379,19 @@ nav ul li a {
 	color: #fff;
 }
 
+.timeClass button .reserveren
+{
+    background-color: #FFBB00;
+    color: #000000;
+}
+
+.timeClass button .uitverkocht
+{
+    background-color: #666666;
+    color: #ffffff;
+}
+
+
 .timeClass
 {
     width: 265px;    

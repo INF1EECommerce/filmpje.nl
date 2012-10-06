@@ -1,6 +1,6 @@
  <?php 
  // Get these from http://developers.facebook.com 
-include_once('/var/www/filmpje.nl/Facebook/src/facebook.php');
+include_once('Facebook/src/facebook.php');
 
 $facebook = new Facebook(array(
   'appId'  => '411293302259375',
@@ -58,9 +58,13 @@ if ($user) {
 
       <h3>Test</h3>
     <?php 
- $token = $facebook->getAccessToken();   
+    if($user)
+    {
+        $
+        
+        $token = $facebook->getAccessToken();   
     
-$data = array("name"=>"Filmpje Test", 
+        $data = array("name"=>"Filmpje Test", 
 
 
            "access_token"=>$token, 
@@ -76,30 +80,13 @@ $data = array("name"=>"Filmpje Test",
 
              "description"=>"Met z'n allen naar de bioscoop." 
     );
- ?>  
-          
-          
-    <?php $result = $facebook->api("/me/events","post",$data); 
+        
+       $result = $facebook->api("/me/events","post",$data); 
     $facebookEventId = $result['id'];
     echo $facebookEventId;
-    ?>
-      
-      
-    <h3>PHP Session</h3>
-    <pre><?php print_r($_SESSION); ?></pre>
-
-    <?php if ($user): ?>
-      <h3>You</h3>
-      <img src="https://graph.facebook.com/<?php echo $user; ?>/picture">
-
-      <h3>Your User Object (/me)</h3>
-      <pre><?php print_r($user_profile); ?></pre>
-    <?php else: ?>
-      <strong><em>You are not Connected.</em></strong>
-    <?php endif ?>
-
-    <h3>Public profile of Naitik</h3>
-    <img src="https://graph.facebook.com/naitik/picture">
+    }
+ ?>  
+          
   </body>
 </html>
 

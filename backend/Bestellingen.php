@@ -6,7 +6,7 @@ class Bestellingen {
 
     public function Bestellingen() {
         require_once(dirname(__FILE__) . '/DBConnection.php');
-        require_once '/var/www/filmpje.nl/Helpers/ReferenceGenerator.php';
+        require_once 'Helpers/ReferenceGenerator.php';
         $this->connection = new DBConnection();
     }
     

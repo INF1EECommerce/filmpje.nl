@@ -1,5 +1,5 @@
 <?php 
-include_once '/var/www/filmpje.nl/Views/FilmPoosterEnInfoView.php'; 
+include_once 'Views/FilmPoosterEnInfoView.php'; 
 //include_once '/Views/FilmPoosterEnInfoView.php'; 
 $voorstelling = intval($_POST['voorstelling']);
 if ($voorstelling == 0) {

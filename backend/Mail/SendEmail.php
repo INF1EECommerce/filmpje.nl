@@ -4,9 +4,9 @@ class SendEmail
 {
     public function SendEmail()
     {
-        include_once '/var/www/filmpje.nl/backend/Mail/Templates/TemplateParser.php';
-        include_once '/var/www/filmpje.nl/backend/Bestellingen.php';
-        include_once '/var/www/filmpje.nl/Views/BestellingOverzichtView.php';
+        include_once 'backend/Mail/Templates/TemplateParser.php';
+        include_once 'backend/Bestellingen.php';
+        include_once 'Views/BestellingOverzichtView.php';
     }
     
     

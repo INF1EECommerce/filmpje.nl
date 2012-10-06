@@ -5,7 +5,7 @@ class BestellingOverzichtHeaderView {
     var $totaalPrijs;
 
     public function BestellingOverzichtHeaderView() {
-        require_once('/var/www/filmpje.nl/backend/DBFunctions.php');
+        require_once('backend/DBFunctions.php');
         //require_once('/backend/DBFunctions.php');
         $this->totaalPrijs = 0.00;
     }

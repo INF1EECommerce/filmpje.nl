@@ -4,9 +4,9 @@ print_r($_POST);
 define('MERCHANTID', 17164);//<--- Change this into your own merchant ID
 define('SECRETCODE', "Ty84RqXj79BtNa65Awf3J4Qxr7E8Scs5GDb93Ygm");//<--- Change this into your own merchant ID
 
-require_once '/var/www/filmpje.nl/icepay/icepay_api_basic.php';
-require_once '/var/www/filmpje.nl/backend/Bestellingen.php';
-require_once '/var/www/filmpje.nl/backend/Mail/SendEmail.php';
+require_once 'icepay/icepay_api_basic.php';
+require_once 'backend/Bestellingen.php';
+require_once 'backend/Mail/SendEmail.php';
 //require_once '/backend/Bestellingen.php';
 
 /* Start the postback class */
