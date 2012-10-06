@@ -6,6 +6,7 @@ define('SECRETCODE', "Ty84RqXj79BtNa65Awf3J4Qxr7E8Scs5GDb93Ygm");//<--- Change t
 
 require_once '/var/www/filmpje.nl/icepay/icepay_api_basic.php';
 require_once '/var/www/filmpje.nl/backend/Bestellingen.php';
+require_once '/var/www/filmpje.nl/backend/Mail/SendEmail.php';
 //require_once '/backend/Bestellingen.php';
 
 /* Start the postback class */
@@ -27,6 +28,14 @@ $bestellingen = new Bestellingen();
          */
         if ($status == "New" || $status="Open"){
             $bestellingen->SlaStatusOp($icepay->getStatus(), $icepay->getOrderID()); //Update the status of your order
+            
+            if ($icepay->getStatus() == "OK") {
+
+            //stuur email met bevestiging
+            $sendEmail = new SendEmail();
+            $sendEmail->ZendEmailForSuccesBetaling($icepay->getOrderID());                
+            }
+            
         }
     } else die ("Unable to validate postback data");
 ?>

@@ -25,6 +25,7 @@ try {
     $bellingen->MaakBestellingAan($bestelling);
 } catch (Exception $ex) {
      $icepayurl = "icepay/betaalerror.php";
+     //echo $ex->getMessage();
 }
 ?>
 <html>
@@ -33,18 +34,18 @@ try {
         <link rel="stylesheet" href="css/stylesheet.css">
     </head>
     <body>
-        <div id="header">
-            <div id="banner">
-                <ul>
-                    <li><a href="#">Home</a></li>
-                    <li><a href="#">Films</a></li>
-                    <li><a href="#">Agenda</a></li>
-                    <li><a href="#">Contact</a></li>
-                    <li><a href="#">Specials</a></li>
-                </ul>
-
-            </div>
-        </div>
+   <header>
+		<img src="image/header2.png">
+	</header>
+	<nav>
+		<ul>
+			<li><a href="index.php">Home</a></li>
+			<li><a href="#">Films</a></li>
+			<li><a href="#">Info</a></li>
+			<li><a href="#">Contact</a></li>
+			<li id="lastLi"><a href="#">Specials</a></li>
+		</ul>
+	</nav>
 
         <div id="outerDiv">
             <div id="sideContent">

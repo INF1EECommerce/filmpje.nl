@@ -21,18 +21,18 @@ var Voorstelling = ". $voorstelling. ";
 ?>
 </head>
 <body onload="HaalBeschikbareStoelenOp()">
-	<div id="header">
-		<div id="banner">
-			<ul>
-				<li><a href="#">Home</a></li>
-				<li><a href="#">Films</a></li>
-				<li><a href="#">Agenda</a></li>
-				<li><a href="#">Contact</a></li>
-				<li><a href="#">Specials</a></li>
-			</ul>
-		
-		</div>
-	</div>
+<header>
+		<img src="image/header2.png">
+	</header>
+	<nav>
+		<ul>
+			<li><a href="index.php">Home</a></li>
+			<li><a href="#">Films</a></li>
+			<li><a href="#">Info</a></li>
+			<li><a href="#">Contact</a></li>
+			<li id="lastLi"><a href="#">Specials</a></li>
+		</ul>
+	</nav>
 	
 	<div id="outerDiv">
         <div id="sideContent">
@@ -42,7 +42,7 @@ var Voorstelling = ". $voorstelling. ";
             <div id="ss">
                 <p class="blockheader">STAP1 - Stoelselectie</p>
             <div id="StoelSelectieHeader">
-               Filmpje hanteerd prijzen gebaseerd op de stoelen die u voor de voorstelling selecteerd. Zou u zo vriendelijk willen zijn hieronder uw zitplaats(en) te kiezen? <br>
+               Filmpje hanteert prijzen gebaseerd op de stoelen die u voor de voorstelling selecteert. <br> Zou u zo vriendelijk willen zijn hieronder uw zitplaats(en) te kiezen? <br>
                Onder het stoeloverzicht vindt u een legenda en een overzicht van uw selectie.
             </div>
             <div id="Stoelen">

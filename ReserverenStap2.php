@@ -15,6 +15,11 @@ $geselecteerdeStoelen = $_POST['GeselecteerdeStoelen'];
 if ($voorstelling == 0 || strlen($geselecteerdeStoelen) == 0) {
     header('Location: index.php');
 }
+ob_start();
+$bestellingOverzichtView = new BestellingOverzichtView();
+$bestellingOverzichtView->Render($geselecteerdeStoelen);
+$stoelenTabel = ob_get_contents();
+ob_end_clean();
 ?>
 <html>
 <head>
@@ -26,18 +31,18 @@ if ($voorstelling == 0 || strlen($geselecteerdeStoelen) == 0) {
 <script src="javascript/SpryValidationSelect.js" type="text/javascript"></script>
 </head>
 <body>
-	<div id="header">
-		<div id="banner">
-			<ul>
-				<li><a href="#">Home</a></li>
-				<li><a href="#">Films</a></li>
-				<li><a href="#">Agenda</a></li>
-				<li><a href="#">Contact</a></li>
-				<li><a href="#">Specials</a></li>
-			</ul>
-		
-		</div>
-	</div>
+	<header>
+		<img src="image/header2.png">
+	</header>
+	<nav>
+		<ul>
+			<li><a href="index.php">Home</a></li>
+			<li><a href="#">Films</a></li>
+			<li><a href="#">Info</a></li>
+			<li><a href="#">Contact</a></li>
+			<li id="lastLi"><a href="#">Specials</a></li>
+		</ul>
+	</nav>
 	
 	<div id="outerDiv">
         <div id="sideContent">
@@ -48,9 +53,6 @@ if ($voorstelling == 0 || strlen($geselecteerdeStoelen) == 0) {
        <p class="blockheader">STAP2 - Uw gegevens</p>
         <div id="ReserverenHeader">
         <?php $bestellingOverzichtHeader = new BestellingOverzichtHeaderView(); $bestellingOverzichtHeader ->Render($voorstelling); ?>    
-        </div>
-        <div id="StoelPrijzen">
-         <?php $bestellingOverzichtView = new BestellingOverzichtView(); $bestellingOverzichtView ->Render($geselecteerdeStoelen) ?> 
         </div>
         <div id="formulier">
         
@@ -129,6 +131,9 @@ if ($voorstelling == 0 || strlen($geselecteerdeStoelen) == 0) {
                     <input type="submit" value="Bestelling plaatsen"></td>
         </table>
         </form>
+        </div>
+          <div id="StoelPrijzen">
+         <?php echo $stoelenTabel; ?> 
         </div>
             </div>
         </div>

@@ -1,0 +1,19 @@
+<html>
+
+<body leftmargin="15" topmargin="15">
+<p><img src="http://chivan.com/filmpje.nl/image/logo.png" width="207" height="58" alt="logo" /></p>
+<p><strong>Geachte mevrouw\meneer {{achternaam}}</strong></p>
+<p>Hartelijk bedankt voor uw bestelling bij filmpje.nl<br />
+  Hieronder vind u een overzicht van de door u geplaatste bestelling alsmede uw bestellingnummer.<br />
+  Bewaart u deze goed. Het is uw bewijs van betaling bij de kassa.</p>
+<p><strong>Bestelling</strong></p>
+<p>Bestellingnummer:<strong> {{kenmerk}}</strong><br />
+  Voorstelling: <strong>{{filmnaam}} - {{datum}} - {{tijd}} UUR</strong><br />
+  Zaal:<strong> {{zaalnummer}}</strong></p>
+<p><strong>Stoelselectie\Prijsoverzicht</strong></p>
+<p>{{stoelen}}</p>
+<p>Wij raden u aan om minimaal een kwartier voor de start van de voorstelling uw kaarten op te halen aan de kassa.</p>
+<p>Wij hopen u hiermee voldoende te hebben geïnformeerd,</p>
+<p>Het Filmpje.nl team.</p>
+</body>
+</html>

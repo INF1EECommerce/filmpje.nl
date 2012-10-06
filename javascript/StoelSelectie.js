@@ -143,7 +143,7 @@
                             //alert(event.data.stoelId);
                                 var stoel = document.getElementById(event.data.stoelId);
                                 //alert(stoel.getAttribute("style"));
-                                if (stoel.getAttribute("style") == "background-color: green;") {
+                                if (geselecteerdeStoelen.indexOf(event.data.stoelId, 0) != -1) {
                                             
                                             geselecteerdeStoelen.splice(geselecteerdeStoelen.indexOf(event.data.stoelId), 1);
                                             VerwijderenOverzichtTabelRij(event.data.stoelId);
@@ -159,7 +159,7 @@
                                         WerkTotaalPrijsBij(parseFloat(event.data.stoelPrijs));
                                         WerkStoelenInFormBij();
                                         VolgendeKnopAanUitBepalen();    
-                                        stoel.setAttribute("style", "background-color: green;");
+                                        stoel.setAttribute("style", "background-color: rgb(255, 255, 255);");
                                     }
                                 
                                     

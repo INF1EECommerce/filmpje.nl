@@ -18,7 +18,6 @@ public function ParseReservernPostValues($postvalues)
         $this ->issuer = $postvalues['issuer'];
         $this ->description = $postvalues['description'];
         $this ->reference = $postvalues['reference'];
-        
         return true;
         }
         catch(Exception $ex)

@@ -10,6 +10,33 @@ class Bestellingen {
         $this->connection = new DBConnection();
     }
     
+    public function HaalBestellingOp($kenmerk)
+    {
+         $this->connection->dbConnect();   
+        $idQuery = mysql_query("
+      SELECT bestellingen.Voornaam, bestellingen.Adres, bestellingen.Postcode, bestellingen.Plaats, bestellingen.Telefoonnummer, bestellingen.Achternaam, bestellingen.Email, bestellingen.Kenmerk, stoelen.Nummer AS StoelNummer, stoelen.StoelID, films.Naam AS FilmNaam, stoeltypes.Naam AS StoelType, stoeltypes.Prijs AS StoelPrijs, rijen.Nummer AS RijNummer, voorstellingen.Datum AS VoorstellingDatum, voorstellingen.Tijd AS VoorstellingTijd, zalen.Naam AS ZaalNaam
+          FROM filmpje.bestellingen 
+		  INNER JOIN voorstellingen on voorstellingen.VoorstellingID = bestellingen.VoorstellingID
+			INNER JOIN zalen on zalen.ZaalID = voorstellingen.ZaalID
+			INNER JOIN films on films.FilmID = voorstellingen.FilmID
+          INNER JOIN bestellingstoelen on bestellingstoelen.BestellingID = bestellingen.BestellingID
+		  INNER JOIN stoelen on stoelen.StoelID = bestellingstoelen.StoelID 
+		  INNER JOIN rijen on rijen.RijID = stoelen.RijID
+		   INNER JOIN stoeltypes on stoeltypes.StoelTypeID = stoelen.StoelTypeID
+          WHERE bestellingen.Kenmerk = '" . $kenmerk . "'") or die(mysql_error());
+        
+       
+       $result = array();
+
+        while ($row = mysql_fetch_array($idQuery)) {
+
+            $result[] = $row;
+        }
+        $this->connection->dbClose();
+        
+        return $result;
+    }
+    
     public function BestaatKenmerk($kenmerk)
     {
          $this->connection->dbConnect();

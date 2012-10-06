@@ -11,9 +11,11 @@
     <h2> Bedankt</h2>
 <p>
     Hartelijk bedankt voor uw bestelling bij Filmpje.</br>
-U ontvangt binnenkort een email ter bevestiging. Hierin vindt u ook uw bestellingnummer. Bewaart u deze goed, dit is uw bewijs van betaling.
+U ontvangt binnenkort een email ter bevestiging. Hierin vindt u ook uw bestellingnummer. </br> Bewaart u deze goed, dit is uw bewijs van betaling.
 </p>
-    
+    <h2>Hoe komt u bij Filmpje?</h2>
+    <p>Hier helpen wij u graag mee. U kunt uw adres opgeven bij "van" en klikt u dan op "ga".</br> Wij vertellen u hoe u moet rijden!</p>
+<script src="//www.gmodules.com/ig/ifr?url=http://hosting.gmodules.com/ig/gadgets/file/114281111391296844949/driving-directions.xml&amp;up_fromLocation=&amp;up_myLocations=West-Kruiskade%2026%2C%203014%20AS%20in%20Rotterdam&amp;up_defaultDirectionsType=&amp;up_autoExpand=&amp;synd=open&amp;w=595&amp;h=500&amp;title=&amp;brand=light&amp;lang=nl&amp;country=ALL&amp;border=%23ffffff%7C3px%2C1px+solid+%23999999&amp;output=js"></script>
     </div>
 </body>
 </html>

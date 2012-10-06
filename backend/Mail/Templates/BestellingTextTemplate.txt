@@ -1,0 +1,17 @@
+Geachte mevrouw\meneer {{achternaam}}
+
+Hartelijk bedankt voor uw bestelling bij filmpje.nl
+Hieronder vind u een overzicht van de door u geplaatste bestelling alsmede uw bestellingnummer.
+Bewaart u deze goed. Het is uw bewijs van betaling bij de kassa.
+
+Bestelling
+
+Bestellingnummer: {{kenmerk}}
+Voorstelling: {{filmnaam}} - {{datum}} - {{tijd}} UUR
+Zaal: {{zaalnummer}}
+
+Wij raden u aan om minimaal een kwartier voor de start van de voorstelling uw kaarten op te halen aan de kassa.
+
+Wij hopen u hiermee voldoende te hebben geïnformeerd,
+
+Het Filmpje.nl team.

@@ -1,0 +1,26 @@
+﻿Beste Filmpje medewerker,
+
+Er heeft een bestelling plaatsgevonden op filmpje.nl
+Hieronder vind u een overzicht van de door de klant geplaatste bestelling alsmede de klantinformatie.
+
+Klantgegevens
+
+Voornaam: {{voornaam}}
+Achternaam: {{achternaam}}
+Adres: {{adres}}
+Postcode: {{postcode}}
+Plaats: {{plaats}}
+Email: {{email}}
+Telefoon: {{telefoon}}
+
+Bestelling
+
+Bestellingnummer: {{kenmerk}}
+Voorstelling: {{filmnaam}} - {{datum}} - {{tijd}} UUR
+Zaal: {{zaalnummer}}
+
+Deze bestelling is voldaan middels: IDEAL.
+
+Groet,
+
+Filmpje.nl
