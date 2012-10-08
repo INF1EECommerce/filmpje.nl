@@ -99,7 +99,37 @@ class Bestellingen {
         $this->connection->dbClose();
         return $result[0]['BestellingStatusID'];
     }
+    
+    public function UpdateBeschikbareStoelenBetaalProbleem($kenmerk)
+    {
+        $this->connection->dbConnect();
+        
+        $query = mysql_query("SELECT VoorstellingID,  COUNT(*) AS AantalStoelen
+          FROM bestellingen
+          INNER JOIN bestellingstoelen on bestellingstoelen.BestellinID = bestellingen.BestellingID
+          WHERE bestellingen.Kenmerk = '" . $kenmerk . "'") or die(mysql_error());
+        $result = array();
 
+        while ($row = mysql_fetch_array($query)) {
+
+            $result[] = $row;
+        }
+        
+        $this->UpdateBeschikbareStoelen($result[0]['VoorstellingID'],$result[0]['AantalStoelen'] , '+');
+        
+        $this->connection->dbClose();
+    }
+    
+    public function UpdateBeschikbareStoelen($voorstelling, $aantalstoelen, $plusmin)
+    {
+       $this -> connection -> dbConnect();
+              
+        mysql_query("UPDATE voorstellingen
+          SET voorstellingen.BeschikbareStoelen = voorstellingen.BeschikbareStoelen ". $plusmin . " " . $aantalstoelen ."
+          WHERE voorstellingen.VoorstellingID = '" . $voorstelling . "'") or die(mysql_error());
+       
+       $this -> connection -> dbClose();
+    }
     public function MaakBestellingAan(Bestelling $bestelling) {
         //TO DO: valideer object;
         $this->connection->dbConnect();
@@ -138,6 +168,8 @@ class Bestellingen {
                 die('Error: ' . mysql_error());
             }
         }
+        
+        $this->UpdateBeschikbareStoelen($bestelling->voorstellingID, count($stoelen), '-');
 
         $this->connection->dbClose();
     }

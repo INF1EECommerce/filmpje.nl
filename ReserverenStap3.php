@@ -25,7 +25,7 @@ try {
     $bellingen->MaakBestellingAan($bestelling);
 } catch (Exception $ex) {
      $icepayurl = "icepay/betaalerror.php";
-     //echo $ex->getMessage();
+//     echo $ex->getMessage();
 }
 ?>
 <html>

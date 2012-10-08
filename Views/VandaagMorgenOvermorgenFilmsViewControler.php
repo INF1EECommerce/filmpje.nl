@@ -54,9 +54,20 @@ class VandaagMorgenOvermorgenFilmsViewControler
                         ");
                                 //lus door de voortstellingen
                                 foreach ($film['items'] as $voorstelling) {
-
+                                
+                                $knopclass="";
+                                $filmTijd = strtotime($voorstelling['VoorstellingDatum'] . " ". $voorstelling['VoorstellingTijd']);
+                                $morgen = DateHelper::Plus24uur();
+                                if ($filmTijd > $morgen) {
+                                 $knopclass = "reserveren";   
+                                }
+                                
+                                if (intval($voorstelling['BeschikbareStoelen']) == 0) {
+                                 $knopclass = "uitverkocht";   
+                                }
+                                    
                                 echo ("
-                                <button onClick=\"TijdButtonCick(". $voorstelling['VoorstellingID'] .")\">" . substr($voorstelling['VoorstellingTijd'], 0, 5). "</button>
+                                <button class=\"". $knopclass ."\" onClick=\"TijdButtonCick(". $voorstelling['VoorstellingID'] .")\">" . substr($voorstelling['VoorstellingTijd'], 0, 5). "</button>
                                 ");
 
                                 }

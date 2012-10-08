@@ -15,7 +15,6 @@ $icepay->setMerchantID(MERCHANTID)
         ->setSecretCode(SECRETCODE);
         //->doIPCheck(); // We encourage to enable ip checking for your own security
 
-
 $bestellingen = new Bestellingen();
 
     if($icepay->validate()){
@@ -34,6 +33,11 @@ $bestellingen = new Bestellingen();
             //stuur email met bevestiging
             $sendEmail = new SendEmail();
             $sendEmail->ZendEmailForSuccesBetaling($icepay->getOrderID());                
+            }
+            
+            if ($icepay->getStatus() == "ERR") {
+            //even aan het bestelsysteem doorgeven dat de stoelen weer vrijgegeven kunnen worden;
+            $bestellingen->UpdateBeschikbareStoelenBetaalProbleem($icepay->getOrderID());    
             }
             
         }

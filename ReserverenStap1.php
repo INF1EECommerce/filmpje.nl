@@ -1,5 +1,6 @@
 <?php 
 include_once 'Views/FilmPoosterEnInfoView.php'; 
+include_once 'Views/FacebookEventView.php';
 //include_once '/Views/FilmPoosterEnInfoView.php'; 
 $voorstelling = intval($_POST['voorstelling']);
 if ($voorstelling == 0) {
@@ -13,6 +14,7 @@ if ($voorstelling == 0) {
 <link rel="stylesheet" href="css/stoelselectie.css">
 <script src="javascript/jquery.js" type="text/javascript"></script>
 <script src="javascript/StoelSelectie.js" type="text/javascript"></script>
+<script src="javascript/popup.js" type="text/javascript"></script>
 <?php
 echo ("
 <script>    
@@ -37,6 +39,7 @@ var Voorstelling = ". $voorstelling. ";
 	<div id="outerDiv">
         <div id="sideContent">
         <?php $filmPoosterEnInfoView = new FilmPoosterEnInfoView(); $filmPoosterEnInfoView ->Render($voorstelling); ?>
+        <?php $facebookEventView =  new FacebookEventView(); $facebookEventView->Render($voorstelling); ?>
         </div>
         <div id="mainContent">
             <div id="ss">

@@ -76,6 +76,7 @@ class DBFunctions
       $this -> connection -> dbClose();
       return $result;
   }
+ 
   
   public function VoorstellingenKomendeXDagen($dagenPlusMin)
   {
@@ -88,7 +89,8 @@ class DBFunctions
                             Naam AS FilmNaam,
                             voorstellingen.VoorstellingID AS VoorstellingID,
                             voorstellingen.Datum AS VoorstellingDatum,
-                            voorstellingen.Tijd AS VoorstellingTijd
+                            voorstellingen.Tijd AS VoorstellingTijd,
+                            voorstellingen.BeschikbareStoelen
                             FROM films
                             INNER JOIN voorstellingen on voorstellingen.FilmID = films.FilmID
                             WHERE voorstellingen.Datum <= DATE_ADD(NOW(), INTERVAL + ". $dagenPlusMin . " DAY)

@@ -22,8 +22,6 @@ header {
 	background: #fff;
 }
 
-
-
 nav {
 	width: 1130px;
 	height: 50px;
@@ -379,13 +377,13 @@ nav ul li a {
 	color: #fff;
 }
 
-.timeClass button .reserveren
+.reserveren
 {
     background-color: #FFBB00;
     color: #000000;
 }
 
-.timeClass button .uitverkocht
+.uitverkocht
 {
     background-color: #666666;
     color: #ffffff;
@@ -493,6 +491,23 @@ footer ul {
         font-size: 16px;
         font-family: arial;
         color: #FFFFFF;
+}
+
+#FacebookEventAanmaken
+{
+    width: 350px;
+	background: #550000;
+        padding-top:  25px;
+	margin-left: 25px;
+	box-shadow: 0 0 5px 5px #440000;
+        margin-top: 25px;
+        padding-bottom: 25px;
+}
+
+#FacebookEventAanmaken img {
+        margin-left: 50px;
+        width: 250px;
+        box-shadow: 0 0 5px 5px #440000;
 }
 
 #filmInfo
@@ -865,6 +880,111 @@ margin-bottom: 15px;
         color: #FFFFFF;
 }
 
+#PopupHeader
+{
+    color: #ffffff;
+    margin-top: 5px;
+    margin-left: 10px;
+    font-family: Arial;
+    font-size: 13px;
+}
 
-	 
+#PopupCover
+{
+  
+   float: left;
+   
+}
 
+#PopupCover img
+{
+    width: 150px;
+    box-shadow: 0 0 5px 5px #440000;
+    margin-left: 5px;
+}
+
+#filmInfoPopup
+{
+    color: #ffffff;
+    font-family: Arial;
+    font-size: 13px;
+    float: left;
+    width: 370px;
+    margin-left: 25px;
+
+}
+
+#PopUpForm input
+{
+margin-left: 25px;
+float: left;
+}
+
+#filmInfoPopup p
+{
+    padding-left: 0px;
+    padding-right: 10px;
+}
+
+#TitleTijdPopup
+{
+    font-size: 14px;
+   color: #ffffff;
+   margin-left: 10px;
+   font-family: Arial;
+}
+
+#PopupFriendList
+{
+    color: #FFFFFF;
+    font-size: 13px;
+    font-family: Arial;
+    margin-left: 15px;
+    
+}
+
+#PopupFriendList table
+{
+    margin-top: 15px;
+    margin-bottom: 15px;
+    color: #000000;
+    background-color: #cccccc;
+    border: 0px;
+    font-size: 13px;
+    border-collapse: collapse;
+}
+
+#PopupFriendList td
+{
+    padding: 5px;
+    border: 0px;
+    border-collapse: collapse;
+}
+
+
+#PopupFriendList th
+{
+    width: 150px;
+    text-align: left;
+    background-color: #FFFFFF;
+    color: #000000;
+    font-size: 13px;
+    border: 0px;
+    padding: 5px;
+    border-collapse: collapse;
+}
+
+#PopupFriendList thead
+{
+    border: 0px;
+    border-collapse: collapse;
+}
+#loadinggif
+{
+    float: left;
+    margin-left: 25px;
+    color: #ffffff;
+    font-size: 13px;
+    font-family: Arial;
+    margin-top: 25px;
+}

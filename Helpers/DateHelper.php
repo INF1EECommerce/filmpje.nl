@@ -29,6 +29,11 @@ class DateHelper
         
     }
     
+    public static function Plus24uur()
+    {
+        return time()+86400;
+    }
+    
     public static function DatumMorgen()
     {
         self::init();
