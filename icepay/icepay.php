@@ -27,7 +27,7 @@ public function ParseReservernPostValues($postvalues)
 
 }
     
-public function GenereerOrderEnGeefUrl() 
+public function GenereerOrderEnGeefUrl($voorstelling) 
 {
 
 define('MERCHANTID',17164);//<--- Change this into your own merchant ID
@@ -60,7 +60,6 @@ $issuers = $ideal->getSupportedIssuers();
                 ->setCurrency("EUR")
                 ->setIssuer($issuers[$this->issuer])
                 ->setOrderID($this->orderId);
-    
     // Merchant Settings
     $basicmode = Icepay_Basicmode::getInstance();
     $basicmode->setMerchantID(MERCHANTID)
@@ -68,7 +67,8 @@ $issuers = $ideal->getSupportedIssuers();
             ->setProtocol('http')
             //->useWebservice() // <--- Want to make a call using the webservices? You can using by using this method
             ->validatePayment($paymentObj); // <--- Required!
-
+    $basicmode->setSuccessURL("http://chivan.com/filmpje.nl/icepay/bedankt.php?vs=".$voorstelling);
+    $basicmode->setErrorURL("http://chivan.com/filmpje.nl/icepay/betaalerror.php");
     return $basicmode->getURL();
     
 }

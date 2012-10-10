@@ -101,6 +101,7 @@ require_once('Views/VandaagMorgenOvermorgenFilmsViewControler.php');
 ?>
 
 <form method="post" id="voorstellingForm" action="ReserverenStap1.php">
+    <input type="hidden" id="modus" name="modus" value="">
     <input type="hidden" id="voorstelling" name="voorstelling" value="">
 </form>
 </div>	
@@ -125,6 +126,14 @@ require_once('Views/VandaagMorgenOvermorgenFilmsViewControler.php');
 	<li>Terms of Service</li>
 </ul>
 </footer>
-</div>	
+</div>
+    <div Id="TijdKlikPopup">
+        <div class="popupButtonClass">
+            <div id="TijdKlikPopUpHeader" style="display: block; width: 100%">
+                
+            </div>
+            <button id="popupbb">Bestellen</button><button id="popuprb">Reserveren</button>
+        </div>
+    </div>
 </body>
 </html>

@@ -13,16 +13,57 @@ class FilmPoosterEnInfoView
         
         $film = $dbfunctions ->FilmInfoVanVoorstelling($voortstelling);
         
+           $kijwijzericonen = explode(",",$film['Kijkwijzer']);
+        $kijkwijzerhtml = "";
+        
+        foreach ($kijwijzericonen as $icon) {
+            $kijkwijzerhtml .= "<img class=\"kijkwijzer\" src=\"image/".$icon.".png\"/>";
+        }
+        
+        
         echo ("
         <div id=\"filmPoosterEnInfo\">
                 <p class=\"blockheader\">Uw film</p>
-                <img src=\"image/Covers/". $film['Cover']."\">
+                <img class=\"pooster\" src=\"image/Covers/". $film['Cover']."\">
                 <div id=\"filmInfo\">
                     <h2>". $film['Naam'] ."</h2>
-                    Duur: ". $film['Duur'] ." minuten.
-                    <p>". $film['KorteBeschrijving'] ."</p>
-                    <div id=\"tijdEnZaal\">" . substr($film['Tijd'], 0,5) ." uur<br>
-                    ". $film['ZaalNaam'] ."<br></div>
+                    <strong>Tijd: </strong>".substr($film['Tijd'], 0,5)." UUR <br>
+                    <strong>Datum: </strong>".date("d-m-Y", strtotime($film['Datum']))."<br><br>    
+                    <strong>Duur: </strong>". $film['Duur'] ." minuten.<br>
+                    <strong>Genre: </strong>". $film['Genre'] ."<br>
+                    <strong>Regisseur: </strong>".$film['Regisseur'] ."<br>
+                    <strong>IMDB: </strong>".$film['Beoordeling'] ."<br>
+                    <p>". $film['KorteBeschrijving']."</p>
+                    ".$kijkwijzerhtml ."
+                </div>
+         </div>
+       ");
+        
+    }
+    
+     public function RenderVoorFilm($filmdata)
+    {
+
+        
+        $kijwijzericonen = explode(",",$filmdata['Kijkwijzer']);
+        $kijkwijzerhtml = "";
+        
+        foreach ($kijwijzericonen as $icon) {
+            $kijkwijzerhtml .= "<img class=\"kijkwijzer\" src=\"image/".$icon.".png\"/>";
+        }
+        
+        
+        echo ("
+        <div id=\"filmPoosterEnInfo\">
+                <p class=\"blockheader\">".$filmdata['Naam']."</p>
+                <img class=\"pooster\" src=\"image/Covers/". $filmdata['Cover']."\">
+                <div id=\"filmInfo\">
+                    <h2>". $filmdata['Naam'] ."</h2>
+                    <strong>Duur: </strong>". $filmdata['Duur'] ." minuten.<br>
+                    <strong>Genre: </strong>". $filmdata['Genre'] ."<br>
+                    <strong>Regisseur: </strong>".$filmdata['Regisseur'] ."<br>
+                    <strong>IMDB: </strong>".$filmdata['Beoordeling'] ."<br><br>
+                    ".$kijkwijzerhtml ."
                 </div>
          </div>
        ");

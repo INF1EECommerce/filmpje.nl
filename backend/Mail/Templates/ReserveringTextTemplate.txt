@@ -1,0 +1,17 @@
+﻿Geachte mevrouw\meneer {{achternaam}}
+
+Hartelijk bedankt voor uw reservering bij filmpje.nl
+Hieronder vind u een overzicht van de door u geplaatste reservering alsmede uw reserveringnummer.
+Bewaart u deze goed. U heeft deze nodig bij de kassa.
+
+Reservering
+
+Reserveringnummer: {{kenmerk}}
+Voorstelling: {{filmnaam}} - {{datum}} - {{tijd}} UUR
+Zaal: {{zaalnummer}}
+
+U dient minimaal een half uur voor de start van de voorstelling uw kaarten op te halen aan de kassa.
+
+Wij hopen u hiermee voldoende te hebben geïnformeerd,
+
+Het Filmpje.nl team.

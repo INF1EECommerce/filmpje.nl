@@ -69,7 +69,7 @@ class DateHelper
                 break;
                 
             default:
-                return $datum;
+                return date("d-m-Y", strtotime($datum));
                 break;
         }
     }

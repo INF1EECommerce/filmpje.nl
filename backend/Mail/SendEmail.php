@@ -4,9 +4,10 @@ class SendEmail
 {
     public function SendEmail()
     {
-        include_once 'backend/Mail/Templates/TemplateParser.php';
-        include_once 'backend/Bestellingen.php';
-        include_once 'Views/BestellingOverzichtView.php';
+        include_once '/var/www/filmpje.nl/backend/Mail/Templates/TemplateParser.php';
+        include_once '/var/www/filmpje.nl/backend/Bestellingen.php';
+        include_once '/var/www/filmpje.nl/backend/Reserveringen.php';
+        include_once '/var/www/filmpje.nl/Views/BestellingOverzichtView.php';
     }
     
     
@@ -51,12 +52,56 @@ class SendEmail
         
        
         
-        $this->SendTemplatedEmailBestelling($emailTo, 'Bestelling', "Uw bestelling bij Filmpje", $templateData);
-        $this->SendTemplatedEmailBestelling("chivan@chivan.com", 'BestellingBioscoop', "Bestelling op Filmpje.nl", $templateData);
+        $this->SendTemplatedEmail($emailTo, 'Bestelling', "Uw bestelling bij Filmpje", $templateData);
+        $this->SendTemplatedEmail("chivan@chivan.com", 'BestellingBioscoop', "Bestelling op Filmpje.nl", $templateData);
         
     }
     
-    public function SendTemplatedEmailBestelling($to, $template, $subject, $templateData )
+        public function ZendEmailForSuccesReservering($data)
+    {
+        $emailTo = $data[0]['Email'];
+        $bov = new BestellingOverzichtView();
+        $stoelen = array();
+        
+         foreach ($data as $stoel) {
+            $stoelen[] = $stoel['StoelID'];
+
+        }
+        
+        $stoelenImploded =  implode(",", $stoelen);
+        
+         ob_start();
+         $bov->RenderVoorEmail($stoelenImploded);
+         $stoelenTabel = ob_get_contents();
+         ob_end_clean();
+
+        
+        
+        $templateData = array(
+          
+            "achternaam" => $data[0]['Achternaam'],
+            "kenmerk" => $data[0]['Kenmerk'],
+            "filmnaam" => $data[0]['FilmNaam'],
+            "datum" => $data[0]['VoorstellingDatum'],
+            "tijd" => substr($data[0]['VoorstellingTijd'], 0, 5),
+            "zaalnummer" => $data[0]['ZaalNaam'],
+            "voornaam" => $data[0]['Voornaam'],
+            "adres" => $data[0]['Adres'],
+            "postcode" => $data[0]['Postcode'],
+            "plaats" => $data[0]['Plaats'],
+            "email" => $data[0]['Email'],
+            "telefoon" => $data[0]['Telefoonnummer'],
+            "stoelen" => $stoelenTabel
+        );
+        
+       
+        
+        $this->SendTemplatedEmail($emailTo, 'Reservering', "Uw reservering bij Filmpje", $templateData);
+        $this->SendTemplatedEmail("chivan@chivan.com", 'ReserveringBioscoop', "Reservering op Filmpje.nl", $templateData);
+        
+    }
+    
+    public function SendTemplatedEmail($to, $template, $subject, $templateData )
     {
         if (!isset($to) || !isset($template) || !isset($templateData) || !isset($subject)) {
             throw new Exception('Een van de parameters is leeg');

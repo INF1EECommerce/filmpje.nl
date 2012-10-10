@@ -6,7 +6,7 @@ class Bestellingen {
 
     public function Bestellingen() {
         require_once(dirname(__FILE__) . '/DBConnection.php');
-        require_once 'Helpers/ReferenceGenerator.php';
+        require_once '/var/www/filmpje.nl/Helpers/ReferenceGenerator.php';
         $this->connection = new DBConnection();
     }
     
@@ -106,7 +106,7 @@ class Bestellingen {
         
         $query = mysql_query("SELECT VoorstellingID,  COUNT(*) AS AantalStoelen
           FROM bestellingen
-          INNER JOIN bestellingstoelen on bestellingstoelen.BestellinID = bestellingen.BestellingID
+          INNER JOIN bestellingstoelen on bestellingstoelen.BestellingID = bestellingen.BestellingID
           WHERE bestellingen.Kenmerk = '" . $kenmerk . "'") or die(mysql_error());
         $result = array();
 

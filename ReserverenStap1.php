@@ -3,9 +3,10 @@ include_once 'Views/FilmPoosterEnInfoView.php';
 include_once 'Views/FacebookEventView.php';
 //include_once '/Views/FilmPoosterEnInfoView.php'; 
 $voorstelling = intval($_POST['voorstelling']);
-if ($voorstelling == 0) {
+if ($voorstelling == 0 || !isset($_POST['modus'])) {
     header('Location: index.php');
 }
+$modus = $_POST['modus'];
 ?>
 <html>
 <head>
@@ -39,17 +40,16 @@ var Voorstelling = ". $voorstelling. ";
 	<div id="outerDiv">
         <div id="sideContent">
         <?php $filmPoosterEnInfoView = new FilmPoosterEnInfoView(); $filmPoosterEnInfoView ->Render($voorstelling); ?>
-        <?php $facebookEventView =  new FacebookEventView(); $facebookEventView->Render($voorstelling); ?>
+            <?php $facebookEventView =  new FacebookEventView(); $facebookEventView->Render($voorstelling); ?>
         </div>
         <div id="mainContent">
             <div id="ss">
-                <p class="blockheader">STAP1 - Stoelselectie</p>
+                <p class="blockheader"><?php echo strtoupper($modus) ?> STAP1 - Stoelselectie</p>
             <div id="StoelSelectieHeader">
                Filmpje hanteert prijzen gebaseerd op de stoelen die u voor de voorstelling selecteert. <br> Zou u zo vriendelijk willen zijn hieronder uw zitplaats(en) te kiezen? <br>
                Onder het stoeloverzicht vindt u een legenda en een overzicht van uw selectie.
             </div>
             <div id="Stoelen">
-                
             </div>        
                 <div id="StoelSelectieFooter">
                     <table id="legenda">           
@@ -80,6 +80,7 @@ var Voorstelling = ". $voorstelling. ";
                       <form method="post" action="ReserverenStap2.php" name="GeselecteerdeStoelenForm">
                             <input type="hidden" id="gs" name="GeselecteerdeStoelen" value="">
                             <input type="hidden" id="voortsellingid" name="voorstellingid" value="<?php echo $voorstelling; ?>">
+                            <input type="hidden" id="modusip" name="modus" value="<?php echo $modus ?>">
                             <input type="submit" disabled="disabled" name="submitB" id="submitB" value="Volgene Stap">
                         </form>
 

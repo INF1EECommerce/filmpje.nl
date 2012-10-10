@@ -12,9 +12,10 @@ include_once 'Helpers/ReferenceGenerator.php';
 
 $voorstelling = intval($_POST['voorstellingid']);
 $geselecteerdeStoelen = $_POST['GeselecteerdeStoelen'];
-if ($voorstelling == 0 || strlen($geselecteerdeStoelen) == 0) {
+if ($voorstelling == 0 || strlen($geselecteerdeStoelen) == 0 || !isset($_POST['modus'])) {
     header('Location: index.php');
 }
+$modus = $_POST['modus'];
 ob_start();
 $bestellingOverzichtView = new BestellingOverzichtView();
 $bestellingOverzichtView->Render($geselecteerdeStoelen);
@@ -50,7 +51,7 @@ ob_end_clean();
          </div>
         <div id="mainContent">
        <div id="ss">
-       <p class="blockheader">STAP2 - Uw gegevens</p>
+           <p class="blockheader"><?php echo strtoupper($modus); ?> STAP2 - Uw gegevens</p>
         <div id="ReserverenHeader">
         <?php $bestellingOverzichtHeader = new BestellingOverzichtHeaderView(); $bestellingOverzichtHeader ->Render($voorstelling); ?>    
         </div>
@@ -103,6 +104,8 @@ ob_end_clean();
                 <span class="textfieldRequiredMsg">Telefoonnummer is verplicht.</span></span></td>
             </tr>
             <tr><td>&nbsp;</td></tr>
+            <?php if($modus=="bestellen")
+            { ?>
             <tr>
             
                 <td><label>Uw bank:</label></td>
@@ -122,13 +125,21 @@ ob_end_clean();
                 <span class="selectRequiredMsg">Selecteer uw bank a.u.b.</span></span></td>
             </tr>
             <tr><td>&nbsp;</td></tr>
+            <?php } ?>
             <tr><td>
                     <input type="hidden" name="amount" value="<?php echo $bestellingOverzichtView -> totaalPrijs; ?>">
                     <input type="hidden" name="reference" value ="<?php echo ReferenceGenerator::Genereer(); ?>">
                     <input type="hidden" name="stoelen" value="<?php echo $geselecteerdeStoelen; ?>">
                     <input type="hidden" name="voorstelling" value="<?php echo $voorstelling; ?>">
                     <input type="hidden" name="description" value="Uw bestelling bij Filmpje.">
-                    <input type="submit" value="Bestelling plaatsen"></td>
+                    <input type="hidden" name="modus" value="<?php echo $modus; ?>">
+                    <?php if($modus=="bestellen")
+                    { ?>
+                    <input type="submit" value="Bestelling plaatsen">
+                    <?php } else {  ?>
+                    <input type="submit" value="Reserveren">
+                    <?php } ?>
+                </td>
         </table>
         </form>
         </div>
@@ -157,7 +168,10 @@ var postcodeText = new Spry.Widget.ValidationTextField("postcodeText");
 var emailText = new Spry.Widget.ValidationTextField("emailText", "email");
 var telefoonnummerText = new Spry.Widget.ValidationTextField("telefoonnummerText");
 var plaatsText = new Spry.Widget.ValidationTextField("plaatsText");
+<?php if($modus=="bestellen")
+{ ?>
 var bankSelect = new Spry.Widget.ValidationSelect("bankSelect", { invalidValue:"-1" });
+<?php } ?>
 </script>
 </body>
 </html>

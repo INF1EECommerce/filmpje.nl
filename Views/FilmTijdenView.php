@@ -1,8 +1,8 @@
 <?php
-class VandaagMorgenOvermorgenFilmsViewControler
+class FilmTijdenView
 {
 
-    public function VandaagMorgenOvermorgenFilmsViewControler()
+    public function FilmTijdenView()
     {
         require_once('Helpers/DateHelper.php');
         require_once('Helpers/ArrayGrouper.php');
@@ -13,12 +13,12 @@ class VandaagMorgenOvermorgenFilmsViewControler
 //        require_once('/backend/DBFunctions.php');
     }
     
-    public function Render()
+    public function Render($film)
     {
        //ducks in a row
         //haal voortstellingen op uit de DB
         $dbfunctions = new DBFunctions();
-        $voorstellingen = $dbfunctions -> VoorstellingenKomendeXDagen(2); 
+        $voorstellingen = $dbfunctions ->VoorstellingenVoorFilm($film);
          
         
         //Groepeer deze op datum
@@ -27,33 +27,27 @@ class VandaagMorgenOvermorgenFilmsViewControler
         
         //lus door de datum groepen heen en maak div aan.
         
-                foreach ($datumGroepen as $datum) {
-                $display = "none;";
-                $vertaaldeDatum = DateHelper::VertaalDatumNaarVandaagMorgenOvermorgen($datum['KeyItem']);
-                if ($vertaaldeDatum == "Vandaag") { $display = "block;"; }
+                
+                
 
                 echo ("    
-                <div id =\"" . $vertaaldeDatum . "films\" style=\"display:". $display ."\">
                 <table class=\"timeTable\">    
                 ");
-                
-                //groupeer de fims op titel
-                $films = ArrayGrouper::GroupArray($datum['items'], "FilmNaam");
 
-                        //lus door de films
-                        foreach ($films as $film) { 
-
+                        //lus door de datums
+               foreach ($datumGroepen as $datum) {
+               $vertaaldeDatum = DateHelper::VertaalDatumNaarVandaagMorgenOvermorgen($datum['KeyItem']);
                         echo ("  
 
                         <tr>
-                        <th><a href=\"films.php?filmid=".$film['items'][0]['FilmID']."\">
-                        " . $film['KeyItem'] . "</a>
+                        <th>
+                        " . $vertaaldeDatum . "
                         </th>
                         <td class=\"timeClass\">
 
                         ");
                                 //lus door de voortstellingen
-                                foreach ($film['items'] as $voorstelling) {
+                                foreach ($datum['items'] as $voorstelling) {
                                 $knopclass = "";
                                 $reserveren = 0;
                                 $filmTijd = strtotime($voorstelling['VoorstellingDatum'] . " ". $voorstelling['VoorstellingTijd']);
@@ -72,7 +66,7 @@ class VandaagMorgenOvermorgenFilmsViewControler
                                 ");
                                 }
                                 
-                        //film tr afsluiten
+                        //datum tr afsluiten
                         echo ("
                         </td>
                         </tr>
@@ -81,9 +75,8 @@ class VandaagMorgenOvermorgenFilmsViewControler
                 //datum div afsluiten
                 echo ("
                 </table>
-                </div>
                 ");
                 }        
-    }
+    
 }
 ?>

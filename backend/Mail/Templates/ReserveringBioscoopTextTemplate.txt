@@ -1,0 +1,24 @@
+﻿Beste Filmpje medewerker,
+
+Er heeft een reservering plaatsgevonden op filmpje.nl
+Hieronder vind u een overzicht van de door de klant geplaatste reservering alsmede de klantinformatie.
+
+Klantgegevens
+
+Voornaam: {{voornaam}}
+Achternaam: {{achternaam}}
+Adres: {{adres}}
+Postcode: {{postcode}}
+Plaats: {{plaats}}
+Email: {{email}}
+Telefoon: {{telefoon}}
+
+Reservering
+
+Reserveringnummer: {{kenmerk}}
+Voorstelling: {{filmnaam}} - {{datum}} - {{tijd}} UUR
+Zaal: {{zaalnummer}}
+
+Groet,
+
+Filmpje.nl

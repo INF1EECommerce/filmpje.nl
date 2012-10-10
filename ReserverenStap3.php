@@ -7,26 +7,39 @@
 include_once 'Views/FilmPoosterEnInfoView.php';
 include_once 'backend/Bestellingen.php';
 include_once 'backend/DTO/BestellingFactory.php';
+include_once 'backend/Reserveringen.php';
+include_once 'backend/DTO/ReserveringFactory.php';
 include_once 'icepay/icepay.php';
 
 $voorstelling = intval($_POST['voorstelling']);
-if ($voorstelling == 0) {
+if ($voorstelling == 0 || !isset($_POST['modus'])) {
     header('Location: index.php');
 }
+$stapnaam = "Ideal";
+$modus = $_POST['modus'];
+if ($modus == "bestellen") {
+$stapnaam = "Ideal";    
 try {
     $filmpjeIdeal = new FilmpjeIdeal();
     $filmpjeIdeal->ParseReservernPostValues($_POST);
-
-    $icepayurl = $filmpjeIdeal->GenereerOrderEnGeefUrl();
-
+    $iframeurl = $filmpjeIdeal->GenereerOrderEnGeefUrl($voorstelling);
     $bestellingFactory = new BestellingFactory();
     $bestelling = $bestellingFactory->BuildBestellingWithNewStatus($_POST);
     $bellingen = new Bestellingen();
     $bellingen->MaakBestellingAan($bestelling);
-} catch (Exception $ex) {
-     $icepayurl = "icepay/betaalerror.php";
+    } catch (Exception $ex) {
+     $iframeurl = "icepay/betaalerror.php";
 //     echo $ex->getMessage();
+    }
+} else {
+     $stapnaam = "Reservering afgerond";
+     $reserveringFactory = new ReserveringFactory();
+     $reservering = $reserveringFactory->BuildReserveringWithNewStatus($_POST);
+     $reserveringen = new Reserveringen();
+     $reserveringen->MaakReserveringAan($reservering);
+     $iframeurl = "icepay/bedankt.php?vs=".$voorstelling;
 }
+
 ?>
 <html>
     <head>
@@ -54,14 +67,9 @@ try {
             </div>
             <div id="mainContent">
                 <div id="ss">
-                    <p class="blockheader">STAP3 - Ideal</p>
-                    <?php if (!isset($errorMessage)) { ?>
-
-                        <iframe class="icepayframe" src="<?php echo $icepayurl; ?>">
+                    <p class="blockheader"><?php echo strtoupper($modus) ?> STAP3 - <?php echo $stapnaam ?></p>
+                        <iframe class="icepayframe" src="<?php echo $iframeurl; ?>">
                         </iframe>
-                    <?php } else {
-                        echo $errorMessage;
-                    } ?>
                 </div>
             </div>
             <footer>

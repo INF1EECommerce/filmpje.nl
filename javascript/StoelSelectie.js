@@ -65,9 +65,11 @@
                                 
                                 //Maak stoelnummer rij aan
                                 var StoelNummerRow = document.createElement("thead");
-                                
+                                var caption = document.createElement('caption');
+                                caption.innerHTML="SCHERM";
+                                caption.setAttribute("id", "scherm");
                                 //Rijnummer cel links boven
-                                var RijnummerText = document.createTextNode("SN:");
+                                var RijnummerText = document.createTextNode("R\\S");
                                 var RijnummerTextCell = document.createElement("th");
                                 RijnummerTextCell.appendChild(RijnummerText);
                                 StoelNummerRow.appendChild(RijnummerTextCell);
@@ -80,7 +82,7 @@
                                     StoelNummerCell.appendChild(StoelNummerTxt);
                                     StoelNummerRow.appendChild(StoelNummerCell);
                                 }
-                                
+                                tbl.appendChild(caption);
                                  tbl.appendChild(StoelNummerRow);
                                 
                                 //Lus door de rijen heen en voeg deze toe aan de tabel + rijnummer
@@ -159,7 +161,7 @@
                                         WerkTotaalPrijsBij(parseFloat(event.data.stoelPrijs));
                                         WerkStoelenInFormBij();
                                         VolgendeKnopAanUitBepalen();    
-                                        stoel.setAttribute("style", "background-color: rgb(255, 255, 255);");
+                                        stoel.setAttribute("style", "background-color: #00a810;");
                                     }
                                 
                                     
