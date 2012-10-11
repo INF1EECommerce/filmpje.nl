@@ -8,7 +8,7 @@ $reserveringen = new Reserveringen();
 try
 {
 $reserveringen->ReserveringAnnuleren($_GET['km']);
-header("Location: index.php?m=RAS");
+header("Location: index.php?m=".  urlencode("Uw reservering is succesvol geannuleerd."));
 } catch (Exception $ex)
 {
     header("Location: index.php?m=" . urldecode($ex->getMessage()));

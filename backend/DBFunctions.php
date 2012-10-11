@@ -249,9 +249,38 @@ class DBFunctions
          
      }
       $this -> connection -> dbClose();
+      
+      if (count($result) == 0) {
+          throw new Exception("Film niet gevonden.");
+      }
+      
+      
       return $result[0];
   }
-       
+  
+  public function AlleFims()
+  {
+            $this -> connection -> dbConnect();
+      $query = mysql_query("SELECT films.*, filmtypes.Naam AS FilmType
+                            FROM filmpje.films
+                            INNER JOIN filmtypes on filmtypes.FilmTypeID = films.FilmTypeID
+                            ORDER BY films.KorteNaam
+                            ") 
+              or die (mysql_error());
+     
+     $result = array(); 
+      
+     while ($row = mysql_fetch_array($query)) {
+     
+         $result[] = $row;
+         
+     }
+      $this -> connection -> dbClose();
+      
+      
+      return $result;
+  }
+  
 }
 
 

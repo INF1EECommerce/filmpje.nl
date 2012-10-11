@@ -22,6 +22,7 @@ $bestellingOverzichtView->Render($geselecteerdeStoelen);
 $stoelenTabel = ob_get_contents();
 ob_end_clean();
 ?>
+<!DOCTYPE html>
 <html>
 <head>
 <title></title>
@@ -38,7 +39,7 @@ ob_end_clean();
 	<nav>
 		<ul>
 			<li><a href="index.php">Home</a></li>
-			<li><a href="#">Films</a></li>
+			<li><a href="filmoverzicht.php">Films</a></li>
 			<li><a href="#">Info</a></li>
 			<li><a href="#">Contact</a></li>
 			<li id="lastLi"><a href="#">Specials</a></li>

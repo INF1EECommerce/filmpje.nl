@@ -2,12 +2,15 @@
 require_once('Views/VandaagMorgenOvermorgenFilmsViewControler.php'); 
 //require_once('/Views/VandaagMorgenOvermorgenFilmsViewControler.php'); 
 ?>
+<!DOCTYPE html>
 <html>
 <head>
 <title></title>
 <link rel="stylesheet" href="css/stylesheet.css">
+<link rel="stylesheet" href="css/messi.css">
 <script src="javascript/jquery.js" type="text/javascript"></script>
 <script src="javascript/FilmTabs.js" type="text/javascript"></script>
+<script src="javascript/MessiPopup.js" type="text/javascript"></script>
 </head>
 <body>
 <header>
@@ -16,7 +19,7 @@ require_once('Views/VandaagMorgenOvermorgenFilmsViewControler.php');
 	<nav>
 		<ul>
 			<li><a href="index.php">Home</a></li>
-			<li><a href="#">Films</a></li>
+			<li><a href="filmoverzicht.php">Films</a></li>
 			<li><a href="#">Info</a></li>
 			<li><a href="#">Contact</a></li>
 			<li id="lastLi"><a href="#">Specials</a></li>

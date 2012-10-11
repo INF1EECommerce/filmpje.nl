@@ -18,7 +18,7 @@ body {
 header {
 	width: 1100px;
 	margin: 0 auto;
-
+        margin-bottom: -5px;
 	background: #fff;
 }
 
@@ -150,15 +150,14 @@ nav ul li a {
 }
 
 #schedule {
-	width: 640px;
+	width: 645px;
 	background: #660000;
 	box-shadow: 0 0 5px 5px #440000;
-        padding-bottom: 4px;
 }
 
 #schedule p {
 	display: block;
-	width: 630px;
+	width: 635px;
 	height: 25px;
 	background: #000;
 	color: #fff;
@@ -177,7 +176,7 @@ nav ul li a {
 	padding-left:10px;
 	padding-top: 5px;
 	font-family: arial;
-
+        margin-top: 0px;
 }
 
 .timeTable  {
@@ -187,7 +186,7 @@ nav ul li a {
 	margin-left: 0px;
 	color: #000;
 	border-collapse: collapse;
-	width: 640px;
+	width: 645px;
 	font-family: arial;
 
 }
@@ -210,7 +209,7 @@ nav ul li a {
 	margin-left: 0px;
 	color: #000;
 	border-collapse: collapse;
-	width: 640px;
+	width: 645px;
 	margin-top: -16px;
 	font-family: arial;
 
@@ -446,11 +445,12 @@ footer ul {
 }
 
 #specialsDiv {
-	width: 640px;
+	width: 645px;
 	height: 400px;
 	font-family: arial;
 	background: #440000;
 	box-shadow: 0 0 5px 5px #440000;
+        margin-top: 25px;
 }
 
 #mainSpecialsDiv {
@@ -460,7 +460,7 @@ footer ul {
 #specialsDiv h2 {
 	display: block;
 	height: 40px;
-	width: 630px;
+	width: 635px;
 	background: #000;
 	color: #fff;
 	padding-top: 4px;
@@ -493,7 +493,6 @@ footer ul {
 	background: #550000;
 	margin-left: 25px;
 	box-shadow: 0 0 5px 5px #440000;
-        margin-top: -13px;
         padding-bottom: 25px;
 }
 
@@ -564,7 +563,6 @@ li.clearfix {
 	width: 645px;
 	background: #550000;
 	box-shadow: 0 0 5px 5px #440000;
-        margin-top: -13px;
         display: inline-block;
         margin-right: 25px;
 }
@@ -863,6 +861,7 @@ margin-bottom: 15px;
     margin-top: 50px;
     float: right;
     margin-right: 10px;
+     margin-bottom: 15px;
 }
 
 .icepayframe
@@ -1067,13 +1066,11 @@ float: left;
 {
      font-family: Arial;
      color: #FFFFFF;
-     font-size: 13px;
      width: 645px;
          background: #550000;
 	box-shadow: 0 0 5px 5px #440000;
         display: block;
         margin-right: 25px;
-        margin-top: -11px;
 }
 
 #trailer video
@@ -1097,7 +1094,6 @@ float: left;
         display: block;
         margin-right: 25px;
         margin-top: 25px;
-        font-size: 13px;
         color: white;
         font-family: Arial;
 
@@ -1106,6 +1102,7 @@ float: left;
 {
     padding: 10px;
     margin-top: -13px;
+    font-size: 13px;
 }
 
 #filmtijden
@@ -1133,4 +1130,122 @@ float: left;
         margin-top: 5px;
         width: 250px;
         box-shadow: 0 0 5px 5px #440000;
+}
+
+#nubinnenkort
+{
+         font-family: Arial;
+     color: #FFFFFF;
+     width: 645px;
+         background: #550000;
+	box-shadow: 0 0 5px 5px #440000;
+        display: inline-block;
+        margin-right: 25px;
+        padding-bottom: 15px;
+}
+.posterRow
+{
+    display: block;
+    clear: both;
+}
+.filmoverzichtposter
+{
+    display: inline-block;
+     box-shadow: 0 0 5px 5px #440000;
+    margin-top: 15px;
+    margin-left: 22.5px;
+    font-size: 10px;
+    padding-bottom: 5px;
+    padding-left: 5px;
+}
+
+.filmoverzichtposter img
+{
+    border:none; 
+}
+
+.filmoverzichtposterrowview img
+{
+    border:none; 
+}
+
+
+
+.filmoverzichtposter:hover
+{
+    display: inline-block;
+     box-shadow: 0 0 5px 5px #FFBB00;
+    margin-top: 15px;
+    margin-left: 22.5px;
+    font-size: 10px;
+    padding-bottom: 5px;
+}
+
+.filoverzichtcover
+{
+    width: 130px;
+    display: inline;
+    height: 192px;
+    margin-left: -5px;
+}
+
+.filmoverzichtposter p
+{
+    font-size: 13px;
+    background-color: #000;
+    min-height: 18px;
+    color: white;
+    text-align: left;
+    margin-top: -1px;
+    margin-bottom: 0px;
+    padding-top: 3px;
+    padding-bottom: 3px;
+    max-width: 120px;
+    padding-right: 5px;
+    margin-left: -5px;
+}
+
+.filmoverzichtbeschrijving
+{
+ font-size: 13px;   
+ margin-right: 10px;
+ float: right;
+ width: 465px;
+ margin-bottom: 5px;
+}
+
+.filoverzichtcoverrowview
+{
+    width: 130px;
+    height: 192px;
+    margin-left: -5px;
+    float: left;
+    margin-right: 10px;
+}
+
+.filmoverzichtposterrowview
+{
+    display: inline-block;
+    float: left;
+    box-shadow: 0 0 5px 5px #440000;
+    margin-top: 15px;
+    margin-left: 15px;
+    font-size: 10px;
+    padding-left: 5px;
+    width: 610px;
+}
+
+.filmoverzichtposterrowview p
+{
+    font-size: 13px;
+    background-color: #000;
+    min-height: 18px;
+    color: white;
+    text-align: left;
+    margin-top: -1px;
+    margin-bottom: 0px;
+    padding-top: 3px;
+    padding-bottom: 3px;
+    padding-right: 5px;
+    margin-left: -5px;
 }

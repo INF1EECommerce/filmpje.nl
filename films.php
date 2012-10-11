@@ -8,8 +8,12 @@ include_once 'Views/FilmPoosterEnInfoView.php';
 include_once 'backend/DBFunctions.php';
 include_once 'Views/FilmTijdenView.php';
 $dbfunctions = new DBFunctions();
-$film = $dbfunctions ->FilmInfo($filmid);
+try { $film = $dbfunctions ->FilmInfo($filmid); } catch(Exception $ex) { if ($ex->getMessage() == "Film niet gevonden.") {
+header("HTTP/1.0 404 Not Found");
+exit;
+}}
 ?>
+<!DOCTYPE html>
 <html>
 <head>
 <meta charset="utf-8">
@@ -27,7 +31,7 @@ $film = $dbfunctions ->FilmInfo($filmid);
 	<nav>
 		<ul>
 			<li title="Home"><a href="index.php">Home</a></li>
-			<li title="Films"><a href="films.html">Films</a></li>
+			<li title="Films"><a href="filmoverzizcht.php">Films</a></li>
 			<li title="Info"><a href="#">Info</a></li>
 			<li title="Contact"><a href="#">Contact</a></li>
 			<li title="Specials"id="lastLi"><a href="#">Specials</a></li>

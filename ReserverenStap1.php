@@ -8,6 +8,7 @@ if ($voorstelling == 0 || !isset($_POST['modus'])) {
 }
 $modus = $_POST['modus'];
 ?>
+<!DOCTYPE html>
 <html>
 <head>
 <title></title>
@@ -30,7 +31,7 @@ var Voorstelling = ". $voorstelling. ";
 	<nav>
 		<ul>
 			<li><a href="index.php">Home</a></li>
-			<li><a href="#">Films</a></li>
+			<li><a href="filmoverzicht.php">Films</a></li>
 			<li><a href="#">Info</a></li>
 			<li><a href="#">Contact</a></li>
 			<li id="lastLi"><a href="#">Specials</a></li>
