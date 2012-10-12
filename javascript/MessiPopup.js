@@ -21,8 +21,8 @@ $(function(){
 
 
         var message = $.getQuery('m');
-        message = message.replace('+', ' ');
-	var messi = new Messi(message, {title: 'Bericht van Filmpje'});
+        message = decodeURIComponent((message + '').replace(/\+/g, '%20'));
+	var messi = new Messi(message, {title: 'Bericht van Filmpje', buttons: [{id: 0, label: 'Sluiten', val: 'X'}]});
         });
         
         }
