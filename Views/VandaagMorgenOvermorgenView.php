@@ -1,8 +1,8 @@
 <?php
-class VandaagMorgenOvermorgenFilmsViewControler
+class VandaagMorgenOvermorgenView
 {
 
-    public function VandaagMorgenOvermorgenFilmsViewControler()
+    public function VandaagMorgenOvermorgenView()
     {
         require_once('Helpers/DateHelper.php');
         require_once('Helpers/ArrayGrouper.php');

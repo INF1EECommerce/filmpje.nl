@@ -17,7 +17,7 @@ exit;
 <html>
 <head>
 <meta charset="utf-8">
-<title>Filmpje.nl</title>
+<title>Filmpje.nl - <?php echo $film['Naam'] ?></title>
 
 <link rel="stylesheet" href="css/stylesheet.css">
 <script src="javascript/jquery.js" type="text/javascript"></script>
@@ -64,7 +64,7 @@ exit;
                <p class="blockheader">Trailer</p>
                     <video controls  width="620" height="360">
                         <source src="trailers/<?php echo $film['Trailer'] ?>.mp4"type="video/mp4" />
-                        <source src="trailers/<?php echo $film['Trailer'] ?>.webm" type="video/webm" />
+                        <source src="trailers/<?php echo $film['Trailer'] ?>.webmvp8.webm" type="video/webm" />
                         <source src="trailers/<?php echo $film['Trailer'] ?>.ogv"  type="video/ogg" />
                     </video>
 			</div>

@@ -9,7 +9,7 @@
 <!DOCTYPE html>
 <html>
     <head>
-        <title></title>
+        <title>Filmpje - Filmovezicht</title>
         <link rel="stylesheet" href="css/stylesheet.css">
         <script src="javascript/jquery.js" type="text/javascript"></script>
         <?php if ($viewModus == "Tiles") { ?>

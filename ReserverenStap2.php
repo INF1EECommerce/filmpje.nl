@@ -25,7 +25,7 @@ ob_end_clean();
 <!DOCTYPE html>
 <html>
 <head>
-<title></title>
+<title>Filmje - <?php echo $modus; ?> - Stap 2</title>
 <link rel="stylesheet" href="css/stylesheet.css">
 <link href="css/SpryValidationTextField.css" rel="stylesheet" type="text/css">
 <link href="css/SpryValidationSelect.css" rel="stylesheet" type="text/css">

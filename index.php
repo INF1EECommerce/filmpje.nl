@@ -1,11 +1,11 @@
 <?php 
-require_once('Views/VandaagMorgenOvermorgenFilmsViewControler.php'); 
+require_once('Views/VandaagMorgenOvermorgenView.php'); 
 //require_once('/Views/VandaagMorgenOvermorgenFilmsViewControler.php'); 
 ?>
 <!DOCTYPE html>
 <html>
 <head>
-<title></title>
+<title>Filmpje - Uw biosccop in Rotterdam</title>
 <link rel="stylesheet" href="css/stylesheet.css">
 <link rel="stylesheet" href="css/messi.css">
 <script src="javascript/jquery.js" type="text/javascript"></script>
@@ -99,7 +99,7 @@ require_once('Views/VandaagMorgenOvermorgenFilmsViewControler.php');
 </tr>
 </table>
 
-<?php $vandaagMorgenOvermorgenFilmsViewControler = new VandaagMorgenOvermorgenFilmsViewControler();
+<?php $vandaagMorgenOvermorgenFilmsViewControler = new VandaagMorgenOvermorgenView();
       $vandaagMorgenOvermorgenFilmsViewControler ->Render();
 ?>
 

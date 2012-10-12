@@ -44,7 +44,7 @@ try {
 <!DOCTYPE html>
 <html>
     <head>
-        <title></title>
+        <title>Filmje - <?php echo $modus; ?> - Stap 3</title>
         <link rel="stylesheet" href="css/stylesheet.css">
     </head>
     <body>

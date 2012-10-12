@@ -3,8 +3,10 @@ include_once 'Facebook/FilmpjeFacebook.php';
 include_once 'Views/FilmPoosterEnInfoView.php';
 
 try {
-$voorstelling = intval($_GET['voorstelling']);
-} catch (Exception $ex) { header("Location: http://chivan.com/filmpje.nl/FacebookError.php"); } 
+    $voorstelling = intval($_GET['voorstelling']);
+} catch (Exception $ex) {
+    header("Location: http://chivan.com/filmpje.nl/FacebookError.php");
+}
 
 if (isset($_GET['error_reason']) && $_GET['error_reason'] == "user_denied") {
     header("Location: http://chivan.com/filmpje.nl/FacebookError.php?melding=afgewezen&voorstelling=" . $voorstelling);
@@ -17,7 +19,7 @@ if ($ff->IsUserLoggingIn()) {
         try {
             $eventData = $ff->ParsePostDataPopup($_POST);
             $eid = $ff->CreateEvent($eventData);
-            header("Location: http://chivan.com/filmpje.nl/InviteFriends.php?eid=" . $eid['id'] . "&fbuser=" . $ff->user . "&voorstelling=".$voorstelling);
+            header("Location: http://chivan.com/filmpje.nl/InviteFriends.php?eid=" . $eid['id'] . "&fbuser=" . $ff->user . "&voorstelling=" . $voorstelling);
         } catch (Exception $ex) {
             header("Location: http://chivan.com/filmpje.nl/FacebookError.php");
         }
@@ -36,7 +38,9 @@ if ($ff->IsUserLoggingIn()) {
     <body>
         <p class="blockheader">STAP 1 - Facebook event aanmaken</p>
         <div id="PopupHeader">U gaat een facebook event aanmaken voor de volgende voorstelling:<br> Bij de volgende stap kunt u vrienden selecteren om uit te nodigen. </div>    
-        <?php $view = new FilmPoosterEnInfoView(); $view->RenderVoorPopup($voorstelling); ?>
+        <?php $view = new FilmPoosterEnInfoView();
+        $view->RenderVoorPopup($voorstelling);
+        ?>
         <div id="loadinggif" style="display: none;"><img src="image/loading.gif">&nbsp;Uw event wordt aangemaakt een ogenblik geduld a.u.b.</div>
     </body>
 </html>
