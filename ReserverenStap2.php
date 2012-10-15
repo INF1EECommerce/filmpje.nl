@@ -4,12 +4,9 @@ include_once 'Views/FilmPoosterEnInfoView.php';
 include_once 'Views/BestellingOverzichtView.php';
 include_once 'Views/BestellingOverzichtHeaderView.php';
 include_once 'Helpers/ReferenceGenerator.php';
-
-//include_once '/Views/FilmPoosterEnInfoView.php'; 
-//include_once '/Views/BestellingOverzichtView.php';
-//include_once '/Views/BestellingOverzichtHeaderView.php';
-//include_once '/Helpers/ReferenceGenerator.php';
-
+include_once 'backend/DBFunctions.php';
+$dbfunctions = new DBFunctions();
+$specials = $dbfunctions->HaalSpecialsOp();
 $voorstelling = intval($_POST['voorstellingid']);
 $geselecteerdeStoelen = $_POST['GeselecteerdeStoelen'];
 if ($voorstelling == 0 || strlen($geselecteerdeStoelen) == 0 || !isset($_POST['modus'])) {
@@ -26,25 +23,46 @@ ob_end_clean();
 <html>
 <head>
 <title>Filmje - <?php echo $modus; ?> - Stap 2</title>
+<link rel="shortcut icon" href="favicon.ico">
 <link rel="stylesheet" href="css/stylesheet.css">
 <link href="css/SpryValidationTextField.css" rel="stylesheet" type="text/css">
 <link href="css/SpryValidationSelect.css" rel="stylesheet" type="text/css">
 <script src="javascript/SpryValidationTextField.js" type="text/javascript"></script>
 <script src="javascript/SpryValidationSelect.js" type="text/javascript"></script>
+<script src="javascript/jquery.js" type="text/javascript"></script>
+<script src="javascript/jquery-ui.js" type="text/javascript"></script>
+<script src="javascript/Zoeken.js" type="text/javascript"></script>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<!-- Pulled from http://code.google.com/p/html5shiv/ -->
+<!--[if lt IE 9]>
+<script src="//html5shim.googlecode.com/svn/trunk/html5.js"></script>
+<![endif]-->
 </head>
 <body>
-	<header>
-		<img src="image/header2.png">
-	</header>
-	<nav>
-		<ul>
-			<li><a href="index.php">Home</a></li>
-			<li><a href="filmoverzicht.php">Films</a></li>
-			<li><a href="#">Info</a></li>
-			<li><a href="#">Contact</a></li>
-			<li id="lastLi"><a href="#">Specials</a></li>
-		</ul>
-	</nav>
+   <header>   
+            <div Id="Zoekbox">
+                <form action="filmoverzicht.php" method="GET"><input id="qtext" type="text" name="qtext"><input class="submitb" type="submit" value="Zoek"></form>
+            </div>
+            <div Id="ZoekPopup" style="display: none;">
+            </div>
+        </header>
+        <nav>
+            <ul>
+                <li><a href="index.php">Home</a></li>
+                <li><a href="filmoverzicht.php">Films</a></li>
+                <li><a href="#">Info</a></li>
+                <li><a href="contact.php">Contact</a></li>
+                <li id="lastLi">Specials
+                    <ul>
+                        <?php
+                        foreach ($specials as $special) {
+                            echo ("<li><a href=\"specials.php?SpecialID=" . $special['SpecialID'] . "\">" . $special['Naam'] . "</a></li>");
+                        }
+                        ?>
+                    </ul>
+                </li>
+            </ul>
+        </nav>
 	
 	<div id="outerDiv">
         <div id="sideContent">

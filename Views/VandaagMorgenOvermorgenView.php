@@ -13,6 +13,8 @@ class VandaagMorgenOvermorgenView
 //        require_once('/backend/DBFunctions.php');
     }
     
+    var $datums = array();
+    
     public function Render()
     {
        //ducks in a row
@@ -30,6 +32,7 @@ class VandaagMorgenOvermorgenView
                 foreach ($datumGroepen as $datum) {
                 $display = "none;";
                 $vertaaldeDatum = DateHelper::VertaalDatumNaarVandaagMorgenOvermorgen($datum['KeyItem']);
+                $this->datums[$vertaaldeDatum] = $vertaaldeDatum;
                 if ($vertaaldeDatum == "Vandaag") { $display = "block;"; }
 
                 echo ("    
@@ -83,7 +86,16 @@ class VandaagMorgenOvermorgenView
                 </table>
                 </div>
                 ");
-                }        
+                }
+                if (!isset($this->datums['Vandaag'])) {
+                    echo ("<div id=\"Vandaagfilms\" class=\"GeenFilmsGevonden\">Er zijn geen voorstellingen gevonden voor deze datum.</div>");
+                }  
+                if (!isset($this->datums['Morgen'])) {
+                    echo ("<div id=\"Morgenfilms\" class=\"GeenFilmsGevonden\" style=\"display: none;\">Er zijn geen voorstellingen gevonden voor deze datum.</div>");
+                }  
+                if (!isset($this->datums['Overmorgen'])) {
+                    echo ("<div id=\"Overmorgenfilms\" style=\"display: none;\" class=\"GeenFilmsGevonden\">Er zijn geen voorstellingen gevonden voor deze datum.</div>");
+                }  
     }
 }
 ?>

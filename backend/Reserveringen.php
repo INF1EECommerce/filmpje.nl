@@ -12,30 +12,57 @@ class Reserveringen {
     
     public function ReserveringAnnuleren($kenmerk)
     {
+        //maak connectie met de database
         $this->connection->dbConnect();
         
-        $idQuery = mysql_query("SELECT MAX(ReserveringID) AS ReserveringID, voorstellingen.Datum, voorstellingen.Tijd, voorstellingen.VoorstellingID, reserveringen.ReserveringStatusID 
-        FROM filmpje.reserveringen 
-        INNER JOIN voorstellingen on voorstellingen.VoorstellingID = reserveringen.VoorstellingID
-        WHERE Kenmerk = '" . $kenmerk . "'") or die(mysql_error());
-        $result = array();
-
-        while ($row = mysql_fetch_array($idQuery)) {
-
-            $result[] = $row;
+        //haal reservering op uit de database
+        $reservering = $this->HaalReserveringOpVoorKlantActie($kenmerk, FALSE);
+        
+        //valideer annuleren actie
+        $ok = $this->ValideerReserveringAnnuleren($reservering);
+        
+        //stoppen als de reservering niet meer geannuleerd kan worden.
+        if (!$ok["ok"]) {
+            throw new Exception($ok["reden"]);
         }
         
-        $reserveringID = $result[0]['ReserveringID'];
-        $datum = $result[0]['Datum'];
-        $tijd = $result[0]['Tijd'];
+        //zet de reservering status naar geannleerd
+        $this->ZetReserveringStatusID($reservering['reserveringID'], 3, FALSE);
         
-        // niet minder dan 2 uur in de toekomst een reeds geannuleerde status
-        if (strtotime($datum." ".$tijd) > time()+(120*60) && $result[0]['ReserveringStatusID'] != 3) {
+        //haal het aantal stoelen voor de reservering op
+        $stoelencount = $this->StoelenCountVoorReservering($reservering, FALSE);
+
+        //update de beschikbare stoelen voor de voorstelling
+        $this->UpdateBeschikbareStoelen($reservering['VoorstellingID'], $stoelencount, "+", FALSE);
         
+        //sluit de connectie naar de database.
+        $this->connection->dbClose();
+
+    }
+    
+    private function ZetReserveringStatusID($reserveringID, $statusID, $closeConnection)
+    {
+        $this->connection->dbConnect();
         
-         $stoelen = mysql_query("SELECT COUNT(*) AS StoelenCount 
+        $sql = "UPDATE filmpje.reserveringen SET ReserveringStatusID = ".$statusID."
+           WHERE ReserveringID = ".$reserveringID;
+        
+        if (!mysql_query($sql, $this->connection->connection)) {
+            die('Error: ' . mysql_error());
+        }
+        
+        if ($closeConnection) {
+            $this->connection->dbClose();
+        }
+    }
+    
+    private function StoelenCountVoorReservering($reservering, $closeConnection)
+    {
+        $this->connection->dbConnect();
+        
+        $stoelen = mysql_query("SELECT COUNT(*) AS StoelenCount 
         FROM filmpje.reserveringstoelen
-        WHERE ReserveringID = '" . $reserveringID ."'") or die(mysql_error());
+        WHERE ReserveringID = '" . $reservering['reserveringID'] ."'") or die(mysql_error());
         $resultstoelen = array();
 
         while ($row = mysql_fetch_array($stoelen)) {
@@ -43,81 +70,98 @@ class Reserveringen {
             $resultstoelen[] = $row;
         }
         
-       $sql = "UPDATE filmpje.reserveringen SET ReserveringStatusID = 3
-           WHERE ReserveringID = ".$reserveringID;
-        
-        if (!mysql_query($sql, $this->connection->connection)) {
-            die('Error: ' . mysql_error());
-        }
-        
-        $this->UpdateBeschikbareStoelen($result[0]['VoorstellingID'], $resultstoelen[0]['StoelenCount'], "+");
-        $this->connection->dbClose();
-        }
-        else
-        {
+        if ($closeConnection) {
             $this->connection->dbClose();
-            throw new Exception("Reservering kan niet meer geannuleerd worden.");
         }
-
+        
+        return intval($resultstoelen[0]['StoelenCount']);
+        
     }
     
-    public function ReserveringOphalen($kenmerk)
-    {
+    private function ValideerReserveringAnnuleren($reservering) {
+        
+        $result = array(
+          "ok" => TRUE,
+          "reden" => ""
+        );
+
+        //niet meer dan twee uur in de toekomst.
+        
+        $voorstellingTijd = strtotime($reservering['datum']." ".$reservering['tijd']);
+        
+        if ($voorstellingTijd < time()+(120*60))
+        {
+            $result["ok"] = FALSE;
+            $result["reden"] = "Uw reservering kan niet meer geannuleerd worden omdat de voorstelling binnen twee uur begint.";
+        }
+        
+        //niet al opgehaald en niet reeds geannuleerd
+        if ($reservering['ReserveringStatusID'] == 2) {
+            $result["ok"] = FALSE;
+            $result["reden"] = "Uw reservering kan niet meer geannuleerd worden omdat deze reeds is opgehaald.";
+        }
+        
+        if ($reservering['ReserveringStatusID'] == 3) {
+            $result["ok"] = FALSE;
+            $result["reden"] = "Uw reservering kan niet meer geannuleerd worden omdat deze reeds is geannuleerd.";
+        }
+        
+        return $result;
+    }
+    
+    
+    private function HaalReserveringOpVoorKlantActie($kenmerk, $closeConnection) {
+        
         $this->connection->dbConnect();
         
         $idQuery = mysql_query("SELECT MAX(ReserveringID) AS ReserveringID, voorstellingen.Datum, voorstellingen.Tijd, voorstellingen.VoorstellingID, reserveringen.ReserveringStatusID 
         FROM filmpje.reserveringen 
         INNER JOIN voorstellingen on voorstellingen.VoorstellingID = reserveringen.VoorstellingID
         WHERE Kenmerk = '" . $kenmerk . "'") or die(mysql_error());
-        $result = array();
+        $resultQuery = array();
 
         while ($row = mysql_fetch_array($idQuery)) {
 
-            $result[] = $row;
+            $resultQuery[] = $row;
         }
         
-        $reserveringID = $result[0]['ReserveringID'];
-        $voorstellingID = $result[0]['VoorstellingID'];
-        $reserveringStatus = $result[0]['ReserveringStatusID'];
-
-        $gstoelenq = mysql_query("SELECT StoelID 
-        FROM filmpje.reserveringstoelen 
-        WHERE ReserveringID = '" . $reserveringID . "'") or die(mysql_error());
-        $result2 = array();
+        $result = array(
+            "reserveringID" => $resultQuery[0]['ReserveringID'],
+            "datum" => $resultQuery[0]['Datum'],
+            "tijd" => $resultQuery[0]['Tijd'],
+            "ReserveringStatusID" => $resultQuery[0]['ReserveringStatusID'],
+            "VoorstellingID" => $resultQuery[0]['VoorstellingID']
+        );
         
-          while ($row = mysql_fetch_array($gstoelenq)) {
-
-            $result2[] = $row['StoelID'];
-        }
-        $stoelenstring = implode(",", $result2);
+        return $result;
         
-        $vsquery = mysql_query("SELECT COUNT(bestellingstoelen.StoelID) AS StoelenCount 
-        FROM filmpje.bestellingstoelen 
-        INNER JOIN filmpje.bestellingen on bestellingen.BestellingID = bestellingstoelen.BestellingID AND bestellingen.BestellingStatusID = 3
-        WHERE bestellingstoelen.StoelID IN ( " .$stoelenstring . ")  AND bestellingen.VoorstellingID = ".$voorstellingID) or die(mysql_error());
-        $result3 = array();
-        
-          while ($row = mysql_fetch_array($vsquery)) {
-
-            $result3[] = $row;
-        }
-        
-        if ($result3[0]['StoelenCount'] == 0 && $reserveringStatus != 2 && $reserveringStatus != 3 ) {
-            
-                  
-       $sql = "UPDATE filmpje.reserveringen SET ReserveringStatusID = 2
-           WHERE ReserveringID = ".$reserveringID;
-        
-        if (!mysql_query($sql, $this->connection->connection)) {
-            die('Error: ' . mysql_error());
-         }
+        if ($closeConnection) {
             $this->connection->dbClose();
-         }
-         else 
-         {
-             $this->connection->dbClose();
-             throw new Exception("Reservering kan niet meer worden afgehaald. Er zijn reeds gereserveerde stoelen verkocht. Of reservering is geannulleerd.");
-         }
+        }
+        
+    }
+    
+    public function ReserveringOphalen($kenmerk)
+    {
+        //databse connectie aanmaken
+        $this->connection->dbConnect();
+        
+        //haal reserving op
+        $reservering = $this->HaalReserveringOpVoorKlantActie($kenmerk, FALSE);
+        
+        //valideer ophalen reservering door klant
+        $ok = $this->ValideerOphalenReserveringKlant($reservering, FALSE);
+            
+        // gooi exceptie als ophalen niet gevalideerd is.
+        if (!$ok["ok"]) {
+            throw new Exception($ok["reden"]);
+        }
+        
+        //zet de reservering status naar opgehaald.        
+        $this->ZetReserveringStatusID($reservering['reserveringID'], 2, FALSE);
+        
+         //sluit de verbinding.
+         $this->connection->dbClose();
         
     }
     
@@ -125,10 +169,10 @@ class Reserveringen {
     public function ZendBevestigingsMail($kenmerk)
     {
         $sendMail = new SendEmail();
-        $sendMail->ZendEmailForSuccesReservering($this->HaalReserveringOp($kenmerk));
+        $sendMail->ZendEmailForSuccesReservering($this->HaalReserveringOpVoorEmail($kenmerk));
     }
     
-     public function HaalReserveringOp($kenmerk)
+     private function HaalReserveringOpVoorEmail($kenmerk)
     {
          $this->connection->dbConnect();   
         $idQuery = mysql_query("
@@ -157,7 +201,7 @@ class Reserveringen {
     
     public function BestaatReservering($kenmerk)
     {
-                 $this->connection->dbConnect();
+       $this->connection->dbConnect();
      
         $idQuery = mysql_query("SELECT ReserveringID
           FROM filmpje.reserveringen 
@@ -182,35 +226,137 @@ class Reserveringen {
     }
     
     
-     public function MaakReserveringAan(Reservering $reservering) {
-        //TO DO: valideer object;
-       
-        if ($this->BestaatReservering($reservering->kenmerk)) {
-            return;
-        }
+    private function ValideerOphalenReserveringKlant($reservering, $closeConnection)
+    {
+        //databse connectie aanmaken
         $this->connection->dbConnect();
         
-        $sql = "INSERT INTO filmpje.reserveringen (VoorstellingID, TotaalPrijs, ReserveringStatusID, Voornaam, Achternaam, Adres, Postcode, Email, Telefoonnummer, Kenmerk, Plaats)
-        VALUES
-        ('$reservering->voorstellingID','$reservering->totaalPrijs','$reservering->ReserveringStatus', '$reservering->voornaam', '$reservering->achternaam', '$reservering->adres', '$reservering->postcode', '$reservering->email', '$reservering->telefoonnummer', '$reservering->kenmerk', '$reservering->plaats')";
-
-        if (!mysql_query($sql, $this->connection->connection)) {
-            die('Error: ' . mysql_error());
+       //standaard waarde voor het validatie object.
+        $result = array(
+            "ok" => TRUE,
+            "reden" => ""
+        );
+        
+        //kijk of er stoelen voor deze reservering verkocht zijn
+        // haal reservering stoelen op.
+        $stoelenstring = $this->HaalReserveringStoelenOp($reservering['reserveringID'], $closeConnection);
+        
+        //kijk of er bestelde stoelen zijn voor de stoelenstring hierboven
+        $besteldeStoelenCount = $this->BesteldeStoelenCountVoorReserveringStoelen($stoelenstring, $reservering['VoorstellingID'], FALSE);
+        
+        //geen verkochte stoelen voor reservering (kan alleen binnen 30 minuten voor de voorstellin)
+        if ($besteldeStoelenCount > 0) {
+            $result["ok"] = FALSE;
+            $result["reden"] = "Reservering kan niet worden opgehaald. Er zijn reeds stoelen voor deze reserving verkocht. ";
+        }
+        
+        //niet reeds opgehaald
+        if ($reservering['ReserveringStatusID'] == 2) {
+            $result["ok"] = FALSE;
+            $result["reden"] = "Reservering kan niet worden opgehaald. Reservering is reeds opgehaald door de klant. ";
+        }
+        
+        //niet geannuleerd door de klant
+       if ($reservering['ReserveringStatusID'] == 3) {
+            $result["ok"] = FALSE;
+            $result["reden"] = "Reservering kan niet worden opgehaald. Reservering is geannuleerd door de klant.";
         }
 
-
-        $idQuery = mysql_query("SELECT MAX(ReserveringID) AS ReserveringID
-          FROM filmpje.reserveringen 
-          WHERE Kenmerk = '" . $reservering->kenmerk . "'") or die(mysql_error());
+        if ($closeConnection) {
+            $this->connection->dbClose();
+        }
+        
+        return $result;
+        
+    }
+    
+    private function BesteldeStoelenCountVoorReserveringStoelen($reserveringStoelen, $voorstellingID, $closeConnection)
+    {
+        //databse connectie aanmaken
+        $this->connection->dbConnect();
+        
+        $vsquery = mysql_query("SELECT COUNT(bestellingstoelen.StoelID) AS StoelenCount 
+        FROM filmpje.bestellingstoelen 
+        INNER JOIN filmpje.bestellingen on bestellingen.BestellingID = bestellingstoelen.BestellingID AND bestellingen.BestellingStatusID = 3
+        WHERE bestellingstoelen.StoelID IN ( " .$reserveringStoelen . ")  AND bestellingen.VoorstellingID = ".$voorstellingID) or die(mysql_error());
+        
         $result = array();
-
-        while ($row = mysql_fetch_array($idQuery)) {
+        
+          while ($row = mysql_fetch_array($vsquery)) {
 
             $result[] = $row;
         }
         
-        $reserveringID = $result[0]['ReserveringID'];
-        $stoelen = explode(",", $reservering->stoelen);
+        if ($closeConnection) {
+            $this->connection->dbClose();
+        }
+        
+        return $result[0]['StoelenCount'];
+    }
+    
+    private function HaalReserveringStoelenOp($reserveringID, $closeConnection)
+    {        
+        //databse connectie aanmaken
+        $this->connection->dbConnect();
+        
+        $gstoelenq = mysql_query("SELECT StoelID 
+        FROM filmpje.reserveringstoelen 
+        WHERE ReserveringID = '" . $reserveringID . "'") or die(mysql_error());
+        
+        $result2 = array();
+        
+          while ($row = mysql_fetch_array($gstoelenq)) {
+
+            $result2[] = $row['StoelID'];
+        }
+        
+        $stoelenstring = implode(",", $result2);
+        
+        if ($closeConnection) {
+            $this->connection->dbClose();
+        }
+        
+        return $stoelenstring;
+    }
+    
+    
+     public function MaakReserveringAan(Reservering $reservering) {
+         
+        //controleren of we een reservering hebben binnen gekregen
+         if (!isset($reservering)) {
+             throw new Exception("Het reservering object is NULL, error");
+         } 
+        
+        //controleren of de reservering niet al bestaat.
+        if ($this->BestaatReservering($reservering->kenmerk)) {
+            return;
+        }
+        
+        //connectie naar de database openen.
+        $this->connection->dbConnect();
+        
+        //reservering record opslaan
+        $this->SlaReservingOp($reservering, FALSE);
+
+        //haal reserveringID op
+        $reserveringID = $this->ReserveringIDvoorKenmerk($reservering->kenmerk, FALSE);
+      
+        //sla reservering stoelen op een krijg het aantal terug
+        $stoelenCount = $this->SlaReserveringStoelenOp($reservering->stoelen, $reserveringID, FALSE);
+        
+        //update de beschikbare stoelen
+        $this->UpdateBeschikbareStoelen($reservering->voorstellingID, $stoelenCount, '-', FALSE);
+
+        //sluit de connectie
+        $this->connection->dbClose();
+        
+        $this->ZendBevestigingsMail($reservering->kenmerk);
+        
+    }
+    
+    private function SlaReserveringStoelenOp($stoelenString, $reserveringID, $closeConnection) {
+        
+        $stoelen = explode(",", $stoelenString);
 
         foreach ($stoelen as $stoel) {
 
@@ -223,16 +369,57 @@ class Reserveringen {
             }
         }
         
-        $this->UpdateBeschikbareStoelen($reservering->voorstellingID, count($stoelen), '-');
-
-        $this->connection->dbClose();
+        if ($closeConnection) {
+            $this->connection->dbClose();
+        }
         
-        $this->ZendBevestigingsMail($reservering->kenmerk);
-        
+        return count($stoelen);
     }
     
+    private function ReserveringIDvoorKenmerk($kenmerk, $closeConnection) {
         
-    public function UpdateBeschikbareStoelen($voorstelling, $aantalstoelen, $plusmin)
+        $this->connection->dbConnect();
+        
+        $idQuery = mysql_query("SELECT MAX(ReserveringID) AS ReserveringID
+          FROM filmpje.reserveringen 
+          WHERE Kenmerk = '" . $kenmerk . "'") or die(mysql_error());
+        $result = array();
+
+        while ($row = mysql_fetch_array($idQuery)) {
+
+            $result[] = $row;
+        }
+        
+        if ($closeConnection) {
+            $this->connection->dbClose();
+        }
+        
+        return $result[0]['ReserveringID'];
+    }
+    
+    
+    private function SlaReservingOp($reservering, $closeConnection) {
+        
+        $this->connection->dbConnect();
+        
+        $sql = "INSERT INTO filmpje.reserveringen (VoorstellingID, TotaalPrijs, ReserveringStatusID, Voornaam, Achternaam, Adres, Postcode, Email, Telefoonnummer, Kenmerk, Plaats)
+        VALUES
+        ('$reservering->voorstellingID','$reservering->totaalPrijs','$reservering->ReserveringStatus', '$reservering->voornaam', '$reservering->achternaam', '$reservering->adres', '$reservering->postcode', '$reservering->email', '$reservering->telefoonnummer', '$reservering->kenmerk', '$reservering->plaats')";
+
+        if (!mysql_query($sql, $this->connection->connection)) {
+            die('Error: ' . mysql_error());
+        }
+        
+        if ($closeConnection) {
+            $this->connection->dbClose();
+        }
+        
+    }
+
+
+
+
+    public function UpdateBeschikbareStoelen($voorstelling, $aantalstoelen, $plusmin, $closeConnection)
     {
        $this -> connection -> dbConnect();
               
@@ -240,7 +427,10 @@ class Reserveringen {
           SET voorstellingen.BeschikbareStoelen = voorstellingen.BeschikbareStoelen ". $plusmin . " " . $aantalstoelen ."
           WHERE voorstellingen.VoorstellingID = '" . $voorstelling . "'") or die(mysql_error());
        
-       $this -> connection -> dbClose();
+        if ($closeConnection) {
+            $this -> connection -> dbClose();
+        }
+       
     }
     
     public function ReserveringStatusIDForStatus($status)

@@ -1,25 +1,28 @@
 body {
-	margin: 0;
-	padding: 0;
-	background: #660000;
+    margin: 0;
+    padding: 0;
+    background: #660000;
 }
 
 #sideContent  {
-	width: 400px;
-	float: left;
-	
+    width: 400px;
+    float: left;
+
 }
 
 #mainContent {
-	width: 675px;
-	float: right;
-        padding-top: 0px;
+    width: 675px;
+    float: right;
+    padding-top: 0px;
 }
 header {
-	width: 1100px;
-	margin: 0 auto;
-        margin-bottom: -5px;
-	background: #fff;
+    width: 1100px;
+    margin: 0 auto;
+    margin-bottom: -5px;
+    background: #fff;
+    text-align: center;
+    background-image: url("../image/header2.png");
+    height: 169px;
 }
 
 header a
@@ -29,165 +32,213 @@ header a
 }
 
 nav {
-	width: 1130px;
-	height: 50px;
-	margin: 0 auto;
-	background: #000000;
-	border-radius: 5px;
-	
+    width: 1130px;
+    height: 50px;
+    margin: 0 auto;
+    background: #000000;
+    border-radius: 5px;
+
 }
 
 nav ul {
-	list-style: none;
-	margin: 0;
-	margin-left: 200px;
+    list-style: none;
+    margin: 0;
+    margin-left: 200px;
+    z-index: 50;
 }
 
 nav ul li {
-	float: left;
-	margin-right: 50px;
-	margin-top: 14px;
-	width: 100px;
-	border-right: 1px solid #303030;
+    float: left;
+    margin-right: 50px;
+    margin-top: 14px;
+    width: 100px;
+    border-right: 1px solid #303030;
+        text-decoration: none;
+    color: #fff;
+    font-family: arial;
+    display: block;
+    font-weight: bold;
+    z-index: 50;
+
+}
+
+nav ul li ul {
+    display: none;
+}
+nav ul li:hover ul {
+    background-color: black;
+    display: block;
+    position: absolute;
+    margin-left: -10px;
+    padding-right: 0;
+    padding-top: 15px;
+    -webkit-border-bottom-right-radius: 10px;
+-webkit-border-bottom-left-radius: 10px;
+-moz-border-radius-bottomright: 10px;
+-moz-border-radius-bottomleft: 10px;
+border-bottom-right-radius: 10px;
+border-bottom-left-radius: 10px;
+z-index: 50;
+    
+}
+nav ul li:hover li {
+    display: block;
+    width: 100%;
+    clear: both;
+    float: left;
+    margin-left: -20px;
+    border: 0;
+    padding-right: 0px;
+    padding-top: 15px !important;
+    padding-bottom: 15px !important; 
+    margin-top: 0px !important;
+    margin-bottom: 0px !important;
+    z-index: 50;
+}
+
+
+nav ul li ul li a {
+
+    width: 100%;
+    padding-right: 0px;
+    margin-right: -30px;
+    z-index: 50;
 }
 
 #lastLi {
-	border-right: none;
+    border-right: none;
 }
 
 nav ul li a {
-	text-decoration: none;
-	color: #fff;
-	font-family: arial;
-	display: block;
-	font-weight: bold;
+    text-decoration: none;
+    color: #fff;
+    font-family: arial;
+    display: block;
+    font-weight: bold;
 
 }
 
 #sideContent form {
-	background: #fff;
-	width: 350px;
-	border: 2px solid #000;
-	margin-left: 25px;
-	margin-top: 0px;
-	font-family: arial;
-	box-shadow: 0 0 5px 5px #440000;
-	
+    background: #fff;
+    width: 350px;
+    border: 2px solid #000;
+    margin-left: 25px;
+    margin-top: 0px;
+    font-family: arial;
+    box-shadow: 0 0 5px 5px #440000;
+
 }
 
 #sideContent form h2 {
-	color: #fff;
-	font-weight: normal;
-	padding-top: 3px;
-	display: block;
-	margin-top: 0px;
-	width: 350px;
-	height: 36px;
-	background: #000;
-	margin-left: 0px;
-	text-align: center;
+    color: #fff;
+    font-weight: normal;
+    padding-top: 3px;
+    display: block;
+    margin-top: 0px;
+    width: 350px;
+    height: 36px;
+    background: #000;
+    margin-left: 0px;
+    text-align: center;
 }
 
 #sideContent form p {
-	font-size: 18px;
-	padding-left: 20px;
+    font-size: 18px;
+    padding-left: 20px;
 }
 
 #dag1 {
-	margin-left: 25px;
+    margin-left: 25px;
 }
 
 #tijd1 {
-	margin-left: 31px;
+    margin-left: 31px;
 }
 
 #film1 {
-	margin-left: 29px;
+    margin-left: 29px;
 }
 
 #sideContent form p select {
-	width: 175px;
+    width: 175px;
 }
-	
+
 #sideContent form button {
-	width: 100px;
-	height: 40px;
-	float: right;
-	margin-bottom: 10px;
-	margin-right: 10px;
-	background: #000;
-	color: #fff;
-	 display: inline-block;
-	outline: none;
-	cursor: pointer;
-	text-align: center;
-	text-decoration: none;
-	font: 14px/100% Arial, Helvetica, sans-serif;
-	padding-top: 5px;
-	padding-bottom: 5px;
-	text-shadow: 0 1px 1px rgba(0,0,0,.3);
-	-webkit-border-radius: .5em; 
-	-moz-border-radius: .5em;
-	border-radius: .5em;
-	-webkit-box-shadow: 0 1px 2px rgba(0,0,0,.2);
-	-moz-box-shadow: 0 1px 2px rgba(0,0,0,.2);
-	box-shadow: 0 1px 2px rgba(0,0,0,.2);
-	margin-right: 5px;
+    width: 100px;
+    height: 40px;
+    float: right;
+    margin-bottom: 10px;
+    margin-right: 10px;
+    background: #000;
+    color: #fff;
+    display: inline-block;
+    outline: none;
+    cursor: pointer;
+    text-align: center;
+    text-decoration: none;
+    font: 14px/100% Arial, Helvetica, sans-serif;
+    padding-top: 5px;
+    padding-bottom: 5px;
+    text-shadow: 0 1px 1px rgba(0,0,0,.3);
+    -webkit-border-radius: .5em; 
+    -moz-border-radius: .5em;
+    border-radius: .5em;
+    -webkit-box-shadow: 0 1px 2px rgba(0,0,0,.2);
+    -moz-box-shadow: 0 1px 2px rgba(0,0,0,.2);
+    box-shadow: 0 1px 2px rgba(0,0,0,.2);
+    margin-right: 5px;
 }
 
 
 
 #moviebanner {
-	margin-left: 0px;
-	width: 670px;
-	
+    margin-left: 0px;
+    width: 640px;
+        border: 2px solid #000;
+    box-shadow: 0 0 5px 5px #440000;
+
 }
 
-
-#moviebanner img {
-	border: 2px solid #000;
-	box-shadow: 0 0 5px 5px #440000;
-}
 
 #schedule {
-	width: 645px;
-	background: #660000;
-	box-shadow: 0 0 5px 5px #440000;
+    width: 645px;
+    background: #660000;
+    box-shadow: 0 0 5px 5px #440000;
 }
 
 #schedule p {
-	display: block;
-	width: 635px;
-	height: 25px;
-	background: #000;
-	color: #fff;
-	padding-left:10px;
-	padding-top: 5px;
-	font-family: arial;
+    display: block;
+    width: 635px;
+    height: 25px;
+    background: #000;
+    color: #fff;
+    padding-left:10px;
+    padding-top: 5px;
+    font-family: arial;
 
 }
 
 .blockheader {
-	display: block;
-	padding-right: -15px;
-	height: 25px;
-	background: #000;
-	color: #fff;
-	padding-left:10px;
-	padding-top: 5px;
-	font-family: arial;
-        margin-top: 0px;
+    display: block;
+    padding-right: -15px;
+    height: 25px;
+    background: #000;
+    color: #fff;
+    padding-left:10px;
+    padding-top: 5px;
+    font-family: arial;
+    margin-top: 0px;
 }
 
 .timeTable  {
-        display: block;
-        clear: both;
-	background: #fff;
-	margin-left: 0px;
-	color: #000;
-	border-collapse: collapse;
-	width: 645px;
-	font-family: arial;
+    display: block;
+    clear: both;
+    background: #fff;
+    margin-left: 0px;
+    color: #000;
+    border-collapse: collapse;
+    width: 645px;
+    font-family: arial;
 
 }
 
@@ -205,194 +256,197 @@ nav ul li a {
 
 
 .timeHeaderTable  {
-	background: #fff;
-	margin-left: 0px;
-	color: #000;
-	border-collapse: collapse;
-	width: 645px;
-	margin-top: -16px;
-	font-family: arial;
+    background: #fff;
+    margin-left: 0px;
+    color: #000;
+    border-collapse: collapse;
+    width: 645px;
+    margin-top: -16px;
+    font-family: arial;
 
 }
 
 #vandaag{
-	margin-right: 20px;
-	background: #000;
-	color: #fff;
+    margin-right: 20px;
+    background: #000;
+    color: #fff;
 }
 
 #morgen {
-	margin-right: 20px;
-	background: #000;
-	color: #fff;
-	
+    margin-right: 20px;
+    background: #000;
+    color: #fff;
+
 }
 
 .timeHeaderTable .currentDate {
-	background: #660000;
+    background: #660000;
 }
 
 
 
 #overmorgen {
-	margin-right: 20px;
-	background: #000;
-	color: #fff;
+    margin-right: 20px;
+    background: #000;
+    color: #fff;
 }
 
 .timeTable  th {
-	padding-right: 20px;
-        height: 30px;
-	text-align: left;
-	padding-left: 10px;
-        width: 375px;   
+    padding-right: 20px;
+    height: 30px;
+    text-align: left;
+    padding-left: 10px;
+    width: 375px;   
 }
 
 .timeHeaderTable  th {
-	width: 325px;
-        height: 35px;
-	text-align: left;
-	padding-left: 10px;
+    width: 325px;
+    height: 35px;
+    text-align: left;
+    padding-left: 10px;
 }
 
 .timeTable  tr {
-	border-bottom: 1px solid #DDDDDD;
+    border-bottom: 1px solid #DDDDDD;
 }
 
 .dateRow {
-	border-bottom: 1px solid #DDDDDD;
-	width: 640px;
-	background: #cccccc;
+    border-bottom: 1px solid #DDDDDD;
+    width: 640px;
+    background: #cccccc;
 }
 
 .dateRow th {
-	width: 300px;
-        height: 35px;
+    width: 300px;
+    height: 35px;
 }
 
 
 .timeHeaderTable  th button {
-	width: 100px;
-	height: 25px;
-	background: #888888;
-	color: #fff;
-	border: none;
-	display: inline-block;
-	outline: none;
-	cursor: pointer;
-	text-align: center;
-	text-decoration: none;
-	font: 14px/100% Arial;
-	padding: 0;
-	text-shadow: 0 1px 1px rgba(0,0,0,.3);
-	border-radius: .5em;
-	box-shadow: 0 1px 2px rgba(0,0,0,.2);
-}
-
-#top10 {
-	width: 350px;
-	height: 350px;
-	background: #550000;
-	margin-left: 25px;
-	box-shadow: 0 0 5px 5px #440000;
-}
-
-#top10 ul li button {
-	border: none;
-	width: 25px;
-	text-align: center;
-	margin-right: 5px;
-	background: #000;
-	color: #fff;
-	
-}
-
-#top10 ul {
-	list-style: none;
-	margin-left: 0px;
-	padding-left: 0px;
-	color: #fff;
-	font-family: arial;
-	}
-
-#top10 ul li {
-	margin-left: 10px;
-	display: block;
-	margin-bottom: 3px;
-	border-bottom: 1px solid #440000;
-	width: 325px;
-}
-
-#top10header {
-	border-bottom: none;
-	margin-bottom: 0px;
-}
-	
-#top10header p {
-	display: block;
-	width: 340px;
-	height: 25px;
-	background: #000;
-	margin-left: -10px;
-	padding-left: 10px;
-	font-family: arial;
-	margin-bottom: 0px;
-        padding-top: 5px;
+    width: 100px;
+    height: 25px;
+    background: #888888;
+    color: #fff;
+    border: none;
+    display: inline-block;
+    outline: none;
+    cursor: pointer;
+    text-align: center;
+    text-decoration: none;
+    font: 14px/100% Arial;
+    padding: 0;
+    text-shadow: 0 1px 1px rgba(0,0,0,.3);
+    border-radius: .5em;
+    box-shadow: 0 1px 2px rgba(0,0,0,.2);
 }
 
 #reviews {
-	width: 200px;
-	height: 45px;
-	background: #ffbb00;
-	border: 1px solid #000;
-	margin-left: 75px;
-	margin-top: 5px;
-	font-family: arial;
-	font-weight: bold;
-	display: inline-block;
-	outline: none;
-	cursor: pointer;
-	text-align: center;
-	text-decoration: none;
-	font: 14px/100% Arial;
-	padding: .5em 2em .55em;
-	text-shadow: 0 1px 1px rgba(0,0,0,.3);
-	border-radius: .5em;
-	box-shadow: 0 1px 2px rgba(0,0,0,.2);
+    width: 200px !important; 
+    height: 45px !important;
+    background: #ffbb00 !important;
+    border: 1px solid #000 !important;
+    margin-left: 75px !important;
+    margin-top: 5px !important;
+    font-family: arial !important;
+    font-weight: bold !important;
+    display: inline-block !important;
+    outline: none !important;
+    cursor: pointer !important;
+    text-align: center !important;
+    text-decoration: none !important;
+    font: 14px/100% Arial !important;
+    padding: .5em 2em .55em !important;
+    text-shadow: 0 1px 1px rgba(0,0,0,.3) !important;
+    border-radius: .5em !important;
+    box-shadow: 0 1px 2px rgba(0,0,0,.2) !important;
 }
 
 #reviews:hover {
-	text-decoration: none;
+    text-decoration: none !important;
 }
+
+
+#top10 {
+    width: 350px;
+    height: 350px;
+    background: #550000;
+    margin-left: 25px;
+    box-shadow: 0 0 5px 5px #440000;
+}
+
+#top10 ul li button {
+    border: none;
+    width: 25px;
+    text-align: center;
+    margin-right: 5px;
+    background: #000;
+    color: #fff;
+
+}
+
+#top10 ul {
+    list-style: none;
+    margin-left: 0px;
+    padding-left: 0px;
+    color: #fff;
+    font-family: arial;
+}
+
+#top10 ul li {
+    margin-left: 10px;
+    display: block;
+    margin-bottom: 3px;
+    border-bottom: 1px solid #440000;
+    width: 325px;
+}
+
+#top10header {
+    border-bottom: none;
+    margin-bottom: 0px;
+}
+
+#top10header p {
+    display: block;
+    width: 340px;
+    height: 25px;
+    background: #000;
+    margin-left: -10px;
+    padding-left: 10px;
+    font-family: arial;
+    margin-bottom: 0px;
+    padding-top: 5px;
+}
+
+
 
 
 #firstLi {
-	border-top: none;
+    border-top: none;
 }
 
 .timeClass button {
-	width: 75px;
-	 display: inline-block;
-	outline: none;
-	cursor: pointer;
-	text-align: center;
-	text-decoration: none;
-	font: 14px/100% Arial, Helvetica, sans-serif;
-	padding-top: 5px;
-	padding-bottom: 5px;
-	text-shadow: 0 1px 1px rgba(0,0,0,.3);
-	-webkit-border-radius: .5em; 
-	-moz-border-radius: .5em;
-	border-radius: .5em;
-	-webkit-box-shadow: 0 1px 2px rgba(0,0,0,.2);
-	-moz-box-shadow: 0 1px 2px rgba(0,0,0,.2);
-	box-shadow: 0 1px 2px rgba(0,0,0,.2);
-	margin-right: 5px;
+    width: 75px;
+    display: inline-block;
+    outline: none;
+    cursor: pointer;
+    text-align: center;
+    text-decoration: none;
+    font: 14px/100% Arial, Helvetica, sans-serif;
+    padding-top: 5px;
+    padding-bottom: 5px;
+    text-shadow: 0 1px 1px rgba(0,0,0,.3);
+    -webkit-border-radius: .5em; 
+    -moz-border-radius: .5em;
+    border-radius: .5em;
+    -webkit-box-shadow: 0 1px 2px rgba(0,0,0,.2);
+    -moz-box-shadow: 0 1px 2px rgba(0,0,0,.2);
+    box-shadow: 0 1px 2px rgba(0,0,0,.2);
+    margin-right: 5px;
 }
 
 .timeClass button:hover {
-	background: #660000;
-	color: #fff;
+    background: #660000;
+    color: #fff;
 }
 
 .reserveren
@@ -414,112 +468,114 @@ nav ul li a {
 }
 
 footer {
-	float: left;
-	width: 1100px;
-	height: 200px;
-	background: #440000;
-	margin-top: 25px;
-	border-top: 1px solid #000;
-	font-family: arial;
+    float: left;
+    width: 1100px;
+    height: 200px;
+    background: #440000;
+    margin-top: 25px;
+    border-top: 1px solid #000;
+    font-family: arial;
 }
 
 footer p {
-	display: block;
-	border-bottom: 1px solid #ff9900;
-	width: 200px;
-	color: #ff9900;
-	font-weight: bold;
-	font-size: 25px;
-	margin-left: 35px;
-	padding-bottom: 5px;
-	margin-bottom: 10px;
-	
+    margin-top: 25px;
+    display: block;
+    border-bottom: 1px solid #ff9900;
+    width: 200px;
+    color: #ff9900;
+    font-weight: bold;
+    font-size: 25px;
+    margin-left: 35px;
+    padding-bottom: 5px;
+    margin-bottom: 10px;
+
 }
 
 footer ul {
-	list-style: none;
-	color: #fff;
-	margin-left: 0px;
-	margin-top: 0px;
-	padding-top: 0px;
+    list-style: none;
+    color: #fff;
+    margin-left: 0px;
+    margin-top: 0px;
+    padding-top: 0px;
+    padding-left: 40px;
 }
 
 #specialsDiv {
-	width: 645px;
-	height: 400px;
-	font-family: arial;
-	background: #440000;
-	box-shadow: 0 0 5px 5px #440000;
-        margin-top: 25px;
+    width: 645px;
+    height: 400px;
+    font-family: arial;
+    background: #440000;
+    box-shadow: 0 0 5px 5px #440000;
+    margin-top: 25px;
 }
 
 #mainSpecialsDiv {
-	width: 325px;
+    width: 325px;
 }
 
 #specialsDiv h2 {
-	display: block;
-	height: 40px;
-	width: 635px;
-	background: #000;
-	color: #fff;
-	padding-top: 4px;
+    display: block;
+    height: 40px;
+    width: 635px;
+    background: #000;
+    color: #fff;
+    padding-top: 4px;
 }
 
 #specialsDiv h2,h3,p {
-	padding-left: 10px;
+    padding-left: 10px;
 }
 
 #specialsDiv h3 {
-	color: #fff;
+    color: #fff;
 }
 
 #specialsDiv p {
-	color: #fff;
+    color: #fff;
 }
 
 #specialSideContent, #mainSpecialsDiv {
-	float: left;
+    float: left;
 }
 
 #specialSideContent  {
-	margin-top: 70px;
+    margin-top: 70px;
 }
 
 
 
 #filmPoosterEnInfo {
-	width: 350px;
-	background: #550000;
-	margin-left: 25px;
-	box-shadow: 0 0 5px 5px #440000;
-        padding-bottom: 25px;
+    width: 350px;
+    background: #550000;
+    margin-left: 25px;
+    box-shadow: 0 0 5px 5px #440000;
+    padding-bottom: 25px;
 }
 
 
 #filmPoosterEnInfo h2 {
-        margin-left: 0px;
-        margin-top: 25px;
-        font-size: 16px;
-        font-family: arial;
-        color: #FFFFFF;
+    margin-left: 0px;
+    margin-top: 25px;
+    font-size: 16px;
+    font-family: arial;
+    color: #FFFFFF;
 }
 
 #FacebookEventAanmaken
 {
     width: 350px;
-	background: #550000;
-	margin-left: 25px;
-	box-shadow: 0 0 5px 5px #440000;
-        margin-top: 25px;
-        padding-bottom: 25px;
+    background: #550000;
+    margin-left: 25px;
+    box-shadow: 0 0 5px 5px #440000;
+    margin-top: 25px;
+    padding-bottom: 25px;
 }
 
 #FacebookEventAanmaken img {
-        margin-left: 50px;
-        width: 250px;
-        box-shadow: 0 0 5px 5px #440000;
-        margin-top: 5px;
+    margin-left: 50px;
+    width: 250px;
+    box-shadow: 0 0 5px 5px #440000;
+    margin-top: 5px;
 }
 
 #filmInfo
@@ -541,38 +597,38 @@ footer ul {
 
 #tijdEnZaal
 {
-        margin-top: 25px;
-        font-size: 13px;
-        font-weight: bold;
-        font-family: arial;
-        color: #FFFFFF;
+    margin-top: 25px;
+    font-size: 13px;
+    font-weight: bold;
+    font-family: arial;
+    color: #FFFFFF;
 }
 
 /* Hide these rules from IE-mac \*/
 * html .clearfix {
-	height: 1%;
+    height: 1%;
 }
 
 li.clearfix {
-	display: list-item;
+    display: list-item;
 }
 
 
 
 #ss {
-	width: 645px;
-	background: #550000;
-	box-shadow: 0 0 5px 5px #440000;
-        display: inline-block;
-        margin-right: 25px;
+    width: 645px;
+    background: #550000;
+    box-shadow: 0 0 5px 5px #440000;
+    display: inline-block;
+    margin-right: 25px;
 }
 
 #ss:after {
     clear: both;
-	display: block;
-	content: " ";
-	height: 0px;
-	visibility: hidden;
+    display: block;
+    content: " ";
+    height: 0px;
+    visibility: hidden;
 }
 
 #ss {
@@ -585,21 +641,21 @@ li.clearfix {
 }
 
 #outerDiv {
-        display: inline-block;
-	margin: 0 auto;
-	background: #660000;
-	width: 1100px;
-	border-left: 1px dotted #440000;
-	border-right: 1px dotted #440000;
-        padding-top: 15px;
+    display: inline-block;
+    margin: 0 auto;
+    background: #660000;
+    width: 1100px;
+    border-left: 1px dotted #440000;
+    border-right: 1px dotted #440000;
+    padding-top: 15px;
 }
 
 #outerDiv:after {
     clear: both;
-	display: block;
-	content: " ";
-	height: 0px;
-	visibility: hidden;
+    display: block;
+    content: " ";
+    height: 0px;
+    visibility: hidden;
 }
 
 #outerDiv{
@@ -608,103 +664,103 @@ li.clearfix {
 
 #Stoelen
 {
- margin-top: 25px;
+    margin-top: 25px;
 }
 
 #Stoelen table {
-        font-family: Arial;
-        color: #FFFFFF;
-        font-size: 11px;
-        border-collapse: collapse;
-        background-color: #cccccc;
-        margin-left: 10px;
+    font-family: Arial;
+    color: #FFFFFF;
+    font-size: 11px;
+    border-collapse: collapse;
+    background-color: #cccccc;
+    margin-left: 10px;
 }
 
 #Stoelen th
 {
-  background-color: #FFFFFF;
-  color: #000000;
-  border-collapse: collapse;
+    background-color: #FFFFFF;
+    color: #000000;
+    border-collapse: collapse;
 }
 
 .RijNummerCell
 {
-      background-color: #FFFFFF;
-  color: #000000;
+    background-color: #FFFFFF;
+    color: #000000;
 }
 
 #StoelSelectieHeader
 {
-     font-family: Arial;
-     color: #FFFFFF;
-     margin-left: 10px;
-     margin-right: 10px;
-     font-size: 13px;
-     width: 100%
+    font-family: Arial;
+    color: #FFFFFF;
+    margin-left: 10px;
+    margin-right: 10px;
+    font-size: 13px;
+    width: 100%
 }
 
 #StoelSelectieHeader h1
 {
-        font-size: 18px;
-        font-family: arial;
-        color: #FFFFFF;
-        margin-top: 10px;
+    font-size: 18px;
+    font-family: arial;
+    color: #FFFFFF;
+    margin-top: 10px;
 }	
 #GeselecteerdeStoelen
 {
- 	display: block;
-	padding-right: -15px;
-	height: 25px;
-	background: #000;
-	color: #fff;
-	padding-left:10px;
-	padding-top: 5px;
-	font-family: arial;
+    display: block;
+    padding-right: -15px;
+    height: 25px;
+    background: #000;
+    color: #fff;
+    padding-left:10px;
+    padding-top: 5px;
+    font-family: arial;
 }
 
 
 #ReserverenHeader h2
 {
-        font-size: 16px;
-        font-family: arial;
-        font-weight: bold;
-        color: #FFFFFF;
-         margin-left: 25px;
-         margin-bottom: 15px;
+    font-size: 16px;
+    font-family: arial;
+    font-weight: bold;
+    color: #FFFFFF;
+    margin-left: 25px;
+    margin-bottom: 15px;
 }
 
 #formulier
 {
-        margin-left: 25px;
-        font-size: 13px;
-        font-family: arial;
-        color: #FFFFFF;
-        padding-bottom: 10px;
-    
+    margin-left: 25px;
+    font-size: 13px;
+    font-family: arial;
+    color: #FFFFFF;
+    padding-bottom: 10px;
+
 }
 
 #formulier h3
 {
-        font-size: 14px;
-        font-family: arial;
-        color: #FFFFFF;
-        padding-left: 0px;
+    font-size: 14px;
+    font-family: arial;
+    color: #FFFFFF;
+    padding-left: 0px;
 }
 
 #formulier label
 {
-                font-size: 13px;
-        font-family: arial;
-        color: #FFFFFF;
+    font-size: 13px;
+    font-family: arial;
+    color: #FFFFFF;
 }
 
 #StoelPrijzen
 {
     margin-left: 25px;
-                    font-size: 13px;
-        font-family: arial;
-        color: #FFFFFF;
-        padding-bottom: 15px;
+    font-size: 13px;
+    font-family: arial;
+    color: #FFFFFF;
+    padding-bottom: 15px;
 }
 
 #StoelPrijzen h3
@@ -714,30 +770,30 @@ li.clearfix {
 
 #StoelPrijzen th
 {
- background-color: #ffffff;
- border-width: 0px;
- padding: 5px;
- color: #000000;
-              font-size: 13px;
-        font-family: arial;
-        height: 25px;
-        text-align: left;
+    background-color: #ffffff;
+    border-width: 0px;
+    padding: 5px;
+    color: #000000;
+    font-size: 13px;
+    font-family: arial;
+    height: 25px;
+    text-align: left;
 }
 
 #StoelPrijzen td
 {
-padding: 5px;
-               font-size: 13px;
-        font-family: arial;
-        color: #000000;
+    padding: 5px;
+    font-size: 13px;
+    font-family: arial;
+    color: #000000;
 }
 
 #StoelPrijzen table
 {
-background-color: #cccccc;
-width: 50%;
-border-spacing: 0px;
-margin-bottom: 15px;
+    background-color: #cccccc;
+    width: 50%;
+    border-spacing: 0px;
+    margin-bottom: 15px;
 }
 
 #StoelPrijzen tfoot
@@ -757,26 +813,26 @@ margin-bottom: 15px;
 
 #legenda td
 {
-        font-family: Arial;
-        color: #FFFFFF;
-        font-size: 13px;
-        border-collapse: collapse;
-        background-color: #cccccc;
-        margin-left: 10px;
-        color: #000000;
-        padding: 5px;
+    font-family: Arial;
+    color: #FFFFFF;
+    font-size: 13px;
+    border-collapse: collapse;
+    background-color: #cccccc;
+    margin-left: 10px;
+    color: #000000;
+    padding: 5px;
 }
 
 #legenda th
 {
     background-color: #ffffff;
- border-collapse: collapse;
- padding: 5px;
- color: #000000;
-              font-size: 13px;
-        font-family: arial;
-        height: 25px;
-        text-align: left;
+    border-collapse: collapse;
+    padding: 5px;
+    color: #000000;
+    font-size: 13px;
+    font-family: arial;
+    height: 25px;
+    text-align: left;
 }
 
 #Stap1GeselecteerdeStoelen 
@@ -789,26 +845,26 @@ margin-bottom: 15px;
 
 #Stap1GeselecteerdeStoelen td
 {
-        font-family: Arial;
-        color: #FFFFFF;
-        font-size: 13px;
-        border-collapse: collapse;
-        background-color: #cccccc;
-        margin-left: 10px;
-        color: #000000;
-        padding: 5px;
+    font-family: Arial;
+    color: #FFFFFF;
+    font-size: 13px;
+    border-collapse: collapse;
+    background-color: #cccccc;
+    margin-left: 10px;
+    color: #000000;
+    padding: 5px;
 }
 
 #Stap1GeselecteerdeStoelen th
 {
     background-color: #ffffff;
- border-collapse: collapse;
- padding: 5px;
- color: #000000;
-              font-size: 13px;
-        font-family: arial;
-        height: 25px;
-        text-align: left;
+    border-collapse: collapse;
+    padding: 5px;
+    color: #000000;
+    font-size: 13px;
+    font-family: arial;
+    height: 25px;
+    text-align: left;
 }
 #Stap1GeselecteerdeStoelen tfoot
 {
@@ -830,7 +886,7 @@ margin-bottom: 15px;
     color: #ffffff;
     text-align: left;
     margin-bottom: 5px;
-    
+
 }
 
 #StoelPrijzen caption
@@ -841,7 +897,7 @@ margin-bottom: 15px;
     color: #ffffff;
     text-align: left;
     margin-bottom: 5px;
-    
+
 }
 #formulier caption
 {
@@ -851,7 +907,7 @@ margin-bottom: 15px;
     color: #ffffff;
     text-align: left;
     margin-bottom: 5px;
-    
+
 }
 
 #StoelSelectieFooter form
@@ -861,7 +917,7 @@ margin-bottom: 15px;
     margin-top: 50px;
     float: right;
     margin-right: 10px;
-     margin-bottom: 15px;
+    margin-bottom: 15px;
 }
 
 .icepayframe
@@ -877,7 +933,7 @@ margin-bottom: 15px;
 
 #bedankt
 {
-   background: #550000;
+    background: #550000;
     font-family: Arial;
     font-size: 13px;
     color: #FFFFFF;
@@ -887,12 +943,12 @@ margin-bottom: 15px;
 
 #bedankt h2
 {
-        margin-left: 10px;
-        margin-top: 25px;
-        font-size: 16px;
-        font-family: arial;
-        color: #FFFFFF;
-        width: 350px;
+    margin-left: 10px;
+    margin-top: 25px;
+    font-size: 16px;
+    font-family: arial;
+    color: #FFFFFF;
+    width: 350px;
 }
 #bedankt img
 {
@@ -913,9 +969,9 @@ margin-bottom: 15px;
 
 #PopupCover
 {
-  
-   float: left;
-   
+
+    float: left;
+
 }
 
 #PopupCover img
@@ -938,8 +994,8 @@ margin-bottom: 15px;
 
 #PopUpForm input
 {
-margin-left: 25px;
-float: left;
+    margin-left: 25px;
+    float: left;
 }
 
 #filmInfoPopup p
@@ -951,9 +1007,9 @@ float: left;
 #TitleTijdPopup
 {
     font-size: 14px;
-   color: #ffffff;
-   margin-left: 10px;
-   font-family: Arial;
+    color: #ffffff;
+    margin-left: 10px;
+    font-family: Arial;
 }
 
 #PopupFriendList
@@ -962,7 +1018,7 @@ float: left;
     font-size: 13px;
     font-family: Arial;
     margin-left: 15px;
-    
+
 }
 
 #PopupFriendList table
@@ -1029,18 +1085,18 @@ float: left;
 {
     border-radius: .5em;
     background-color: #660000;
-    
     width: 235px;
-   outline: medium none;
-   font-family: Arial;
-   color:white;
-   font-size: 13px;
-   padding:10px;
+    outline: medium none;
+    font-family: Arial;
+    color:white;
+    font-size: 13px;
+    padding:10px;
+    z-index: 50;
 }
 
 .popupButtonClass button
 {
-     border-radius: 0.5em 0.5em 0.5em 0.5em;
+    border-radius: 0.5em 0.5em 0.5em 0.5em;
     box-shadow: 0 1px 2px rgba(0, 0, 0, 0.2);
     cursor: pointer;
     display: inline-block;
@@ -1058,19 +1114,19 @@ float: left;
 }
 
 .popupButtonClass button:hover {
-	background: #660000;
-	color: #fff;
+    background: #660000;
+    color: #fff;
 }
 
 #trailer
 {
-     font-family: Arial;
-     color: #FFFFFF;
-     width: 645px;
-         background: #550000;
-	box-shadow: 0 0 5px 5px #440000;
-        display: block;
-        margin-right: 25px;
+    font-family: Arial;
+    color: #FFFFFF;
+    width: 645px;
+    background: #550000;
+    box-shadow: 0 0 5px 5px #440000;
+    display: block;
+    margin-right: 25px;
 }
 
 #trailer video
@@ -1080,22 +1136,22 @@ float: left;
 }
 
 #filmomschrijving {
-	width: 675px;
-        display: block;
+    width: 675px;
+    display: block;
     padding-top: 0px;
     margin-top: 25px;
 }
 
 #filmomschrijvingHeader
 {
-    	width: 645px;
-	background: #550000;
-	box-shadow: 0 0 5px 5px #440000;
-        display: block;
-        margin-right: 25px;
-        margin-top: 25px;
-        color: white;
-        font-family: Arial;
+    width: 645px;
+    background: #550000;
+    box-shadow: 0 0 5px 5px #440000;
+    display: block;
+    margin-right: 25px;
+    margin-top: 25px;
+    color: white;
+    font-family: Arial;
 
 }
 .filmbeschrijving
@@ -1107,12 +1163,12 @@ float: left;
 
 #filmtijden
 {
-    	width: 645px;
-	background: #550000;
-	box-shadow: 0 0 5px 5px #440000;
-        display: block;
-        margin-right: 25px;
-        margin-top: 25px;
+    width: 645px;
+    background: #550000;
+    box-shadow: 0 0 5px 5px #440000;
+    display: block;
+    margin-right: 25px;
+    margin-top: 25px;
 }
 
 #filmPoosterEnInfo .kijkwijzer
@@ -1126,22 +1182,22 @@ float: left;
 
 #filmPoosterEnInfo .pooster
 {
-        margin-left: 50px;
-        margin-top: 5px;
-        width: 250px;
-        box-shadow: 0 0 5px 5px #440000;
+    margin-left: 50px;
+    margin-top: 5px;
+    width: 250px;
+    box-shadow: 0 0 5px 5px #440000;
 }
 
 #nubinnenkort
 {
-         font-family: Arial;
-     color: #FFFFFF;
-     width: 645px;
-         background: #550000;
-	box-shadow: 0 0 5px 5px #440000;
-        display: inline-block;
-        margin-right: 25px;
-        padding-bottom: 15px;
+    font-family: Arial;
+    color: #FFFFFF;
+    width: 645px;
+    background: #550000;
+    box-shadow: 0 0 5px 5px #440000;
+    display: inline-block;
+    margin-right: 25px;
+    padding-bottom: 15px;
 }
 .posterRow
 {
@@ -1151,7 +1207,7 @@ float: left;
 .filmoverzichtposter
 {
     display: inline-block;
-     box-shadow: 0 0 5px 5px #440000;
+    box-shadow: 0 0 5px 5px #440000;
     margin-top: 15px;
     margin-left: 22.5px;
     font-size: 10px;
@@ -1174,7 +1230,7 @@ float: left;
 .filmoverzichtposter:hover
 {
     display: inline-block;
-     box-shadow: 0 0 5px 5px #FFBB00;
+    box-shadow: 0 0 5px 5px #FFBB00;
     margin-top: 15px;
     margin-left: 22.5px;
     font-size: 10px;
@@ -1207,11 +1263,11 @@ float: left;
 
 .filmoverzichtbeschrijving
 {
- font-size: 13px;   
- margin-right: 10px;
- float: right;
- width: 465px;
- margin-bottom: 5px;
+    font-size: 13px;   
+    margin-right: 10px;
+    float: right;
+    width: 465px;
+    margin-bottom: 5px;
 }
 
 .filoverzichtcoverrowview
@@ -1248,4 +1304,325 @@ float: left;
     padding-bottom: 3px;
     padding-right: 5px;
     margin-left: -5px;
+}
+
+.GeenFilmsGevonden
+{
+    padding: 5px;
+    font-family: Arial;
+    font-size: 13px;
+    color: white;
+}
+
+#Zoekbox 
+{
+    position: relative;
+    top: 60px;
+    left: 395px;
+}
+#Zoekbox input
+{
+    border: 1px;
+    border-color: #FFBB00;
+    border-style: solid;
+    margin-left: 5px;
+    background-color: #FFFFFF;
+    height: 21px;
+}
+
+#Zoekbox .submitb
+{
+    width: 100px;
+    height: 25px;
+    background: #888888;
+    color: #fff;
+    border: none;
+    display: inline-block;
+    outline: none;
+    cursor: pointer;
+    text-align: center;
+    text-decoration: none;
+    font: 14px/100% Arial;
+    padding: 0;
+    text-shadow: 0 1px 1px rgba(0,0,0,.3);
+    border-radius: .5em;
+    box-shadow: 0 1px 2px rgba(0,0,0,.2);
+}
+
+#ZoekPopup
+{
+    border: 1px;
+    border-style: solid;
+    width: 350px;
+    position: relative;
+    top: 60px;
+    left: 612px;
+    background-color: #660000;
+    -webkit-border-radius: 10px;
+    -webkit-border-top-right-radius: 0;
+    -moz-border-radius: 10px;
+    -moz-border-radius-topright: 0;
+    border-radius: 10px;
+    border-top-right-radius: 0;
+    z-index: 50;
+}
+#ZoekPopup p
+{
+ text-align: left;
+ font-weight: bold;
+ color:white;
+ height: 20px;
+ background-color: black;
+ font-size: 13px;
+ padding: 5px;
+ font-family: Arial;
+ margin: 0px;
+ -webkit-border-top-left-radius: 5px;
+-moz-border-radius-topleft: 5px;
+border-top-left-radius: 5px;
+}
+
+#ZoekPopup tfoot td
+{
+    color:white;
+    background-color: #333333;
+    font-size: 13px;
+    font-weight: bold;
+    -webkit-border-bottom-right-radius: 5px;
+-webkit-border-bottom-left-radius: 5px;
+-moz-border-radius-bottomright: 5px;
+-moz-border-radius-bottomleft: 5px;
+border-bottom-right-radius: 5px;
+border-bottom-left-radius: 5px;
+}
+
+#ZoekPopup table
+{
+    color: white;
+    font-family: Arial;
+    font-size: 10px;
+    text-align: left;
+    border-collapse: collapse;
+}
+
+#ZoekPopup td
+{
+    vertical-align: top;
+    padding: 5px;
+}
+
+#ZoekPopup thead th
+{
+    background-color: #666666;
+    color:white;
+    font-size: 14px;
+    height: 20px;
+    text-align: left;
+    
+}
+
+#ZoekPopup img
+{
+   width: 100px;
+   margin-top: 5px;
+}
+
+#ZoekPopup tr:hover
+{
+    background-color: #440000;
+}
+
+#ZoekPopup a, a:visited
+{
+    text-decoration: none;
+    color:white;
+    font-family: Arial;
+    font-size: 10px;
+}
+
+/*rogier*/
+
+#infoDiv {
+    width: 640px;
+
+    background: #550000;
+    margin-left: 0px;
+    margin-top: 0px;
+    box-shadow: 0 0 5px 5px #440000;
+    padding-top: 0px;
+}
+
+#infoDiv h2 {
+    display: block;
+    width: 635px;
+    background: #000;
+    color: #fff;
+    font-family: arial;
+    height: 30px;
+    font-weight: normal;
+    font-size: 18px;
+    padding-top: 3px;
+    padding-left: 5px;
+    margin-bottom: 0px;
+}
+
+#infoDiv p#infoP{
+    display: block;
+    height: 30px;
+    width: 630px;
+    margin-top: 0px;
+    background: #cccccc;
+}
+
+#infoDiv button {
+    width: 125px;
+    display: inline-block;
+    margin-left: 10px;
+    margin-top: 3px;
+    background: #000;
+    color: #fff;
+    outline: none;
+    cursor: pointer;
+    text-align: center;
+    text-decoration: none;
+    font: 14px/100% Arial, Helvetica, sans-serif;
+    border: none;
+    padding-top: 5px;
+    padding-bottom: 5px;
+    text-shadow: 0 1px 1px rgba(0,0,0,.3);
+    -webkit-border-radius: .5em; 
+    -moz-border-radius: .5em;
+    border-radius: .5em;
+    -webkit-box-shadow: 0 1px 2px rgba(0,0,0,.2);
+    -moz-box-shadow: 0 1px 2px rgba(0,0,0,.2);
+    box-shadow: 0 1px 2px rgba(0,0,0,.2);
+    margin-right: 5px;
+}
+
+
+
+
+#infoDiv article {
+    width: 500px;
+    margin-left: 20px;
+    color: #fff;
+    font-family: arial;
+    margin-top: 20px;
+}
+
+#infoDiv article form {
+    margin-top: 25px;
+    background: #330000;
+    color: #fff;
+    width: 450px;
+    border: 2px dotted #000;
+    font-size: 15px;
+    margin-left: 25px;
+    font-family: arial;
+    box-shadow: 0 0 5px 5px #440000;
+
+}
+
+#infoDiv form p {
+    font-weight: bold;
+}
+
+#infoDiv form button {
+    margin-bottom: 8px;
+}
+
+#openingstijden {
+    color: #fff;
+    border-collapse: collapse;
+    margin-left: 25px;
+    margin-top: 25px;
+}
+
+#openingstijden th {
+    width: 200px;
+}
+
+#openingstijden th, #openingstijden td{
+    border-bottom: 1px solid #220000;
+    text-align: left;
+}
+
+#infodiv iframe {
+    margin-top: 20px;
+    margin-left: 20px;
+}
+
+#adres {
+    color: #fff;
+    font-weight: bold;
+    margin-top: 30px;
+}
+
+#routebeschrijving {
+    color: #fff;
+
+}
+
+#routeDiv {
+    width: 600px;
+    border-bottom: 2px dotted #440000;
+    margin-left: 20px;
+    font-family: arial;
+}
+
+#table1, #table2 {
+    width: 550px;
+    background: #330000;
+    margin-left: 20px;
+    box-shadow: 0 0 5px 5px #440000;
+}
+
+#routeTable1, #routeTable2 {
+    background: #440000;
+    color: #fff;
+    text-align: left;
+    width: 550px;
+    border-collapse: collapse;
+    font-family: arial;
+    margin-top: 5px;
+}
+
+#routeTable1 th, #routeTable2 th {
+    padding-left: 5px;
+}
+
+#routeTable1 .td1, #routeTable2 .td1 {
+    width: 150px;
+}
+
+#routeTable1 .td2, .td3 {
+    width: 200px;
+}	
+
+#routetable1 .td1, .td2, .td3, #routeTable2 .td1, .td2, .td3 {
+    font-size: 15px;
+    height: 25px;
+    padding-left: 5px;
+}
+#infodiv iframe {
+    margin-top: 20px;
+    margin-left: 20px;
+}
+
+#specialBeschrijving
+{
+    color: white;
+    margin-top: 10px;
+    font-size: 13px;
+    width: 645px;
+    background: #550000;
+    box-shadow: 0 0 5px 5px #440000;
+    display: inline-block;
+    font-family: Arial;
+
+}
+
+.specialBeschrijvingText
+{
+    margin: 10px;
 }

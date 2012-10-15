@@ -11,6 +11,37 @@ class DBFunctions
       $this-> connection = new DBConnection();
   }
   
+  public function ZoekenNaarFilms($query)
+  {
+      $this -> connection -> dbConnect();
+      $query = mysql_query("
+        SELECT *, 'Naam' AS MatchType
+        FROM `films`
+        WHERE Naam LIKE '%".$query."%'
+
+        UNION
+
+        SELECT *, 'Acteur' AS MatchType
+        FROM films
+        WHERE Acteurs LIKE '%".$query."%'
+
+        UNION
+
+        SELECT *, 'Regissuer' AS MatchType
+        FROM films
+        WHERE Regisseur LIKE '%".$query."%'");
+      
+    $result = array(); 
+      
+     while ($row = mysql_fetch_array($query)) {
+     
+         $result[] = $row;
+         
+     }
+      $this -> connection -> dbClose();
+      return $result;
+  }
+  
   public function FilmsMetVoorstellingenKomendeXDagen($dagenPlusMin)
   {
         if (!is_int($dagenPlusMin)) {
@@ -281,6 +312,105 @@ class DBFunctions
       return $result;
   }
   
+  public function VoorstellingenVoorSpecial($specialID) 
+  {
+      
+     if (!is_int($specialID)) {
+          throw new Exception("specialid is geen nummer.");
+      }
+      
+      $this -> connection -> dbConnect();
+      $query = mysql_query("SELECT 
+                            films.FilmID,
+                            films.Naam AS FilmNaam,
+                            voorstellingen.VoorstellingID AS VoorstellingID,
+                            voorstellingen.Datum AS VoorstellingDatum,
+                            voorstellingen.Tijd AS VoorstellingTijd,
+                            voorstellingen.BeschikbareStoelen
+                            FROM voorstellingen
+                            INNER JOIN films on films.FilmID = voorstellingen.FilmID
+                            WHERE voorstellingen.SpecialID = ".$specialID."
+                            AND TIMESTAMP(voorstellingen.Datum, voorstellingen.Tijd) > NOW()
+                            ORDER BY voorstellingen.Datum, voorstellingen.Tijd") or die (mysql_error());
+      $result = array(); 
+      
+     while ($row = mysql_fetch_array($query)) {
+     
+         $result[] = $row;
+         
+     }
+      $this -> connection -> dbClose();
+      return $result;    
+      
+  }
+  
+  
+  public function HaalSpecialOp($specialId) {
+      
+      $this -> connection -> dbConnect();
+      $query = mysql_query("SELECT specials.*
+                            FROM filmpje.specials
+                            WHERE specials.SpecialID = ".$specialId."
+                            ") 
+              or die (mysql_error());
+     
+     $result = array(); 
+      
+     while ($row = mysql_fetch_array($query)) {
+     
+         $result[] = $row;
+         
+     }
+      $this -> connection -> dbClose();
+      
+      
+      return $result[0];
+  }
+  
+  public function HaalSpecialsOp()
+  {
+      $this -> connection -> dbConnect();
+      $query = mysql_query("SELECT specials.*
+                            FROM filmpje.specials
+                            ") 
+              or die (mysql_error());
+     
+     $result = array(); 
+      
+     while ($row = mysql_fetch_array($query)) {
+     
+         $result[] = $row;
+         
+     }
+      $this -> connection -> dbClose();
+      
+      
+      return $result;
+  }
+  
+  public function HaalBannersOp()
+  {
+         $this -> connection -> dbConnect();
+      $query = mysql_query("SELECT films.Banner, films.Naam, films.FilmID
+                            FROM filmpje.films
+                            WHERE films.Banner IS NOT NULL
+                            ") 
+              or die (mysql_error());
+     
+     $result = array(); 
+      
+     while ($row = mysql_fetch_array($query)) {
+     
+         $result[] = $row;
+         
+     }
+      $this -> connection -> dbClose();
+      
+      
+      return $result;
+  }
+      
+
 }
 
 

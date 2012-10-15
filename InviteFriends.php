@@ -1,7 +1,6 @@
 <?php
 include_once 'Facebook/FilmpjeFacebook.php';
 $ff = new FilmpjeFacebook();
-
 try
 {
 $eventid = $_GET['eid'];
@@ -40,8 +39,10 @@ if ($ff->IsUserLoggingIn()) {
     header("Location: ".$ff->GetLoginURL("http://chivan.com/filmpje.nl/InviteFriends.php?eid=".$eventid."&fbuser=".$user));    
 }
 ?>
+<!DOCTYPE html>
 <html>
     <head><title>Filmpje.nl - Facebook Event aanmaken</title>
+        <link rel="shortcut icon" href="favicon.ico">
     <link rel="stylesheet" href="css/stylesheet.css">
     <script src="javascript/jquery.js" type="text/javascript"></script>
     <script src="javascript/Loading.js" type="text/javascript"></script>

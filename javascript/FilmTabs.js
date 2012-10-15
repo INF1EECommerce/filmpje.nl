@@ -16,51 +16,26 @@ function ReserverenKlik(voorstellingId)
      document.getElementById('voorstellingForm').submit();
 }
 
-function DagButtonClick (dag)
-{
-    if ($("#TijdKlikPopup").not(":hidden")) {
-    $("#TijdKlikPopup").toggle(false);
-    $(SelectedButton).css({background: "",
-	color: ""});  
-    }
-    switch (dag) {
-            case 'Vandaag':
-                document.getElementById('Vandaagfilms').style.display = 'block';
-                document.getElementById('Morgenfilms').style.display = 'none';
-                document.getElementById('Overmorgenfilms').style.display = 'none';
-                
-                document.getElementById('vandaagButton').className = 'currentDate';
-                document.getElementById('morgenButton').className = '';
-                document.getElementById('overmorgenButton').className = '';
-                break;
-            case 'Morgen':
-                document.getElementById('Vandaagfilms').style.display = 'none';
-                document.getElementById('Morgenfilms').style.display = 'block';
-                document.getElementById('Overmorgenfilms').style.display = 'none';
-                
-                document.getElementById('vandaagButton').className = '';
-                document.getElementById('morgenButton').className = 'currentDate';
-                document.getElementById('overmorgenButton').className = '';
-                break;
-            case 'Overmorgen':
-                document.getElementById('Vandaagfilms').style.display = 'none';
-                document.getElementById('Morgenfilms').style.display = 'none';
-                document.getElementById('Overmorgenfilms').style.display = 'block';
-                
-                document.getElementById('vandaagButton').className = '';
-                document.getElementById('morgenButton').className = '';
-                document.getElementById('overmorgenButton').className = 'currentDate';
-            default:
-                break;
-        }
-
-}
 
 var SelectedButton;
 
   $(document).ready(function () { 
     $("#TijdKlikPopup").toggle(false); 
+
+
   }); 
+
+    $(document).mouseup(function (e)
+{
+    var container = $("#TijdKlikPopup");
+
+    if (container.has(e.target).length === 0 && e.target.id != "timeb")
+    {
+     $("#TijdKlikPopup").toggle(false);
+    $(SelectedButton).css({background: "",
+	color: ""});  
+    }
+});
 
 
 function TijdKlik(voorstellingID, button, reserveren, beschikbarestoelen)
@@ -88,13 +63,13 @@ function TijdKlik(voorstellingID, button, reserveren, beschikbarestoelen)
         if (button != SelectedButton) {
            offset = $(button).offset();
            $('#TijdKlikPopup')
-          .toggle()
           .css({
               position: "absolute",
               top: offset.top - ($('#TijdKlikPopup').height()+15),
               left: offset.left - 90,
               opacity: 1
           });
+           $('#TijdKlikPopup').show("slide", { direction: "down" }, 200);
         $(SelectedButton).css({background: "",
 	color: ""});  
         $(button).css({ background: "#660000",
@@ -106,7 +81,7 @@ function TijdKlik(voorstellingID, button, reserveren, beschikbarestoelen)
         $(SelectedButton).css({ background: "#660000",
 	color: "#fff" });
             $('#TijdKlikPopup')
-          .toggle();
+          .show("slide", { direction: "down" }, 200);
           
         }
         
@@ -116,14 +91,18 @@ function TijdKlik(voorstellingID, button, reserveren, beschikbarestoelen)
           offset = $(button).offset();
            $('#TijdKlikPopup')
           .toggle();
-          $('#TijdKlikPopup')
-          .toggle()
-          .css({
+          
+          $('#TijdKlikPopup').css({
               position: "absolute",
               top: offset.top - ($('#TijdKlikPopup').height()+15),
               left: offset.left - 90,
               opacity: 1
           });
+          
+          $('#TijdKlikPopup')
+          .show("slide", { direction: "down" }, 200)
+         
+          
           $(SelectedButton).css({ background: "",
                 color: "" });
           $(button).css({ background: "#660000",
@@ -132,7 +111,7 @@ function TijdKlik(voorstellingID, button, reserveren, beschikbarestoelen)
           }
           else
           {
-             $('#TijdKlikPopup').toggle(); 
+             $('#TijdKlikPopup').hide("slide", { direction: "down" }, 200); 
           $(button).css({ background: "",
                 color: "" });
           }

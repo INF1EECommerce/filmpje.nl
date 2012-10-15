@@ -30,8 +30,21 @@ $(document).ready(function() {
 function SwitchView()
 {
     
- $('#Tiles').toggle();
- $('#Rows').toggle();
+ if ($("#Tiles").is(":visible")) {   
+ $('#Tiles').toggle("drop", { direction: "down" }, 200, function()
+{
+     $('#Rows').toggle("drop", { direction: "down" }, 200);
+}
+);
+ } 
+ else
+  {
+  $('#Rows').toggle("drop", { direction: "down" }, 200, function()
+{
+    $('#Tiles').toggle("drop", { direction: "down" }, 200);
+} 
+);
+  }
     
 }
 

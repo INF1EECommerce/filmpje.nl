@@ -20,7 +20,8 @@ class FilmTijdenView
         $dbfunctions = new DBFunctions();
         $voorstellingen = $dbfunctions ->VoorstellingenVoorFilm($film);
          
-        
+        if (count($voorstellingen) > 0) {
+
         //Groepeer deze op datum
         $datumGroepen = ArrayGrouper::GroupArray($voorstellingen, 'VoorstellingDatum');
         
@@ -76,6 +77,12 @@ class FilmTijdenView
                 echo ("
                 </table>
                 ");
+        } else {
+               echo ("    
+                <table class=\"timeTable\"><tr><td><span style=\"margin-left: 10px;\">Er zijn geen voorstellingen gevonden.<span></td</tr></table>    
+                ");
+        }
+                
                 }        
     
 }

@@ -115,12 +115,12 @@ class Bestellingen {
             $result[] = $row;
         }
         
-        $this->UpdateBeschikbareStoelen($result[0]['VoorstellingID'],$result[0]['AantalStoelen'] , '+');
+        $this->UpdateBeschikbareStoelen($result[0]['VoorstellingID'],$result[0]['AantalStoelen'] , '+', FALSE);
         
         $this->connection->dbClose();
     }
     
-    public function UpdateBeschikbareStoelen($voorstelling, $aantalstoelen, $plusmin)
+    public function UpdateBeschikbareStoelen($voorstelling, $aantalstoelen, $plusmin, $closeConnection)
     {
        $this -> connection -> dbConnect();
               
@@ -128,35 +128,41 @@ class Bestellingen {
           SET voorstellingen.BeschikbareStoelen = voorstellingen.BeschikbareStoelen ". $plusmin . " " . $aantalstoelen ."
           WHERE voorstellingen.VoorstellingID = '" . $voorstelling . "'") or die(mysql_error());
        
-       $this -> connection -> dbClose();
+        if ($closeConnection) {
+            $this->connection->dbClose();
+        }
     }
     public function MaakBestellingAan(Bestelling $bestelling) {
-        //TO DO: valideer object;
-        $this->connection->dbConnect();
-
-        mysql_select_db("my_db", $this->connection->connection);
-
-        $sql = "INSERT INTO filmpje.bestellingen (VoorstellingID, TotaalPrijs, BestellingStatusID, Voornaam, Achternaam, Adres, Postcode, Email, Telefoonnummer, Bank, BankNummer, Kenmerk, Plaats)
-        VALUES
-        ('$bestelling->voorstellingID','$bestelling->totaalPrijs','$bestelling->BestellingStatus', '$bestelling->voornaam', '$bestelling->achternaam', '$bestelling->adres', '$bestelling->postcode', '$bestelling->email', '$bestelling->telefoonnummer', '$bestelling->bank', '$bestelling->banknummer', '$bestelling->kenmerk', '$bestelling->plaats')";
-
-        if (!mysql_query($sql, $this->connection->connection)) {
-            die('Error: ' . mysql_error());
-        }
-
-
-        $idQuery = mysql_query("SELECT MAX(BestellingID) AS BestellingID
-          FROM filmpje.bestellingen 
-          WHERE Kenmerk = '" . $bestelling->kenmerk . "'") or die(mysql_error());
-        $result = array();
-
-        while ($row = mysql_fetch_array($idQuery)) {
-
-            $result[] = $row;
-        }
         
-        $bestellingID = $result[0]['BestellingID'];
-        $stoelen = explode(",", $bestelling->stoelen);
+        //kijk of we een bestelling binnen hebben gekregen.
+        if (!isset($bestelling)) {
+            throw new Exception("Bestelling is NULL, error.");
+        }
+       
+        //Connectie openen.
+        $this->connection->dbConnect();
+        
+        //bestelling record wegschrijven in de database.
+        $this->SlaBestellingOp($bestelling, FALSE);
+        
+        //gegenereerd bestelling id ophalen voor deze bestelling
+        $bestellingID = $this->BestellingIDVoorkenmerk($bestelling->kenmerk, FALSE);
+        
+        //sla de stoelen bij de bestelling op en geef het aantal terug.
+        $stoelenCount = $this->SlaBestellingStoelenOp($bestelling->stoelen, $bestellingID, FALSE);
+        
+        //update de beschikbare stoelen in de voorstellingen tabel.
+        $this->UpdateBeschikbareStoelen($bestelling->voorstellingID, $stoelenCount, '-', FALSE);
+
+        $this->connection->dbClose();
+    }
+    
+    
+    private function SlaBestellingStoelenOp($stoelen, $bestellingID, $closeConnection)
+    {
+        $this->connection->dbConnect();
+        
+        $stoelen = explode(",", $stoelen);
 
         foreach ($stoelen as $stoel) {
 
@@ -169,11 +175,59 @@ class Bestellingen {
             }
         }
         
-        $this->UpdateBeschikbareStoelen($bestelling->voorstellingID, count($stoelen), '-');
-
-        $this->connection->dbClose();
+        if ($closeConnection) {
+            $this->connection->dbClose();
+        }
+        
+        return count($stoelen);
     }
     
+    
+    private function SlaBestellingOp(Bestelling $bestelling, $closeConnection)
+    {
+        $this->connection->dbConnect();
+        
+        mysql_select_db("my_db", $this->connection->connection);
+
+        $sql = "INSERT INTO filmpje.bestellingen (VoorstellingID, TotaalPrijs, BestellingStatusID, Voornaam, Achternaam, Adres, Postcode, Email, Telefoonnummer, Bank, BankNummer, Kenmerk, Plaats)
+        VALUES
+        ('$bestelling->voorstellingID','$bestelling->totaalPrijs','$bestelling->BestellingStatus', '$bestelling->voornaam', '$bestelling->achternaam', '$bestelling->adres', '$bestelling->postcode', '$bestelling->email', '$bestelling->telefoonnummer', '$bestelling->bank', '$bestelling->banknummer', '$bestelling->kenmerk', '$bestelling->plaats')";
+
+        if (!mysql_query($sql, $this->connection->connection)) {
+            die('Error: ' . mysql_error());
+        }
+        
+        if ($closeConnection) {
+            $this->connection->dbClose();
+        }
+    }
+    
+    
+    private function BestellingIDVoorkenmerk($kenmerk, $closeConnection)
+    {
+        $this->connection->dbConnect();
+        
+        $idQuery = mysql_query("SELECT MAX(BestellingID) AS BestellingID
+          FROM filmpje.bestellingen 
+          WHERE Kenmerk = '" .$kenmerk. "'") or die(mysql_error());
+        $result = array();
+
+        while ($row = mysql_fetch_array($idQuery)) {
+
+            $result[] = $row;
+        }
+        
+        if ($closeConnection) {
+            $this->connection->dbClose();
+        }
+        
+        return  $result[0]['BestellingID'];
+        
+    }
+
+
+
+
     public function BestellingStatusVoorID($id)
     {
      $this->connection->dbConnect();
