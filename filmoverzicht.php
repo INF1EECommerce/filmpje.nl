@@ -1,5 +1,7 @@
 <?php 
 include_once 'Views/NuBinnenkortView.php'; 
+include_once 'Views/SpecialAccordionView.php';
+include_once 'Views/Top10View.php';
 include_once 'backend/DBFunctions.php';
 $dbfunctions = new DBFunctions();
 $specials = $dbfunctions->HaalSpecialsOp();
@@ -14,6 +16,7 @@ $specials = $dbfunctions->HaalSpecialsOp();
         <script src="javascript/jquery-ui.js" type="text/javascript"></script>
         <script src="javascript/NBTabs.js" type="text/javascript"></script> 
         <script src="javascript/Zoeken.js" type="text/javascript"></script>
+        <script src="javascript/SpecialAccordion.js" type="text/javascript"></script>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <!-- Pulled from http://code.google.com/p/html5shiv/ -->
         <!--[if lt IE 9]>
@@ -23,9 +26,6 @@ $specials = $dbfunctions->HaalSpecialsOp();
     </head>
     <body>
         <header>   
-            <div Id="Zoekbox">
-                <form action="filmoverzicht.php" method="GET"><input id="qtext" type="text" name="qtext"><input class="submitb" type="submit" value="Zoek"></form>
-            </div>
             <div Id="ZoekPopup" style="display: none;">
             </div>
         </header>
@@ -33,7 +33,7 @@ $specials = $dbfunctions->HaalSpecialsOp();
             <ul>
                 <li><a href="index.php">Home</a></li>
                 <li><a href="filmoverzicht.php">Films</a></li>
-                <li><a href="#">Info</a></li>
+                                <li><a href="#">Info</a>                     <ul>                         <li><a href="bereikbaarheid.php">Bereikbaarheid</a></li>                     </ul>                 </li>
                 <li><a href="contact.php">Contact</a></li>
                 <li id="lastLi">Specials
                     <ul>
@@ -44,58 +44,44 @@ $specials = $dbfunctions->HaalSpecialsOp();
                         ?>
                     </ul>
                 </li>
+                               <li>
+                    <form style="width: 250px;" action="filmoverzicht.php" method="GET"><input id="qtext" type="text" name="qtext"><input class="ZoekSubmitButton" type="submit" value="Zoek"></form>
+                </li>
+ 
             </ul>
         </nav>
 
         <div id="outerDiv">
             <div id="sideContent">
-                <form action="ReserverenStap1.php" method="POST">
-                    <h2>SNELLE TICKETVERKOOP</h2>
+   <form action="ReserverenStap1.php" method="POST">
+                    <h2 class="blockheader">SNELLE TICKETVERKOOP</h2>
                     <p>
-                        <label for="film">film</label>	
+                        <label>film</label>	
                         <select id="film1">
                             <option id="film">The Avengers</option>
-                    </p>
                     </select>
 
                     <p>
-                        <label for="dag">dag</label>
+                        <label>dag</label>
                         <select id="dag1">	
                             <option id="dag">vandaag</option>
-                    </p>
                     </select>
 
                     <p>
-                        <label for="tijd">tijd</label>	
+                        <label>tijd</label>	
                         <select id="tijd1">
                             <option id="tijd">15:00</option>
-                    </p>
                     </select>
                     <p>
-                        <input type="hidden" name="voorstelling" value="1">
-                        <!--<input type="submit" id="reserveer">Reserveer</button>-->
-                        <input type="submit" id="koop" value="Koop">
-                    </p>
-                    <p style="clear: both;"></p>
+                        <button id="reserveer">Reserveer</button>
+                        <button id="koop">Koop</button>
+                    <p style="clear: both;">
                 </form>
 
+
                 <div id="top10">
-
-                    <ul id="top10">
-                        <li id="top10header"><p>Top 10 films</p></li>
-                        <li id="firstLi"><button>1</button>Ted</li>
-                        <li><button>2</button>The Possession</li>
-                        <li><button>3</button>The Bourne Legacy</li>
-                        <li><button>4</button>De Verbouwing</li>
-                        <li><button>5</button>Bait</li>
-                        <li><button>6</button>The Expendables 2</li>
-                        <li><button>7</button>The Dark Knight Rises</li>
-                        <li><button onclick="SwitchView()">8</button>The Watch</li>
-                        <li><button>9</button>Intouchables</li>
-                        <li><button>10</button>Detachment</li>
-                        <button id="reviews">Top 10 Filmreviews</button>
-                    </ul>
-
+                   <?php $top10view = new Top10View(); $top10view->Render(); ?>
+             
                 </div>
 
             </div>
@@ -114,14 +100,7 @@ $specials = $dbfunctions->HaalSpecialsOp();
                   <?php $nubinnenkortview = new NuBinnenkortView(); $nubinnenkortview->Render(); ?>
                 </div>
             <div id="specialsDiv">
-                <div id="mainSpecialsDiv">
-                    <h2>Ladies Night</h2>
-                    <h3>Alle vrouwen verzamelen</h3>
-                    <p>Lorem Ipsum Lorem Ipsum Lorem Ipsum Lorem Ipsum Lorem Ipsum Lorem Ipsum Lorem Ipsum Lorem Ipsum</p>
-                </div>
-                <div id="specialSideContent">
-                    <img src="image/ladiesnight.jpg">
-                </div>
+                <?php $specialsAccordionView = new SpecialAccordionView(); $specialsAccordionView->Render(); ?>
             </div>
             </div>
      	

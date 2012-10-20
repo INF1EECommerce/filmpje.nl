@@ -71,7 +71,7 @@ class VandaagMorgenOvermorgenView
                                 }
                                     
                                 echo ("
-                                <button id=\"timeb\" class=\"". $knopclass ."\" onClick=\"TijdKlik(". $voorstelling['VoorstellingID'] .", this, ".$reserveren.",".$voorstelling['BeschikbareStoelen'].");\">" . substr($voorstelling['VoorstellingTijd'], 0, 5). "</button>
+                                <button id=\"timeb-".$voorstelling['VoorstellingID']."\" class=\"". $knopclass ."\" onClick=\"TijdKlik(". $voorstelling['VoorstellingID'] .", this, ".$reserveren.",".$voorstelling['BeschikbareStoelen'].");\">" . substr($voorstelling['VoorstellingTijd'], 0, 5). "</button>
                                 ");
                                 }
                                 

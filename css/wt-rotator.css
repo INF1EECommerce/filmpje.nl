@@ -8,9 +8,10 @@ width:825px;
 height:300px;
 overflow:hidden;
 }
-.wt-rotator a{
+.wt-rotator a, a:visited{
 outline:none;
 text-decoration: none;
+color:white;
 }
 .wt-rotator .screen{
 position:relative;

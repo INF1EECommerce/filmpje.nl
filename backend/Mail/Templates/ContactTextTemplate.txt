@@ -1,0 +1,20 @@
+﻿Beste Filmpje medewerker,
+
+U ontvangt dit bericht omdat een bezoeker van Filmpje.nl het contactformulier heeft ingevuld.
+Hieronder vind u een overzicht van de door de bezoeker ingevoerde gegevens.
+
+Formuliergegevens
+
+Onderwerp: {{onderwerp}}
+
+Voornaam: {{voornaam}}
+Achternaam: {{achternaam}}
+Email: {{email}}
+
+Bericht:
+
+{{bericht}}
+
+Groet,
+
+Filmpje.nl

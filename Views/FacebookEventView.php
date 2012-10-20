@@ -1,5 +1,4 @@
 <?php
-
 class FacebookEventView {
 
     var $faceBook;
@@ -18,7 +17,7 @@ class FacebookEventView {
             $url = $this->faceBook->GetLoginUrl("http://chivan.com/filmpje.nl/CreateEvent.php?voorstelling=" . $voorstelling);
         }
 
-        echo("<div id=\"FacebookEventAanmaken\"><p class=\"blockheader\">Facebook event</p><a href=\"" . $url . "\" id=\"EventAanmakenLink\"><img src=\"image/EventAanmaken.png\" alt=\"eventAanmaken\"></a></div>");
+        echo("<div id=\"FacebookEventAanmaken\"><a href=\"" . $url . "\" id=\"EventAanmakenLink\"><img src=\"image/EventAanmakenKlein.png\" alt=\"eventAanmaken\"></a></div>");
     }
 
 }

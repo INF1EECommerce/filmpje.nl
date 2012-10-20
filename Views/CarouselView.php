@@ -28,7 +28,7 @@ class CarouselView {
                 <div class=\"screen\">
                     <noscript>
                         <!-- placeholder 1st image when javascript is off -->
-                        <img src=\"image/logo.png\"/>
+                        <img src=\"image/logo.png\" alt=\"Logo\"/>
                     </noscript>
                 </div>
                 <div class=\"c-panel\">

@@ -4,14 +4,15 @@ class FilmPoosterEnInfoView
     public function FilmPoosterEnInfoView()
     {
         require_once('backend/DBFunctions.php');
+        include_once('Views/FacebookEventView.php');
         //require_once('/backend/DBFunctions.php');
     }
     
-    public function Render($voortstelling)
+    public function Render($voorstelling)
     {
         $dbfunctions = new DBFunctions();
         
-        $film = $dbfunctions ->FilmInfoVanVoorstelling($voortstelling);
+        $film = $dbfunctions ->FilmInfoVanVoorstelling($voorstelling);
         
            $kijwijzericonen = explode(",",$film['Kijkwijzer']);
         $kijkwijzerhtml = "";
@@ -25,6 +26,9 @@ class FilmPoosterEnInfoView
         <div id=\"filmPoosterEnInfo\">
                 <p class=\"blockheader\">Uw film</p>
                 <img class=\"pooster\" src=\"image/Covers/". $film['Cover']."\">
+                 ");
+        $facebookEventView = new FacebookEventView(); $facebookEventView->Render($voorstelling);
+        echo ("
                 <div id=\"filmInfo\">
                     <h2>". $film['Naam'] ."</h2>
                     <strong>Tijd: </strong>".substr($film['Tijd'], 0,5)." UUR <br>

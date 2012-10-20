@@ -1,6 +1,7 @@
 <?php 
 require_once('Views/VandaagMorgenOvermorgenView.php'); 
 include_once 'backend/DBFunctions.php';
+include_once 'Views/Top10View.php';
 $dbfunctions = new DBFunctions();
 $specials = $dbfunctions->HaalSpecialsOp();
 ?>
@@ -21,9 +22,6 @@ $specials = $dbfunctions->HaalSpecialsOp();
 </head>
 <body>
     <header>   
-            <div Id="Zoekbox">
-                <form action="filmoverzicht.php" method="GET"><input id="qtext" type="text" name="qtext"><input class="submitb" type="submit" value="Zoek"></form>
-            </div>
             <div Id="ZoekPopup" style="display: none;">
             </div>
         </header>
@@ -31,7 +29,7 @@ $specials = $dbfunctions->HaalSpecialsOp();
             <ul>
                 <li><a href="index.php">Home</a></li>
                 <li><a href="filmoverzicht.php">Films</a></li>
-                <li><a href="#">Info</a></li>
+                                <li><a href="#">Info</a>                     <ul>                         <li><a href="bereikbaarheid.php">Bereikbaarheid</a></li>                     </ul>                 </li>
                 <li><a href="contact.php">Contact</a></li>
                 <li id="lastLi">Specials
                     <ul>
@@ -42,69 +40,58 @@ $specials = $dbfunctions->HaalSpecialsOp();
                         ?>
                     </ul>
                 </li>
+                               <li>
+                    <form style="width: 250px;" action="filmoverzicht.php" method="GET"><input id="qtext" type="text" name="qtext"><input class="ZoekSubmitButton" type="submit" value="Zoek"></form>
+                </li>
+ 
             </ul>
         </nav>
 	
 	<div id="outerDiv">
 			<div id="sideContent">
-			<form action="ReserverenStap1.php" method="POST">
-		<h2>SNELLE TICKETVERKOOP</h2>
-<p>
-<label for="film">film</label>	
-<select id="film1">
-<option id="film">The Avengers</option>
-</p>
-</select>
+  <form action="ReserverenStap1.php" method="POST">
+                    <h2 class="blockheader">SNELLE TICKETVERKOOP</h2>
+                    <p>
+                        <label>film</label>	
+                        <select id="film1">
+                            <option id="film">The Avengers</option>
+                    </select>
 
-<p>
-<label for="dag">dag</label>
-<select id="dag1">	
-<option id="dag">vandaag</option>
-</p>
-</select>
+                    <p>
+                        <label>dag</label>
+                        <select id="dag1">	
+                            <option id="dag">vandaag</option>
+                    </select>
 
-<p>
-<label for="tijd">tijd</label>	
-<select id="tijd1">
-<option id="tijd">15:00</option>
-</p>
-</select>
-<p>
-<input type="hidden" name="voorstelling" value="1">
-<!--<input type="submit" id="reserveer">Reserveer</button>-->
-<input type="submit" id="koop" value="Koop">
-</p>
-<p style="clear: both;"></p>
-</form>
+                    <p>
+                        <label>tijd</label>	
+                        <select id="tijd1">
+                            <option id="tijd">15:00</option>
+                    </select>
+                    <p>
+                        <button id="reserveer">Reserveer</button>
+                        <button id="koop">Koop</button>
+                    <p style="clear: both;">
+                </form>
+
 
 <div id="top10">
 
 <ul id="top10">
-	<li id="top10header"><p>Top 10 films</p></li>
-	<li id="firstLi"><button>1</button>Ted</li>
-	<li><button>2</button>The Possession</li>
-	<li><button>3</button>The Bourne Legacy</li>
-	<li><button>4</button>De Verbouwing</li>
-	<li><button>5</button>Bait</li>
-	<li><button>6</button>The Expendables 2</li>
-	<li><button>7</button>The Dark Knight Rises</li>
-	<li><button>8</button>The Watch</li>
-	<li><button>9</button>Intouchables</li>
-	<li><button>10</button>Detachment</li>
-	<button id="reviews">Top 10 Filmreviews</button>
+<?php $top10view = new Top10View(); $top10view->Render(); ?>
 </ul>
 
 </div>
 
 </div>
 		<div id="mainContent">
-		<div id="moviebanner">
+		<div id="pagebanner">
 <img src="image/banner_avengers.png">
 </div>
 <div id="infoDiv">
 		
 		<h2>Bereikbaarheid</h2>
-		<iframe width="600" height="400" frameborder="0" scrolling="no" marginheight="0" marginwidth="0" src="https://maps.google.nl/maps?f=q&amp;source=s_q&amp;hl=nl&amp;geocode=&amp;q=west-kruiskade+26&amp;aq=&amp;sll=51.920714,4.471092&amp;sspn=0.005036,0.013068&amp;ie=UTF8&amp;hq=&amp;hnear=Kruiskade+26,+Centrum,+Rotterdam,+Zuid-Holland&amp;t=m&amp;ll=51.928231,4.476414&amp;spn=0.018525,0.036478&amp;z=14&amp;iwloc=A&amp;output=embed"></iframe>
+		<iframe width="645" height="400" frameborder="0" scrolling="no" marginheight="0" marginwidth="0" src="https://maps.google.nl/maps?f=q&amp;source=s_q&amp;hl=nl&amp;geocode=&amp;q=west-kruiskade+26&amp;aq=&amp;sll=51.920714,4.471092&amp;sspn=0.005036,0.013068&amp;ie=UTF8&amp;hq=&amp;hnear=Kruiskade+26,+Centrum,+Rotterdam,+Zuid-Holland&amp;t=m&amp;ll=51.928231,4.476414&amp;spn=0.018525,0.036478&amp;z=14&amp;iwloc=A&amp;output=embed"></iframe>
 		
 		<div id="routeDiv">
 		<p id="adres">Bioscoop Filmpje<br>
@@ -124,9 +111,9 @@ $specials = $dbfunctions->HaalSpecialsOp();
 		
 <div id="table1">
 <table id="routeTable1">
-	<tr>
-		<th colspan="3">Openbaar vervoer</th>
-	</tr>
+	<thead>
+		<th class="subblockheader" colspan="3">Openbaar vervoer</th>
+	</thead>
 	<tr>
 		<th></th>
 		<th>Lijn</th>
@@ -158,9 +145,9 @@ $specials = $dbfunctions->HaalSpecialsOp();
 <br>
 <div id ="table2">
 <table id="routeTable2">
-	<tr>
-		<th colspan="3">Auto</th>
-	</tr>
+	<thead>
+		<th class="subblockheader" colspan="3">Auto</th>
+	</thead>
 	<tr>
 		<td class="td1">Parkeren</td>
 		<td class="td2" colspan="2">P1 Filmpje</td>
@@ -194,14 +181,5 @@ $specials = $dbfunctions->HaalSpecialsOp();
 	<li>Terms of Service</li>
 </ul>
 </footer>
-</div>
-    <div Id="TijdKlikPopup">
-        <div class="popupButtonClass">
-            <div id="TijdKlikPopUpHeader" style="display: block; width: 100%">
-                
-            </div>
-            <button id="popupbb">Bestellen</button><button id="popuprb">Reserveren</button>
-        </div>
-    </div>
 </body>
 </html>

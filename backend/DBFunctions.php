@@ -11,6 +11,31 @@ class DBFunctions
       $this-> connection = new DBConnection();
   }
   
+  public function HaalTop10FilmsOp()
+  {
+      $this -> connection -> dbConnect();
+      $query = mysql_query("
+        SELECT films.Naam AS FilmNaam, films.FilmID, ((SUM(zalen.AantalStoelen) - SUM(voorstellingen.BeschikbareStoelen)) / SUM(zalen.AantalStoelen)) AS PercentageVerkocht 
+        FROM films 
+        INNER JOIN voorstellingen on voorstellingen.FilmID = films.FilmID
+        INNER JOIN zalen on zalen.ZaalID = voorstellingen.ZaalID
+        GROUP BY films.FilmID, films.Naam
+        ORDER BY ((SUM(zalen.AantalStoelen) - SUM(voorstellingen.BeschikbareStoelen)) / SUM(zalen.AantalStoelen)) DESC
+        LIMIT 0, 10
+        ");
+      
+    $result = array(); 
+      
+     while ($row = mysql_fetch_array($query)) {
+     
+         $result[] = $row;
+         
+     }
+      $this -> connection -> dbClose();
+      return $result;
+  }
+  
+  
   public function ZoekenNaarFilms($query)
   {
       $this -> connection -> dbConnect();
@@ -220,10 +245,14 @@ class DBFunctions
       }
         
       $this -> connection -> dbConnect();
-      $query = mysql_query("SELECT zalen.Rijen, zalen.MaxStoelenPerRij 
-                            FROM voorstellingen
-                            INNER JOIN zalen ON zalen.ZaalID = voorstellingen.ZaalID
-                            AND voorstellingen.VoorstellingID = " . $voorstelling . " ") 
+      $query = mysql_query("SELECT rijen.Nummer as RijNummer, MAX(stoelen.Nummer) AS MaxStoelNummer, MIN(stoelen.Nummer) AS MinStoelNummer 
+                            ,zalen.MaxStoelenPerRij, zalen.Rijen, zalen.LooppadBijStoelen, zalen.LooppadBijRijen
+                            FROM
+                            zalen
+                            INNER JOIN rijen ON rijen.ZaalID = zalen.ZaalID
+                            INNER JOIN voorstellingen on voorstellingen.ZaalID = zalen.ZaalID AND voorstellingen.VoorstellingID = ".$voorstelling."
+                            INNER JOIN stoelen ON stoelen.RijID = rijen.RijID
+                            GROUP BY rijen.RijID") 
               or die (mysql_error());
      
      $result = array(); 

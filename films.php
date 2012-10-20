@@ -2,11 +2,13 @@
 if (!isset($_GET['filmid']))
 {
    header("Location: index.php");
+   die;
 }
 $filmid = intval($_GET['filmid']);        
 include_once 'Views/FilmPoosterEnInfoView.php';
 include_once 'backend/DBFunctions.php';
 include_once 'Views/FilmTijdenView.php';
+include_once 'Views/Top10View.php';
 $dbfunctions = new DBFunctions();
 $specials = $dbfunctions->HaalSpecialsOp();
 try { $film = $dbfunctions ->FilmInfo($filmid); } catch(Exception $ex) { if ($ex->getMessage() == "Film niet gevonden.") {
@@ -35,9 +37,6 @@ exit;
 
 <body>
       <header>   
-            <div Id="Zoekbox">
-                <form action="filmoverzicht.php" method="GET"><input id="qtext" type="text" name="qtext"><input class="submitb" type="submit" value="Zoek"></form>
-            </div>
             <div Id="ZoekPopup" style="display: none;">
             </div>
         </header>
@@ -45,7 +44,7 @@ exit;
             <ul>
                 <li><a href="index.php">Home</a></li>
                 <li><a href="filmoverzicht.php">Films</a></li>
-                <li><a href="#">Info</a></li>
+                                <li><a href="#">Info</a>                     <ul>                         <li><a href="bereikbaarheid.php">Bereikbaarheid</a></li>                     </ul>                 </li>
                 <li><a href="contact.php">Contact</a></li>
                 <li id="lastLi">Specials
                     <ul>
@@ -56,6 +55,10 @@ exit;
                         ?>
                     </ul>
                 </li>
+                               <li>
+                    <form style="width: 250px;" action="filmoverzicht.php" method="GET"><input id="qtext" type="text" name="qtext"><input class="ZoekSubmitButton" type="submit" value="Zoek"></form>
+                </li>
+ 
             </ul>
         </nav>
 	<div id="outerDiv">
@@ -64,20 +67,8 @@ exit;
             
             <div id="top10">
 
-                    <ul>
-                        <li id="top10header"><p>Top 10 films</p></li>
-                        <li id="firstLi"><button>1</button>Ted</li>
-                        <li><button>2</button>The Possession</li>
-                        <li><button>3</button>The Bourne Legacy</li>
-                        <li><button>4</button>De Verbouwing</li>
-                        <li><button>5</button>Bait</li>
-                        <li><button>6</button>The Expendables 2</li>
-                        <li><button>7</button>The Dark Knight Rises</li>
-                        <li><button>8</button>The Watch</li>
-                        <li><button>9</button>Intouchables</li>
-                        <li><button>10</button>Detachment</li>
-                    </ul>
-			</div>
+                          <?php $top10view = new Top10View(); $top10view->Render(); ?>
+            </div>
         </div>
         <div id="mainContent">
                  
@@ -87,6 +78,12 @@ exit;
                         <source src="trailers/<?php echo $film['Trailer'] ?>.mp4"type="video/mp4" />
                         <source src="trailers/<?php echo $film['Trailer'] ?>.webmvp8.webm" type="video/webm" />
                         <source src="trailers/<?php echo $film['Trailer'] ?>.theora.ogv"  type="video/ogg" />
+                        <object type="application/x-shockwave-flash" data="http://releases.flowplayer.org/swf/flowplayer-3.2.1.swf" height="360" width="620">
+                        <param name="movie" value="http://releases.flowplayer.org/swf/flowplayer-3.2.1.swf" />
+                        <param name="allowFullScreen" value="true" />
+                        <param name="wmode" value="transparent" />
+                        <param name="flashVars" value="config={'playlist':['http%3A%2F%2Fchivan.com%2Ffilmpje.nl%2Fimage%2FtrailerLogo.png',{'url':'http%3A%2F%2Fchivan.com%2Ffilmpje.nl%2Ftrailers%2F<?php echo $film['Trailer'] ?>.mp4','autoPlay':false}]}" />
+                    </object>
                     </video>
 			</div>
              

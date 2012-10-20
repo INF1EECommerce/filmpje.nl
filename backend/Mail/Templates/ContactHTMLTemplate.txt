@@ -1,0 +1,17 @@
+﻿<html>
+<body leftmargin="15" topmargin="15">
+<p><img src="http://chivan.com/filmpje.nl/image/logo.png" width="207" height="58" alt="logo" /></p>
+<p><strong>Beste Filmpje.nl medewerker,</strong></p>
+<p>U ontvangt dit bericht omdat een bezoeker van Filmpje.nl het contactformulier heeft ingevuld.<br />
+  Hieronder vind u een overzicht van de door de bezoeker ingevoerde gegevens.</p>
+<p><strong>Formuliergegevens</strong></p>
+Onderwerp: {{onderwerp}}<br/>
+Voornaam: {{voornaam}}<br />
+Achternaam: {{achternaam}}<br />
+Email: {{email}}<br />
+<p><strong>Bericht</strong></p>
+<p>{{bericht}}</p>
+<p>Groet,</p>
+<p>Filmpje.nl</p>
+</body>
+</html>

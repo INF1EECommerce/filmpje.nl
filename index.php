@@ -2,6 +2,8 @@
 require_once('Views/VandaagMorgenOvermorgenView.php');
 require_once 'backend/DBFunctions.php';
 require_once 'Views/CarouselView.php';
+require_once 'Views/SpecialAccordionView.php';
+require_once 'Views/Top10View.php';
 $dbFunctions = new DBFunctions();
 $specials = $dbFunctions->HaalSpecialsOp();
 ?>
@@ -14,6 +16,7 @@ $specials = $dbFunctions->HaalSpecialsOp();
         <link rel="stylesheet" href="css/stylesheet.css">
         <link rel="stylesheet" href="css/messi.css">
         <link rel="stylesheet" href="css/wt-rotator.css">
+        <link rel="stylesheet" href="css/jquery.tweet.css">
         <script src="javascript/jquery.js" type="text/javascript"></script>
         <script src="javascript/jquery-ui.js" type="text/javascript"></script>
         <script src="javascript/FilmTabs.js" type="text/javascript"></script>
@@ -22,6 +25,9 @@ $specials = $dbFunctions->HaalSpecialsOp();
         <script src="javascript/Zoeken.js" type="text/javascript"></script>
         <script src="javascript/jquery.wt-rotator.min.js" type="text/javascript"></script>
         <script src="javascript/Carousel.js" type="text/javascript"></script>
+        <script src="javascript/SpecialAccordion.js" type="text/javascript"></script>
+        <script src="javascript/jquery.tweet.js" type="text/javascript"></script>
+        <script src="javascript/Twitter.js" type="text/javascript"></script>
         <!-- Pulled from http://code.google.com/p/html5shiv/ -->
         <!--[if lt IE 9]>
         <script src="//html5shim.googlecode.com/svn/trunk/html5.js"></script>
@@ -29,9 +35,6 @@ $specials = $dbFunctions->HaalSpecialsOp();
     </head>
     <body>
         <header>   
-            <div Id="Zoekbox">
-                <form action="filmoverzicht.php" method="GET"><input id="qtext" type="text" name="qtext"><input class="submitb" type="submit" value="Zoek"></form>
-            </div>
             <div Id="ZoekPopup" style="display: none;">
             </div>
         </header>
@@ -39,7 +42,11 @@ $specials = $dbFunctions->HaalSpecialsOp();
             <ul>
                 <li><a href="index.php">Home</a></li>
                 <li><a href="filmoverzicht.php">Films</a></li>
-                <li><a href="#">Info</a></li>
+                <li><a href="#">Info</a>
+                    <ul>
+                        <li><a href="bereikbaarheid.php">Bereikbaarheid</a></li>
+                    </ul>
+                </li>
                 <li><a href="contact.php">Contact</a></li>
                 <li id="lastLi">Specials
                     <ul>
@@ -50,62 +57,46 @@ $specials = $dbFunctions->HaalSpecialsOp();
                         ?>
                     </ul>
                 </li>
+                <li>
+                    <form style="width: 250px;" action="filmoverzicht.php" method="GET"><input id="qtext" type="text" name="qtext"><input class="ZoekSubmitButton" type="submit" value="Zoek"></form>
+                </li>
             </ul>
         </nav>
 
         <div id="outerDiv">
             <div id="sideContent">
                 <form action="ReserverenStap1.php" method="POST">
-                    <h2>SNELLE TICKETVERKOOP</h2>
+                    <h2 class="blockheader">SNELLE TICKETVERKOOP</h2>
                     <p>
-                        <label for="film">film</label>	
+                        <label>film</label>	
                         <select id="film1">
                             <option id="film">The Avengers</option>
-                    </p>
                     </select>
 
                     <p>
-                        <label for="dag">dag</label>
+                        <label>dag</label>
                         <select id="dag1">	
                             <option id="dag">vandaag</option>
-                    </p>
                     </select>
 
                     <p>
-                        <label for="tijd">tijd</label>	
+                        <label>tijd</label>	
                         <select id="tijd1">
                             <option id="tijd">15:00</option>
-                    </p>
                     </select>
                     <p>
                         <button id="reserveer">Reserveer</button>
                         <button id="koop">Koop</button>
-                    </p>
-                    <p style="clear: both;"></p>
+                    <p style="clear: both;">
                 </form>
 
                 <div id="top10">
-
-                    <ul id="top10">
-                        <li id="top10header"><p>Top 10 films</p></li>
-                        <li id="firstLi"><button>1</button>Ted</li>
-                        <li><button>2</button>The Possession</li>
-                        <li><button>3</button>The Bourne Legacy</li>
-                        <li><button>4</button>De Verbouwing</li>
-                        <li><button>5</button>Bait</li>
-                        <li><button>6</button>The Expendables 2</li>
-                        <li><button>7</button>The Dark Knight Rises</li>
-                        <li><button>8</button>The Watch</li>
-                        <li><button>9</button>Intouchables</li>
-                        <li><button>10</button>Detachment</li>
-                        <li style="border-bottom: 0px;"><button id="reviews">Top 10 Filmreviews</button></li>
-                    </ul>
-
+                    <?php $top10view = new Top10View(); $top10view->Render(); ?>
                 </div>
 
             </div>
             <div id="mainContent">
-                <div id="moviebanner">
+                <div id="pagebanner">
                 <?php $carouselView = new CarouselView(); $carouselView->Render(); ?>    
                 </div>
                 <div id="schedule">
@@ -120,7 +111,6 @@ $specials = $dbFunctions->HaalSpecialsOp();
                         <tr>
                             <td id="fillerTd"></td>
                         </tr>
-                        </tr>
                     </table>
 
                     <?php
@@ -134,17 +124,12 @@ $specials = $dbFunctions->HaalSpecialsOp();
                     </form>
                 </div>	
                 <div id="specialsDiv">
-                    <div id="mainSpecialsDiv">
-                        <h2>Ladies Night</h2>
-                        <h3>Alle vrouwen verzamelen</h3>
-                        <p>Lorem Ipsum Lorem Ipsum Lorem Ipsum Lorem Ipsum Lorem Ipsum Lorem Ipsum Lorem Ipsum Lorem Ipsum</p>
-                    </div>
-                    <div id="specialSideContent">
-                        <img src="image/ladiesnight.jpg">
-                    </div>
+                    <?php $specialsAccordionView = new SpecialAccordionView(); $specialsAccordionView->Render(); ?>
                 </div>
-            </div>		
+            </div>
+            <div style="clear:both;">  </div>
             <footer>
+                <div style="float: left;">
                 <p>Contact</p>
                 <ul>
                     <li>Klantenservice</li>
@@ -153,6 +138,13 @@ $specials = $dbFunctions->HaalSpecialsOp();
                     <li>Route</li>
                     <li>Terms of Service</li>
                 </ul>
+                </div>
+                <div style="float: left;">
+                    <p style="width: 325px">Twitter</p>
+                <div id="ticker">
+                    
+                </div>
+                </div>
             </footer>
         </div>
         <div Id="TijdKlikPopup">

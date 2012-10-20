@@ -27,15 +27,15 @@ $(document).ready(function() {
                             
                      
                 
-                ZoekResultaten = data
+                    ZoekResultaten = data
                              
-                //teken de stoelen
-                VulZoekDiv();
+                    //teken de stoelen
+                    VulZoekDiv();
                 }
                 else
-                 {
-                     VerbergZoekDiv();
-                 }
+                {
+                    VerbergZoekDiv();
+                }
 
             });
 
@@ -50,13 +50,13 @@ $(document).ready(function() {
 
 function VulZoekDiv()
 {
-    var html ="<p>Zoekresultaten</p>";
+    var html ="";
     var zoekDiv = $('#ZoekPopup');
     $.each(ZoekResultaten, function(){
         
-        html += "<table><thead><th colspan='2'>" + this.Naam  + "</th></tr></thead>";
-        html += "<tr><td><a href='films.php?filmid=+" + this.FilmID + "'><img src='image/Covers/" + this.Cover  + "'></a></td><td><a href='films.php?filmid="+this.FilmID+"'>" + this.Beschrijving + "</a></td></tr>"  ;  
-        html += "<tfoot><tr><td colspan='2'>Gevonden op: "+ this.MatchType  +"</td></tr></tfoot></table>"  ;  
+        html += "<table><thead><th colspan='2'>" + this.Naam  + " ("+this.MatchType+")</th></tr></thead>";
+        html += "<tr><td><a href='films.php?filmid=+" + this.FilmID + "'><img src='image/Covers/" + this.Cover  + "'></a></td><td><a href='films.php?filmid="+this.FilmID+"'>Genre: " + this.Genre + "<br>Duur: "+ this.Duur + " minuten<br>IMDB: "+ this.Beoordeling+"</a></td></tr>"  ;  
+        html += "</table>"  ;  
     });
     
     $(zoekDiv).html(html);

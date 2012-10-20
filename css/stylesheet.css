@@ -4,6 +4,11 @@ body {
     background: #660000;
 }
 
+a, a:visited
+{
+    color: white;
+}
+
 #sideContent  {
     width: 400px;
     float: left;
@@ -43,7 +48,7 @@ nav {
 nav ul {
     list-style: none;
     margin: 0;
-    margin-left: 200px;
+    margin-left: 50px;
     z-index: 50;
 }
 
@@ -129,18 +134,6 @@ nav ul li a {
 
 }
 
-#sideContent form h2 {
-    color: #fff;
-    font-weight: normal;
-    padding-top: 3px;
-    display: block;
-    margin-top: 0px;
-    width: 350px;
-    height: 36px;
-    background: #000;
-    margin-left: 0px;
-    text-align: center;
-}
 
 #sideContent form p {
     font-size: 18px;
@@ -191,10 +184,10 @@ nav ul li a {
 
 
 
-#moviebanner {
+#pagebanner {
     margin-left: 0px;
     width: 640px;
-        border: 2px solid #000;
+    height: 270px;
     box-shadow: 0 0 5px 5px #440000;
 
 }
@@ -215,12 +208,13 @@ nav ul li a {
     padding-left:10px;
     padding-top: 5px;
     font-family: arial;
+    font-weight: bold;
 
 }
 
 .blockheader {
     display: block;
-    padding-right: -15px;
+/*    padding-right: -15px;*/
     height: 25px;
     background: #000;
     color: #fff;
@@ -228,6 +222,20 @@ nav ul li a {
     padding-top: 5px;
     font-family: arial;
     margin-top: 0px;
+    font-weight: bold;
+    font-size: 16px;
+}
+
+.subblockheader {
+/*    padding-right: -15px;*/
+    font-weight: normal;
+    background: #000;
+    color: #fff;
+    padding-left:10px;
+    padding: 5px;
+    font-family: arial;
+    margin-top: 0px;
+    font-size: 16px;
 }
 
 .timeTable  {
@@ -368,10 +376,16 @@ nav ul li a {
 
 #top10 {
     width: 350px;
-    height: 350px;
     background: #550000;
     margin-left: 25px;
     box-shadow: 0 0 5px 5px #440000;
+
+}
+
+#top10 ul
+{
+    padding-bottom: 5px;
+    cursor: pointer;
 }
 
 #top10 ul li button {
@@ -381,6 +395,7 @@ nav ul li a {
     margin-right: 5px;
     background: #000;
     color: #fff;
+    cursor: pointer;
 
 }
 
@@ -415,6 +430,7 @@ nav ul li a {
     font-family: arial;
     margin-bottom: 0px;
     padding-top: 5px;
+    font-weight: bold;
 }
 
 
@@ -422,6 +438,16 @@ nav ul li a {
 
 #firstLi {
     border-top: none;
+}
+
+.ZoekSubmitButton
+{
+    color:white;
+    background-color: black;
+    border:none;
+    font-weight: bold;
+    font-family: arial;
+    font-size: 16px;
 }
 
 .timeClass button {
@@ -488,7 +514,6 @@ footer p {
     margin-left: 35px;
     padding-bottom: 5px;
     margin-bottom: 10px;
-
 }
 
 footer ul {
@@ -498,15 +523,15 @@ footer ul {
     margin-top: 0px;
     padding-top: 0px;
     padding-left: 40px;
+    float: left;
 }
 
 #specialsDiv {
     width: 645px;
-    height: 400px;
     font-family: arial;
     background: #440000;
     box-shadow: 0 0 5px 5px #440000;
-    margin-top: 25px;
+    margin-top: 16px;
 }
 
 #mainSpecialsDiv {
@@ -532,6 +557,13 @@ footer ul {
 
 #specialsDiv p {
     color: #fff;
+    margin-top: 0px;
+    width: 425px;
+    display: inline-block;
+    vertical-align: top;
+    margin-bottom: 5px;
+    margin-top: 5px;
+    font-size: 13px;
 }
 
 #specialSideContent, #mainSpecialsDiv {
@@ -555,27 +587,22 @@ footer ul {
 
 #filmPoosterEnInfo h2 {
     margin-left: 0px;
-    margin-top: 25px;
+    margin-top: 15px;
     font-size: 16px;
     font-family: arial;
     color: #FFFFFF;
 }
 
-#FacebookEventAanmaken
-{
-    width: 350px;
-    background: #550000;
-    margin-left: 25px;
-    box-shadow: 0 0 5px 5px #440000;
-    margin-top: 25px;
-    padding-bottom: 25px;
-}
 
 #FacebookEventAanmaken img {
     margin-left: 50px;
     width: 250px;
     box-shadow: 0 0 5px 5px #440000;
-    margin-top: 5px;
+    margin-top: 15px;
+    -webkit-border-radius: 5px;
+-moz-border-radius: 5px;
+border-radius: 5px;
+border: 0px;
 }
 
 #filmInfo
@@ -648,6 +675,7 @@ li.clearfix {
     border-left: 1px dotted #440000;
     border-right: 1px dotted #440000;
     padding-top: 15px;
+    position: relative;
 }
 
 #outerDiv:after {
@@ -665,6 +693,7 @@ li.clearfix {
 #Stoelen
 {
     margin-top: 25px;
+
 }
 
 #Stoelen table {
@@ -672,21 +701,23 @@ li.clearfix {
     color: #FFFFFF;
     font-size: 11px;
     border-collapse: collapse;
-    background-color: #cccccc;
+    background-color: #440000;
     margin-left: 10px;
+        margin: 0 auto;
+    position: relative;
 }
 
 #Stoelen th
 {
-    background-color: #FFFFFF;
-    color: #000000;
+   
+    color: #fff;
     border-collapse: collapse;
 }
 
 .RijNummerCell
 {
-    background-color: #FFFFFF;
-    color: #000000;
+  
+    color: #FFF;
 }
 
 #StoelSelectieHeader
@@ -709,7 +740,7 @@ li.clearfix {
 #GeselecteerdeStoelen
 {
     display: block;
-    padding-right: -15px;
+/*    padding-right: -15px;*/
     height: 25px;
     background: #000;
     color: #fff;
@@ -754,6 +785,7 @@ li.clearfix {
     color: #FFFFFF;
 }
 
+
 #StoelPrijzen
 {
     margin-left: 25px;
@@ -776,7 +808,6 @@ li.clearfix {
     color: #000000;
     font-size: 13px;
     font-family: arial;
-    height: 25px;
     text-align: left;
 }
 
@@ -831,7 +862,6 @@ li.clearfix {
     color: #000000;
     font-size: 13px;
     font-family: arial;
-    height: 25px;
     text-align: left;
 }
 
@@ -845,11 +875,23 @@ li.clearfix {
 
 #Stap1GeselecteerdeStoelen td
 {
-    font-family: Arial;
+        font-family: Arial;
     color: #FFFFFF;
     font-size: 13px;
     border-collapse: collapse;
     background-color: #cccccc;
+    margin-left: 10px;
+    color: #000000;
+    padding: 5px;
+}
+
+#Stap1GeselecteerdeStoelen tfoot td
+{
+    font-family: Arial;
+    color: #FFFFFF;
+    font-size: 13px;
+    border-collapse: collapse;
+    background-color: #999999;
     margin-left: 10px;
     color: #000000;
     padding: 5px;
@@ -863,11 +905,13 @@ li.clearfix {
     color: #000000;
     font-size: 13px;
     font-family: arial;
-    height: 25px;
+    
     text-align: left;
 }
 #Stap1GeselecteerdeStoelen tfoot
 {
+        background-color: #999999;
+    color: #FFFFFF;
     font-weight: bold;
 }
 
@@ -882,21 +926,32 @@ li.clearfix {
 {
     font-family: Arial;
     font-size: 16px;
-    font-weight: bold;
+    background-color: #000;
     color: #ffffff;
     text-align: left;
-    margin-bottom: 5px;
+    padding: 5px;
+    
 
+}
+
+.buttonLight
+{
+    float: right;
+    font: 14px/100% Arial, Helvetica, sans-serif;
+    -webkit-border-radius: .5em; 
+    -moz-border-radius: .5em;
+    border-radius: .5em;
+    height: 30px;
 }
 
 #StoelPrijzen caption
 {
+    background-color: #000000;
+    color: #FFFFFF;
     font-family: Arial;
     font-size: 16px;
-    font-weight: bold;
-    color: #ffffff;
+    padding: 5px;
     text-align: left;
-    margin-bottom: 5px;
 
 }
 #formulier caption
@@ -914,7 +969,7 @@ li.clearfix {
 {
     display: block;
     clear: both;
-    margin-top: 50px;
+    margin-top: 20px;
     float: right;
     margin-right: 10px;
     margin-bottom: 15px;
@@ -952,10 +1007,12 @@ li.clearfix {
 }
 #bedankt img
 {
-    left: 490px;
-    position: absolute;
+    float: right;
     top: 10px;
     cursor: pointer;
+    -webkit-border-radius: 5px;
+-moz-border-radius: 5px;
+border-radius: 5px;
 }
 
 #PopupHeader
@@ -1149,7 +1206,7 @@ li.clearfix {
     box-shadow: 0 0 5px 5px #440000;
     display: block;
     margin-right: 25px;
-    margin-top: 25px;
+    margin-top: 16px;
     color: white;
     font-family: Arial;
 
@@ -1314,56 +1371,21 @@ li.clearfix {
     color: white;
 }
 
-#Zoekbox 
-{
-    position: relative;
-    top: 60px;
-    left: 395px;
-}
-#Zoekbox input
-{
-    border: 1px;
-    border-color: #FFBB00;
-    border-style: solid;
-    margin-left: 5px;
-    background-color: #FFFFFF;
-    height: 21px;
-}
-
-#Zoekbox .submitb
-{
-    width: 100px;
-    height: 25px;
-    background: #888888;
-    color: #fff;
-    border: none;
-    display: inline-block;
-    outline: none;
-    cursor: pointer;
-    text-align: center;
-    text-decoration: none;
-    font: 14px/100% Arial;
-    padding: 0;
-    text-shadow: 0 1px 1px rgba(0,0,0,.3);
-    border-radius: .5em;
-    box-shadow: 0 1px 2px rgba(0,0,0,.2);
-}
-
 #ZoekPopup
 {
     border: 1px;
     border-style: solid;
-    width: 350px;
+    width: 250px;
     position: relative;
-    top: 60px;
-    left: 612px;
-    background-color: #660000;
-    -webkit-border-radius: 10px;
-    -webkit-border-top-right-radius: 0;
-    -moz-border-radius: 10px;
-    -moz-border-radius-topright: 0;
-    border-radius: 10px;
-    border-top-right-radius: 0;
+    top: 200px;
+    left: 827px;
+    background-color: #333333;
+-webkit-border-bottom-right-radius: 5px;
+-webkit-border-bottom-left-radius: 5px;
+-moz-border-radius-bottomright: 5px;
+-moz-border-radius-bottomleft: 5px;
+border-bottom-right-radius: 5px;
+border-bottom-left-radius: 5px;
     z-index: 50;
 }
 #ZoekPopup p
@@ -1377,14 +1399,12 @@ li.clearfix {
  padding: 5px;
  font-family: Arial;
  margin: 0px;
- -webkit-border-top-left-radius: 5px;
--moz-border-radius-topleft: 5px;
-border-top-left-radius: 5px;
 }
 
-#ZoekPopup tfoot td
+#ZoekPopup td
 {
     color:white;
+    vertical-align: top;
     background-color: #333333;
     font-size: 13px;
     font-weight: bold;
@@ -1400,16 +1420,11 @@ border-bottom-left-radius: 5px;
 {
     color: white;
     font-family: Arial;
-    font-size: 10px;
+    font-size: 13px;
     text-align: left;
     border-collapse: collapse;
 }
 
-#ZoekPopup td
-{
-    vertical-align: top;
-    padding: 5px;
-}
 
 #ZoekPopup thead th
 {
@@ -1418,13 +1433,13 @@ border-bottom-left-radius: 5px;
     font-size: 14px;
     height: 20px;
     text-align: left;
-    
+    width: 250px;
 }
 
 #ZoekPopup img
 {
-   width: 100px;
-   margin-top: 5px;
+   width: 80px;
+   margin: 0px;
 }
 
 #ZoekPopup tr:hover
@@ -1443,25 +1458,27 @@ border-bottom-left-radius: 5px;
 /*rogier*/
 
 #infoDiv {
-    width: 640px;
+    width: 645px;
 
     background: #550000;
     margin-left: 0px;
     margin-top: 0px;
     box-shadow: 0 0 5px 5px #440000;
     padding-top: 0px;
+    font-size: 13px;
+    
 }
 
 #infoDiv h2 {
     display: block;
-    width: 635px;
+    width: 640px;
     background: #000;
     color: #fff;
     font-family: arial;
-    height: 30px;
-    font-weight: normal;
-    font-size: 18px;
-    padding-top: 3px;
+    height: 25px;
+    font-weight: bold;
+    font-size: 16px;
+    padding-top: 5px;
     padding-left: 5px;
     margin-bottom: 0px;
 }
@@ -1474,36 +1491,8 @@ border-bottom-left-radius: 5px;
     background: #cccccc;
 }
 
-#infoDiv button {
-    width: 125px;
-    display: inline-block;
-    margin-left: 10px;
-    margin-top: 3px;
-    background: #000;
-    color: #fff;
-    outline: none;
-    cursor: pointer;
-    text-align: center;
-    text-decoration: none;
-    font: 14px/100% Arial, Helvetica, sans-serif;
-    border: none;
-    padding-top: 5px;
-    padding-bottom: 5px;
-    text-shadow: 0 1px 1px rgba(0,0,0,.3);
-    -webkit-border-radius: .5em; 
-    -moz-border-radius: .5em;
-    border-radius: .5em;
-    -webkit-box-shadow: 0 1px 2px rgba(0,0,0,.2);
-    -moz-box-shadow: 0 1px 2px rgba(0,0,0,.2);
-    box-shadow: 0 1px 2px rgba(0,0,0,.2);
-    margin-right: 5px;
-}
-
-
-
-
 #infoDiv article {
-    width: 500px;
+    width: 600px;
     margin-left: 20px;
     color: #fff;
     font-family: arial;
@@ -1512,24 +1501,30 @@ border-bottom-left-radius: 5px;
 
 #infoDiv article form {
     margin-top: 25px;
-    background: #330000;
+    background: #440000;
     color: #fff;
     width: 450px;
-    border: 2px dotted #000;
-    font-size: 15px;
-    margin-left: 25px;
+    font-size: 13px;
+   margin: 0 auto;
     font-family: arial;
     box-shadow: 0 0 5px 5px #440000;
+    margin-top: 15px;
 
 }
 
-#infoDiv form p {
-    font-weight: bold;
+#infoDiv article form table
+{
+    padding-left: 15px;
+    padding-right: 15px;
 }
 
-#infoDiv form button {
-    margin-bottom: 8px;
+
+#infoDiv #comment
+{
+    width: 410px; height: 200px;
+    margin-bottom: 15px;
 }
+
 
 #openingstijden {
     color: #fff;
@@ -1555,26 +1550,28 @@ border-bottom-left-radius: 5px;
 #adres {
     color: #fff;
     font-weight: bold;
-    margin-top: 30px;
+    margin-top: 15px;
 }
 
 #routebeschrijving {
     color: #fff;
+    width: 600px;
 
 }
 
 #routeDiv {
-    width: 600px;
-    border-bottom: 2px dotted #440000;
+    width: 640px;
     margin-left: 20px;
     font-family: arial;
+    font-size: 13px;
 }
 
 #table1, #table2 {
     width: 550px;
     background: #330000;
-    margin-left: 20px;
+    margin: 0 auto;
     box-shadow: 0 0 5px 5px #440000;
+    
 }
 
 #routeTable1, #routeTable2 {
@@ -1585,11 +1582,9 @@ border-bottom-left-radius: 5px;
     border-collapse: collapse;
     font-family: arial;
     margin-top: 5px;
+    font-size: 13px;
 }
 
-#routeTable1 th, #routeTable2 th {
-    padding-left: 5px;
-}
 
 #routeTable1 .td1, #routeTable2 .td1 {
     width: 150px;
@@ -1600,7 +1595,7 @@ border-bottom-left-radius: 5px;
 }	
 
 #routetable1 .td1, .td2, .td3, #routeTable2 .td1, .td2, .td3 {
-    font-size: 15px;
+    font-size: 13px;
     height: 25px;
     padding-left: 5px;
 }
@@ -1612,7 +1607,7 @@ border-bottom-left-radius: 5px;
 #specialBeschrijving
 {
     color: white;
-    margin-top: 10px;
+    margin-top: 16px;
     font-size: 13px;
     width: 645px;
     background: #550000;
@@ -1625,4 +1620,50 @@ border-bottom-left-radius: 5px;
 .specialBeschrijvingText
 {
     margin: 10px;
+}
+
+#HelpText1
+{
+    color:red !important;
+}
+#loader
+{
+    width:635px; margin-left: 5px; height: 100%; padding-bottom: 15px;
+}
+
+#loader p
+{
+    text-align:center; font-size: 13px; color:white; font-weight: bold; font-family: Arial; margin-bottom: 15px;
+}
+
+#SpecialAccordion h3
+{
+        display: block;
+/*    padding-right: -15px;*/
+    height: 25px;
+    background: #000;
+    color: #fff;
+    padding-left:10px;
+    padding-top: 5px;
+    font-family: arial;
+    margin-top: 0px;
+    margin-bottom: 5px;
+    font-size: 16px;
+}/*
+
+*/#SpecialAccordion img
+{
+   display: inline-block;
+   vertical-align: top;
+   margin-top: -5px;
+   border: 0px;
+}
+
+#ticker
+{
+    display: block;
+    height: 90px;
+    overflow: hidden;
+    width: 325px;
+    margin-left: 45px;
 }

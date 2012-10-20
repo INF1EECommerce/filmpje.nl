@@ -19,9 +19,6 @@ $specials = $dbFunctions->HaalSpecialsOp();
 </head>
 <body>
         <header>   
-            <div Id="Zoekbox">
-                <form action="filmoverzicht.php" method="GET"><input id="qtext" type="text" name="qtext"><input class="submitb" type="submit" value="Zoek"></form>
-            </div>
             <div Id="ZoekPopup" style="display: none;">
             </div>
         </header>
@@ -29,7 +26,7 @@ $specials = $dbFunctions->HaalSpecialsOp();
             <ul>
                 <li><a href="index.php">Home</a></li>
                 <li><a href="filmoverzicht.php">Films</a></li>
-                <li><a href="#">Info</a></li>
+                                <li><a href="#">Info</a>                     <ul>                         <li><a href="bereikbaarheid.php">Bereikbaarheid</a></li>                     </ul>                 </li>
                 <li><a href="contact.php">Contact</a></li>
                 <li id="lastLi">Specials
                     <ul>
@@ -40,11 +37,15 @@ $specials = $dbFunctions->HaalSpecialsOp();
                         ?>
                     </ul>
                 </li>
+                               <li>
+                    <form style="width: 250px;" action="filmoverzicht.php" method="GET"><input id="qtext" type="text" name="qtext"><input class="ZoekSubmitButton" type="submit" value="Zoek"></form>
+                </li>
+ 
             </ul>
         </nav>
 	<div id="outerDiv">
 		<div id="mainContent">
-		<div id="moviebanner">
+		<div id="pagebanner">
 <img src="image/banner_avengers.png">
 </div>
 		<!-- kiezen tussen contactgegevens/openingstijden/bereikbaarheid/tarieven via php -->
@@ -77,42 +78,31 @@ $specials = $dbFunctions->HaalSpecialsOp();
 
 		
 		<div id="sideContent">
-		<form>
-		<h2>SNELLE TICKETVERKOOP</h2>
+	  <form action="ReserverenStap1.php" method="POST">
+                    <h2 class="blockheader">SNELLE TICKETVERKOOP</h2>
+                    <p>
+                        <label>film</label>	
+                        <select id="film1">
+                            <option id="film">The Avengers</option>
+                    </select>
 
-<p>
-<label for="film">film</label>	
-<select id="film1">
-<option id="film">planet of the apes</option>
-<option id="film">planet of the apes</option>
-<option id="film">planet of the apes</option>
-</p>
-</select>
+                    <p>
+                        <label>dag</label>
+                        <select id="dag1">	
+                            <option id="dag">vandaag</option>
+                    </select>
 
-<p>
-<label for="dag">dag</label>
-<select id="dag1">	
-<option id="dag">vandaag</option>
-<option id="dag">morgen</option>
-<option id="dag">overmorgen</option>
-</p>
-</select>
+                    <p>
+                        <label>tijd</label>	
+                        <select id="tijd1">
+                            <option id="tijd">15:00</option>
+                    </select>
+                    <p>
+                        <button id="reserveer">Reserveer</button>
+                        <button id="koop">Koop</button>
+                    <p style="clear: both;">
+                </form>
 
-<p>
-<label for="tijd">tijd</label>	
-<select id="tijd1">
-<option id="tijd">19:00</option>
-<option id="tijd">19:30</option>
-<option id="tijd">20:00</option>
-</p>
-</select>
-<p>
-
-<button id="reserveer">Reserveer</button>
-<button id="koop">Koop</button>
-</p>
-<p style="clear: both;"></p>
-</form>
 
 <div id="top10">
 

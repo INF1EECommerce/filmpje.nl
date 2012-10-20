@@ -40,9 +40,6 @@ ob_end_clean();
 </head>
 <body>
    <header>   
-            <div Id="Zoekbox">
-                <form action="filmoverzicht.php" method="GET"><input id="qtext" type="text" name="qtext"><input class="submitb" type="submit" value="Zoek"></form>
-            </div>
             <div Id="ZoekPopup" style="display: none;">
             </div>
         </header>
@@ -50,7 +47,7 @@ ob_end_clean();
             <ul>
                 <li><a href="index.php">Home</a></li>
                 <li><a href="filmoverzicht.php">Films</a></li>
-                <li><a href="#">Info</a></li>
+                                <li><a href="#">Info</a>                     <ul>                         <li><a href="bereikbaarheid.php">Bereikbaarheid</a></li>                     </ul>                 </li>
                 <li><a href="contact.php">Contact</a></li>
                 <li id="lastLi">Specials
                     <ul>
@@ -61,6 +58,10 @@ ob_end_clean();
                         ?>
                     </ul>
                 </li>
+                               <li>
+                    <form style="width: 250px;" action="filmoverzicht.php" method="GET"><input id="qtext" type="text" name="qtext"><input class="ZoekSubmitButton" type="submit" value="Zoek"></form>
+                </li>
+ 
             </ul>
         </nav>
 	
@@ -101,8 +102,8 @@ ob_end_clean();
             <tr>
                 <td><label>Postcode:</label></td>
                 <td><span id="postcodeText">
-                  <input type="text" value="" name="postcode">
-                <span class="textfieldRequiredMsg">Postcode is verplicht.</span></span></td>
+                <input type="text" value="" name="postcode">
+                <span class="textfieldRequiredMsg">Postcode is verplicht.</span><span class="textfieldMinCharsMsg">Postcode moet minimaal 7 karakters lang zijn.</span><span class="textfieldMaxCharsMsg">Postcode mag maximaal 7 karakters lang zijn.</span></span></td>
             </tr>
             <tr>
                 <td><label>Plaats:</label></td>
@@ -114,13 +115,13 @@ ob_end_clean();
                 <td><label>Email:</label></td>
                 <td><span id="emailText">
                   <input type="text" value="" name="email">
-                <span class="textfieldRequiredMsg">Email is verplicht.</span></span></td>
+                  <span class="textfieldRequiredMsg">Email is verplicht.</span><span class="textfieldInvalidFormatMsg">Dit is geen email adres.</span></td>
             </tr>
             <tr>
                 <td><label>Telefoonnummer:</label></td>
                 <td><span id="telefoonnummerText">
-                  <input type="text" value="" name="telefoon">
-                <span class="textfieldRequiredMsg">Telefoonnummer is verplicht.</span></span></td>
+                <input type="text" value="" name="telefoon">
+                <span class="textfieldRequiredMsg">Telefoonnummer is verplicht.</span><span class="textfieldMinCharsMsg">Telefoonnummer moet 10 cijfers lang zijn.</span><span class="textfieldMaxCharsMsg">Telefoonnummer mag maximaal 10 cijfers lang zijn.</span></span></td>
             </tr>
             <tr><td>&nbsp;</td></tr>
             <?php if($modus=="bestellen")
@@ -154,9 +155,9 @@ ob_end_clean();
                     <input type="hidden" name="modus" value="<?php echo $modus; ?>">
                     <?php if($modus=="bestellen")
                     { ?>
-                    <input type="submit" value="Bestelling plaatsen">
+                    <input type="submit" class="buttonLight" value="Bestelling plaatsen">
                     <?php } else {  ?>
-                    <input type="submit" value="Reserveren">
+                    <input type="submit" class="buttonLight" value="Reserveren">
                     <?php } ?>
                 </td>
         </table>
@@ -180,16 +181,16 @@ ob_end_clean();
 </footer>
 	</div>
 <script type="text/javascript">
-var voornaamText = new Spry.Widget.ValidationTextField("voornaamText");
-var achternaamText = new Spry.Widget.ValidationTextField("achternaamText");
-var adresText = new Spry.Widget.ValidationTextField("adresText");
-var postcodeText = new Spry.Widget.ValidationTextField("postcodeText");
-var emailText = new Spry.Widget.ValidationTextField("emailText", "email");
-var telefoonnummerText = new Spry.Widget.ValidationTextField("telefoonnummerText");
-var plaatsText = new Spry.Widget.ValidationTextField("plaatsText");
+var voornaamText = new Spry.Widget.ValidationTextField("voornaamText", "none", {validateOn:["change"], hint:"Uw voornaam"});
+var achternaamText = new Spry.Widget.ValidationTextField("achternaamText", "none", {validateOn:["change"], hint:"Uw achternaam"});
+var adresText = new Spry.Widget.ValidationTextField("adresText", "none", {hint:"b.v. Dorpsweg 18", validateOn:["change"]});
+var postcodeText = new Spry.Widget.ValidationTextField("postcodeText", "none", {minChars:7, maxChars:7, hint:"b.v. 1234 AA", validateOn:["change"]});
+var emailText = new Spry.Widget.ValidationTextField("emailText", "email", {validateOn:["change"], hint:"b.v. info@filmpje.nl"});
+var telefoonnummerText = new Spry.Widget.ValidationTextField("telefoonnummerText", "none", {minChars:10, maxChars:10, hint:"b.v. 0612345678", validateOn:["change"]});
+var plaatsText = new Spry.Widget.ValidationTextField("plaatsText", "none", {hint:"b.v. 0612345678", validateOn:["change"]});
 <?php if($modus=="bestellen")
 { ?>
-var bankSelect = new Spry.Widget.ValidationSelect("bankSelect", { invalidValue:"-1" });
+var bankSelect = new Spry.Widget.ValidationSelect("bankSelect", { invalidValue:"-1", validateOn:["change"] });
 <?php } ?>
 </script>
 </body>

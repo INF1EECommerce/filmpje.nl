@@ -13,7 +13,7 @@
     Het lijkt erop dat er iets mis gegaan is met uw bestelling.</br>
 Probeert u het a.u.b opniew. Mocht u problemen blijven ondervinden, neem dan a.u.b contact op met Filmpje.
 </p>
-    
+    <button class="buttonLight" onclick="window.parent.location='../index.php'">Naar de Homepage</button>
     </div>
 </body>
 </html>

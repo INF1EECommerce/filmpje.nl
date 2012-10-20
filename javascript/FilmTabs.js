@@ -29,7 +29,7 @@ var SelectedButton;
 {
     var container = $("#TijdKlikPopup");
 
-    if (container.has(e.target).length === 0 && e.target.id != "timeb")
+    if (container.has(e.target).length === 0 && e.target.id.substr(0,5) != "timeb")
     {
      $("#TijdKlikPopup").toggle(false);
     $(SelectedButton).css({background: "",

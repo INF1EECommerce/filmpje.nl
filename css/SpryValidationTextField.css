@@ -73,5 +73,5 @@ input.textfieldMaxCharsState, .textfieldMaxCharsState input {
 
 /* When the widget has the hint message on, the hint text can be styled differently than the user typed text. */
 .textfieldHintState input, input.textfieldHintState {
-	/*color: red !important;*/
+	color: grey !important;
 }

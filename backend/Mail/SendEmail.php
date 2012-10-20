@@ -101,6 +101,21 @@ class SendEmail
         
     }
     
+    public function ZendEmailContactFormulier($data)
+    {
+         $templateData = array(
+          
+            "achternaam" => $data['achternaam'],
+            "voornaam" => $data['voornaam'],
+            "email" => $data['email'],
+            "onderwerp" =>$data['onderwerp'],
+             "bericht" =>$data['bericht']
+        );
+         
+        $this->SendTemplatedEmail("chivan@chivan.com", "Contact", "Contactformulier - Filmpje.nl", $templateData);
+    }
+    
+    
     public function SendTemplatedEmail($to, $template, $subject, $templateData )
     {
         if (!isset($to) || !isset($template) || !isset($templateData) || !isset($subject)) {
