@@ -52,7 +52,7 @@ class DBFunctions
 
         UNION
 
-        SELECT *, 'Regissuer' AS MatchType
+        SELECT *, 'Regisseur' AS MatchType
         FROM films
         WHERE Regisseur LIKE '%".$query."%'");
       

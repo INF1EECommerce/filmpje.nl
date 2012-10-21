@@ -1440,11 +1440,13 @@ border-bottom-left-radius: 5px;
 {
    width: 80px;
    margin: 0px;
+   border: 0px;
+   margin-bottom: -4px; 
 }
 
-#ZoekPopup tr:hover
+#ZoekPopup .ZoekPopupText:hover
 {
-    background-color: #440000;
+    background-color: #550000;
 }
 
 #ZoekPopup a, a:visited
@@ -1453,6 +1455,17 @@ border-bottom-left-radius: 5px;
     color:white;
     font-family: Arial;
     font-size: 10px;
+}
+
+.ZoekPopupCover
+{
+    width: 80px;
+}
+
+.ZoekPopupText
+{
+    padding-left: 5px;
+    
 }
 
 /*rogier*/

@@ -50,13 +50,47 @@ $(document).ready(function() {
 
 function VulZoekDiv()
 {
+    var dupes = [];
+    var gevondenOp = [];
+    var singles = [];
+    
+    $.each(ZoekResultaten, function(){
+       
+       if (!dupes[this.Naam]) {
+        dupes[this.Naam] = true;
+        singles.push(this);
+        gevondenOp.push(this.Naam); 
+        gevondenOp[this.Naam] = [];
+        gevondenOp[this.Naam]["Matches"] = [];
+        gevondenOp[this.Naam]["Matches"].push(this.MatchType);
+        }
+        else  
+        {
+         gevondenOp[this.Naam]["Matches"].push(this.MatchType);  
+        }
+       
+    });
+    
     var html ="";
     var zoekDiv = $('#ZoekPopup');
-    $.each(ZoekResultaten, function(){
-        
-        html += "<table><thead><th colspan='2'>" + this.Naam  + " ("+this.MatchType+")</th></tr></thead>";
-        html += "<tr><td><a href='films.php?filmid=+" + this.FilmID + "'><img src='image/Covers/" + this.Cover  + "'></a></td><td><a href='films.php?filmid="+this.FilmID+"'>Genre: " + this.Genre + "<br>Duur: "+ this.Duur + " minuten<br>IMDB: "+ this.Beoordeling+"</a></td></tr>"  ;  
-        html += "</table>"  ;  
+    $.each(singles, function(){
+                
+                html += "<table>\n\
+                        <thead><th colspan='2'>" + this.Naam  + "</th></tr></thead>";
+                html += "<tr><td class=\"ZoekPopupCover\"><a href='films.php?filmid=+" + this.FilmID + "'>\n\
+                            <img src='image/Covers/" + this.Cover  + "'></a></td>\n\
+                            <td class=\"ZoekPopupText\">\n\
+                            <a href='films.php?filmid="+this.FilmID+"'>\n\
+                            Regisseur: "+ this.Regisseur + "<br>\n\
+                            Genre: " + this.Genre + "<br>\n\
+                            Duur: "+ this.Duur + " minuten<br>\n\
+                            IMDB: "+ this.Beoordeling+"<br><br>\n\
+                            Gevonden op: <strong>"; 
+                html +=  gevondenOp[this.Naam]["Matches"].join(", ");
+         
+                html += "</strong></a></td>\n\
+                        </tr>\n\
+                       </table>"  ;  
     });
     
     $(zoekDiv).html(html);
@@ -64,6 +98,7 @@ function VulZoekDiv()
         direction: "up"
     }, 200);
 }
+
 
 function VerbergZoekDiv()
 {

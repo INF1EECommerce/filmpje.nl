@@ -4,7 +4,7 @@ if (!isset($_GET['q']))
     echo "Error";
     die;
 }
-$query = $_GET['q'];
+$query = urldecode($_GET['q']);
 if (!isset($query)) {
     exit();
 }
