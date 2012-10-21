@@ -1,27 +1,32 @@
 <?php 
-include_once 'Views/NuBinnenkortView.php'; 
+include_once 'Views/ZoekresultatenView.php'; 
 include_once 'Views/SpecialAccordionView.php';
 include_once 'Views/Top10View.php';
 include_once 'backend/DBFunctions.php';
 $dbfunctions = new DBFunctions();
 $specials = $dbfunctions->HaalSpecialsOp();
+if (isset($_GET['qtext'])) {
+    $query = urldecode($_GET['qtext']);
+}
+else
+{
+    header("Location: index.php");
+}
 ?>
 <!DOCTYPE html>
 <html>
     <head>
-        <title>Filmpje - Filmovezicht</title>
+        <title>Filmmpje - Zoekresultaten</title>
         <link rel="shortcut icon" href="favicon.ico">
         <link rel="stylesheet" href="css/stylesheet.css">
         <script src="javascript/jquery.js" type="text/javascript"></script>
         <script src="javascript/jquery-ui.js" type="text/javascript"></script>
-        <script src="javascript/NBTabs.js" type="text/javascript"></script> 
         <script src="javascript/Zoeken.js" type="text/javascript"></script>
         <script src="javascript/SpecialAccordion.js" type="text/javascript"></script>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <!-- Pulled from http://code.google.com/p/html5shiv/ -->
         <!--[if lt IE 9]>
         <script src="//html5shim.googlecode.com/svn/trunk/html5.js"></script>
-        <style>#Zoekbox { margin-left: -300px; }</style>
         <![endif]-->
     </head>
     <body>
@@ -86,18 +91,9 @@ $specials = $dbfunctions->HaalSpecialsOp();
 
             </div>
             <div id="mainContent">
-                <div id="nubinnenkort">
-                    <p class="blockheader">Films Nu\Binnenkort</p>
-                    <table class="timeHeaderTable">
-                        <tr class="dateRow">
-                            <th id="dateTh">
-                                <button id="nuButton" class="currentDate" onClick="NBClick('Nu')">Nu</button>
-                                <button id="binnenkortButton" onClick="NBClick('Binnenkort')">Binnenkort</button>
-                                <button style="float:right; width: 150px; margin-right: 10px;" id="SwitchViewButton" onClick="SwitchView();">Verander weergave</button>
-                            </th>
-                        </tr>
-                    </table>
-                  <?php $nubinnenkortview = new NuBinnenkortView(); $nubinnenkortview->Render(); ?>
+                <div id="ZoekResultaten">
+                    <p class="blockheader">Zoekresultaten</p>
+                    <?php $zoekresultatenView =  new ZoekresultatenView($query);  $zoekresultatenView->Render(); ?>
                 </div>
             <div id="specialsDiv">
                 <?php $specialsAccordionView = new SpecialAccordionView(); $specialsAccordionView->Render(); ?>

@@ -271,6 +271,7 @@ nav ul li a {
     width: 645px;
     margin-top: -16px;
     font-family: arial;
+    margin-bottom: 15px;
 
 }
 
@@ -1254,7 +1255,17 @@ border-radius: 5px;
     box-shadow: 0 0 5px 5px #440000;
     display: inline-block;
     margin-right: 25px;
-    padding-bottom: 15px;
+}
+
+#ZoekResultaten
+{
+    font-family: Arial;
+    color: #FFFFFF;
+    width: 645px;
+    background: #550000;
+    box-shadow: 0 0 5px 5px #440000;
+    display: inline-block;
+    margin-right: 25px;
 }
 .posterRow
 {
@@ -1265,7 +1276,7 @@ border-radius: 5px;
 {
     display: inline-block;
     box-shadow: 0 0 5px 5px #440000;
-    margin-top: 15px;
+    margin-bottom: 15px;
     margin-left: 22.5px;
     font-size: 10px;
     padding-bottom: 5px;
@@ -1286,12 +1297,7 @@ border-radius: 5px;
 
 .filmoverzichtposter:hover
 {
-    display: inline-block;
     box-shadow: 0 0 5px 5px #FFBB00;
-    margin-top: 15px;
-    margin-left: 22.5px;
-    font-size: 10px;
-    padding-bottom: 5px;
 }
 
 .filoverzichtcover
@@ -1320,10 +1326,10 @@ border-radius: 5px;
 
 .filmoverzichtbeschrijving
 {
-    font-size: 13px;   
+    font-size: 10px;   
     margin-right: 10px;
     float: right;
-    width: 465px;
+    width: 460px;
     margin-bottom: 5px;
 }
 
@@ -1331,7 +1337,6 @@ border-radius: 5px;
 {
     width: 130px;
     height: 192px;
-    margin-left: -5px;
     float: left;
     margin-right: 10px;
 }
@@ -1341,28 +1346,11 @@ border-radius: 5px;
     display: inline-block;
     float: left;
     box-shadow: 0 0 5px 5px #440000;
-    margin-top: 15px;
+    margin-bottom: 15px;
     margin-left: 15px;
     font-size: 10px;
-    padding-left: 5px;
     width: 610px;
 }
-
-.filmoverzichtposterrowview p
-{
-    font-size: 13px;
-    background-color: #000;
-    min-height: 18px;
-    color: white;
-    text-align: left;
-    margin-top: -1px;
-    margin-bottom: 0px;
-    padding-top: 3px;
-    padding-bottom: 3px;
-    padding-right: 5px;
-    margin-left: -5px;
-}
-
 .GeenFilmsGevonden
 {
     padding: 5px;
@@ -1544,6 +1532,7 @@ border-bottom-left-radius: 5px;
     border-collapse: collapse;
     margin-left: 25px;
     margin-top: 25px;
+    font-family: Arial;
 }
 
 #openingstijden th {

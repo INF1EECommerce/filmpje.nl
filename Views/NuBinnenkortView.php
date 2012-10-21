@@ -20,11 +20,11 @@ class NuBinnenkortView {
         //tile modus divs
         echo ("
         <div id=\"Tiles\">
-        <div id=\"NuFilms\">
-        <div class=\"posterRow\">");
+        <div id=\"NuFilms\">");
         //lus door de nu films heem
         if (!isset($this->filmgroups['Nu'])) { echo "<div class=\"GeenFilmsGevonden\">Er zijn geen films gevonden die aan de criteria voldoen.</div>"; }
         if (isset($this->filmgroups['Nu'])) {
+        echo ("<div class=\"posterRow\">");
         foreach ($this->filmgroups['Nu']['items'] as $film) {
             $kijwijzericonen = explode(",", $film['Kijkwijzer']);
 
@@ -50,21 +50,21 @@ class NuBinnenkortView {
             }
             $this->count++;
             $this->rowcount++;
+        }          
         }
-        //nufilms div afsluiten           
+         //nufilms div afsluiten 
         echo("</div>");
-        }
         //binkort div openen
         //count waardes resetten voor nieuwe filmrijen.
         $this->count = 1;
         $this->rowcount = 1;
         echo ("
-        <div id=\"BinnenkortFilms\"style=\"display:none;\">
-            <div class=\"posterRow\"> ");
+        <div id=\"BinnenkortFilms\"style=\"display:none;\">");
 
         //lus door de binnenkort films heem
         if (!isset($this->filmgroups['Binnenkort'])) { echo "<div class=\"GeenFilmsGevonden\">Er zijn geen films gevonden die aan de criteria voldoen.</div>"; }
         if (isset($this->filmgroups['Binnenkort'])) {
+                echo ("<div class=\"posterRow\"> ");
         foreach ($this->filmgroups['Binnenkort']['items'] as $film) {
             $kijwijzericonen = explode(",", $film['Kijkwijzer']);
 
@@ -93,7 +93,7 @@ class NuBinnenkortView {
         }
         }
         //binnenkortfilms div afsluiten           
-        echo("</div></div></div>");
+        echo("</div></div>");
 
         //row modus divs
         //nufilms div openen
@@ -112,7 +112,7 @@ class NuBinnenkortView {
             echo ("
                     <div class=\"posterRow\" >
                         <div id=\"" . $film['FilmID'] . "\" class=\"filmoverzichtposterrowview\">
-                            <p>" . $film['KorteNaam'] . "</p>
+                            <h3 class=\"subblockheader\" style=\"margin-bottom:0px;\">" . $film['Naam'] . "</h3>
                             <a href=\"films.php?filmid=" . $film['FilmID'] . "\"><img class=\"filoverzichtcoverrowview\" src=\"image/Covers/" . $film['Cover'] . "\"></a>
                             <strong>Genre</strong><br>" . $film['Genre'] . "
                             <br><br>
@@ -128,7 +128,7 @@ class NuBinnenkortView {
 
         //binnenkortfilms div openen
         echo ("
-        <div id=\"BinnenkortFilmsRows\">");
+        <div id=\"BinnenkortFilmsRows\" style=\"display:none;\">");
         if (!isset($this->filmgroups['Binnenkort'])) { echo "<div class=\"GeenFilmsGevonden\">Er zijn geen films gevonden die aan de criteria voldoen.</div>"; }
         if (isset($this->filmgroups['Binnenkort'])) {
         foreach ($this->filmgroups['Binnenkort']['items'] as $film) {
@@ -141,7 +141,7 @@ class NuBinnenkortView {
             echo ("
                     <div class=\"posterRow\" >
                         <div id=\"" . $film['FilmID'] . "\" class=\"filmoverzichtposterrowview\">
-                            <p>" . $film['KorteNaam'] . "</p>
+                            <h3 class=\"subblockheader\" style=\"margin-bottom:0px;\">" . $film['Naam'] . "</h3>
                             <a href=\"films.php?filmid=" . $film['FilmID'] . "\"><img class=\"filoverzichtcoverrowview\" src=\"image/Covers/" . $film['Cover'] . "\"></a>
                             <strong>Genre</strong><br>" . $film['Genre'] . "
                             <br><br>

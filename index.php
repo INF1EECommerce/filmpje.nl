@@ -45,6 +45,7 @@ $specials = $dbFunctions->HaalSpecialsOp();
                 <li><a href="#">Info</a>
                     <ul>
                         <li><a href="bereikbaarheid.php">Bereikbaarheid</a></li>
+                        <li><a href="openingstijden.php">Openingstijden</a></li>
                     </ul>
                 </li>
                 <li><a href="contact.php">Contact</a></li>
@@ -58,7 +59,7 @@ $specials = $dbFunctions->HaalSpecialsOp();
                     </ul>
                 </li>
                 <li>
-                    <form style="width: 250px;" action="filmoverzicht.php" method="GET"><input id="qtext" type="text" name="qtext"><input class="ZoekSubmitButton" type="submit" value="Zoek"></form>
+                    <form style="width: 250px;" action="zoeken.php" method="GET"><input id="qtext" type="text" name="qtext" autocomplete="off"><input class="ZoekSubmitButton" type="submit" value="Zoek"></form>
                 </li>
             </ul>
         </nav>
@@ -101,7 +102,7 @@ $specials = $dbFunctions->HaalSpecialsOp();
                 </div>
                 <div id="schedule">
                     <p>Nu bij Filmpje</p>
-                    <table class="timeHeaderTable">
+                    <table class="timeHeaderTable" style="margin-bottom: 0px;">
                         <tr class="dateRow">
                             <th id="dateTh">
                                 <button id="vandaagButton" class="currentDate" onClick="DagButtonClick('Vandaag')">Vandaag</button>

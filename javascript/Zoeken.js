@@ -81,11 +81,11 @@ function VulZoekDiv()
                             <img src='image/Covers/" + this.Cover  + "'></a></td>\n\
                             <td class=\"ZoekPopupText\">\n\
                             <a href='films.php?filmid="+this.FilmID+"'>\n\
-                            Regisseur: "+ this.Regisseur + "<br>\n\
-                            Genre: " + this.Genre + "<br>\n\
-                            Duur: "+ this.Duur + " minuten<br>\n\
-                            IMDB: "+ this.Beoordeling+"<br><br>\n\
-                            Gevonden op: <strong>"; 
+                            <strong>Regisseur: </strong>"+ this.Regisseur + "<br>\n\
+                            <strong>Genre: </strong>" + this.Genre + "<br>\n\
+                            <strong>Duur: </strong>"+ this.Duur + " minuten<br>\n\
+                            <strong>IMDB: </strong>"+ this.Beoordeling+"<br><br>\n\
+                            <strong>Gevonden op: "; 
                 html +=  gevondenOp[this.Naam]["Matches"].join(", ");
          
                 html += "</strong></a></td>\n\
