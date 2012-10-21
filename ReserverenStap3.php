@@ -47,6 +47,7 @@ try {
         <script src="javascript/jquery.js" type="text/javascript"></script>
         <script src="javascript/jquery-ui.js" type="text/javascript"></script>
         <script src="javascript/Zoeken.js" type="text/javascript"></script>
+        <script src="javascript/popup.js" type="text/javascript"></script>
         <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
         <!-- Pulled from http://code.google.com/p/html5shiv/ -->
         <!--[if lt IE 9]>

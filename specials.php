@@ -4,6 +4,7 @@ $specialID = intval($_GET['SpecialID']);
 require_once('Views/SpecialFilmTijdenView.php'); 
 require_once 'backend/DBFunctions.php';
 include_once 'Views/Top10View.php';
+include_once 'Views/SpecialGalleryView.php';
 $dbFunctions =  new DBFunctions();
 $specialItem = $dbFunctions->HaalSpecialOp($specialID);
 $specials = $dbFunctions->HaalSpecialsOp();
@@ -14,15 +15,16 @@ $specials = $dbFunctions->HaalSpecialsOp();
 <title>Filmpje - Specials - <?php echo $specialItem['Naam'] ?></title>
 <link rel="shortcut icon" href="favicon.ico">
 <link rel="stylesheet" href="css/stylesheet.css">
+<link rel="stylesheet" href="css/mocha.css">
 <script src="javascript/jquery.js" type="text/javascript"></script>
 <script src="javascript/jquery-ui.js" type="text/javascript"></script>
 <script src="javascript/Zoeken.js" type="text/javascript"></script>
 <script src="javascript/FilmTabs.js" type="text/javascript"></script>
+<script src="javascript/mocha.js" type="text/javascript"></script>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
 <!-- Pulled from http://code.google.com/p/html5shiv/ -->
-<!--[if lt IE 9]>
+<!--[if lt IE 8]>
 <script src="//html5shim.googlecode.com/svn/trunk/html5.js"></script>
-<style>#Zoekbox { margin-left: -300px; }</style>
 <![endif]-->
 </head>
 <body>
@@ -111,6 +113,7 @@ $specials = $dbFunctions->HaalSpecialsOp();
     <input type="hidden" id="voorstelling" name="voorstelling" value="">
 </form>
 </div>	
+ <?php $specialGallery = new SpecialGalleryView(); $specialGallery->Render($specialItem['SpecialID']); ?>
 </div>		
 <footer>
 <p>Contact</p>

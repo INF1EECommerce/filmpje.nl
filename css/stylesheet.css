@@ -1669,3 +1669,13 @@ border-bottom-left-radius: 5px;
     width: 325px;
     margin-left: 45px;
 }
+
+#SpecialFotos
+{
+        background: none repeat scroll 0 0 #660000;
+    box-shadow: 0 0 5px 5px #440000;
+    width: 645px;
+    height: 330px;
+    margin-top: 16px;
+    overflow: hidden;
+}
