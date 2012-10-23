@@ -48,8 +48,11 @@ $specials = $dbfunctions->HaalSpecialsOp();
         </nav>
 	
 	<div id="outerDiv">
-			<div id="sideContent">
-  <form action="ReserverenStap1.php" method="POST">
+                   <table>  
+            <tr>
+            <td> 
+	   <div id="sideContent">
+                     <form action="ReserverenStap1.php" method="POST">
                     <h2 class="blockheader">SNELLE TICKETVERKOOP</h2>
                     <p>
                         <label>film</label>	
@@ -83,7 +86,7 @@ $specials = $dbfunctions->HaalSpecialsOp();
 
 </div>
 
-</div>
+</div></td><td>
 		<div id="mainContent">
 		<div id="pagebanner">
 <img src="image/banner_avengers.png">
@@ -171,6 +174,7 @@ $specials = $dbfunctions->HaalSpecialsOp();
 
 
 </div>		
+</td></tr></table>
 <footer>
 <p>Contact</p>
 <ul>
@@ -181,5 +185,6 @@ $specials = $dbfunctions->HaalSpecialsOp();
 	<li>Terms of Service</li>
 </ul>
 </footer>
+        </div>
 </body>
 </html>

@@ -65,6 +65,9 @@ $specials = $dbFunctions->HaalSpecialsOp();
         </nav>
 
         <div id="outerDiv">
+        <table>  
+            <tr>
+            <td>
             <div id="sideContent">
                 <form action="ReserverenStap1.php" method="POST">
                     <h2 class="blockheader">SNELLE TICKETVERKOOP</h2>
@@ -96,6 +99,8 @@ $specials = $dbFunctions->HaalSpecialsOp();
                 </div>
 
             </div>
+                </td>
+                <td>
             <div id="mainContent">
                 <div id="pagebanner">
                 <?php $carouselView = new CarouselView(); $carouselView->Render(); ?>    
@@ -128,6 +133,9 @@ $specials = $dbFunctions->HaalSpecialsOp();
                     <?php $specialsAccordionView = new SpecialAccordionView(); $specialsAccordionView->Render(); ?>
                 </div>
             </div>
+                </td>
+        </tr>
+        </table>
             <div style="clear:both;">  </div>
             <footer>
                 <div style="float: left;">

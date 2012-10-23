@@ -60,6 +60,39 @@ if ( 'POST' == $_SERVER['REQUEST_METHOD'] )
             </ul>
         </nav>
         <div id="outerDiv">
+                    <table>  
+            <tr>
+            <td>
+                       <div id="sideContent">
+                     <form action="ReserverenStap1.php" method="POST">
+                    <h2 class="blockheader">SNELLE TICKETVERKOOP</h2>
+                    <p>
+                        <label>film</label>	
+                        <select id="film1">
+                            <option id="film">The Avengers</option>
+                    </select>
+
+                    <p>
+                        <label>dag</label>
+                        <select id="dag1">	
+                            <option id="dag">vandaag</option>
+                    </select>
+
+                    <p>
+                        <label>tijd</label>	
+                        <select id="tijd1">
+                            <option id="tijd">15:00</option>
+                    </select>
+                    <p>
+                        <button id="reserveer">Reserveer</button>
+                        <button id="koop">Koop</button>
+                    <p style="clear: both;">
+                </form>
+                <div id="top10">
+                    <?php $top10view = new Top10View(); $top10view->Render(); ?>
+                </div>
+            </div>
+            </td><td>
             <div id="mainContent">
                 <div id="pagebanner">
                     <img src="image/banner_avengers.png">
@@ -126,38 +159,10 @@ if ( 'POST' == $_SERVER['REQUEST_METHOD'] )
                 </div>
 
 
-            </div> <!-- mainContent -->
+            </div></td></tr></table> <!-- mainContent -->
 
 
-            <div id="sideContent">
-                     <form action="ReserverenStap1.php" method="POST">
-                    <h2 class="blockheader">SNELLE TICKETVERKOOP</h2>
-                    <p>
-                        <label>film</label>	
-                        <select id="film1">
-                            <option id="film">The Avengers</option>
-                    </select>
-
-                    <p>
-                        <label>dag</label>
-                        <select id="dag1">	
-                            <option id="dag">vandaag</option>
-                    </select>
-
-                    <p>
-                        <label>tijd</label>	
-                        <select id="tijd1">
-                            <option id="tijd">15:00</option>
-                    </select>
-                    <p>
-                        <button id="reserveer">Reserveer</button>
-                        <button id="koop">Koop</button>
-                    <p style="clear: both;">
-                </form>
-                <div id="top10">
-                    <?php $top10view = new Top10View(); $top10view->Render(); ?>
-                </div>
-            </div> <!-- sideContent -->
+      <!-- sideContent -->
             <footer>
                 <p>Contact</p>
                 <ul>

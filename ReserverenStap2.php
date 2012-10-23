@@ -67,17 +67,21 @@ ob_end_clean();
         </nav>
 	
 	<div id="outerDiv">
+                    <table>  
+            <tr>
+            <td>
         <div id="sideContent">
         <?php $filmPoosterEnInfoView = new FilmPoosterEnInfoView(); $filmPoosterEnInfoView ->Render($voorstelling); ?>
          </div>
+            </td><td>
         <div id="mainContent">
        <div id="ss">
            <p class="blockheader"><?php echo strtoupper($modus); ?> STAP2 - Uw gegevens</p>
-        <div id="ReserverenHeader">
-        <?php $bestellingOverzichtHeader = new BestellingOverzichtHeaderView(); $bestellingOverzichtHeader ->Render($voorstelling); ?>    
+           <div id="ReserverenHeader">
+            <?php $bestellingOverzichtHeader = new BestellingOverzichtHeaderView(); $bestellingOverzichtHeader ->Render($voorstelling); ?>    
         </div>
         <div id="formulier">
-        
+            
         <form method="POST" id="ReserverenForm" action="ReserverenStap3.php">
             <table>
                 <caption>Uw contactinformatie</caption>
@@ -164,12 +168,13 @@ ob_end_clean();
         </table>
         </form>
         </div>
+           <span id="idealLogo"><img src="image/ideal.png" alt="ideallogo"></span>
           <div id="StoelPrijzen">
          <?php echo $stoelenTabel; ?> 
         </div>
             </div>
         </div>
-		
+            </td></tr></table>	
 <footer>
 <p>Contact</p>
 <ul>

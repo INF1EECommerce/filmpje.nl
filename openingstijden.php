@@ -44,39 +44,10 @@ $specials = $dbFunctions->HaalSpecialsOp();
             </ul>
         </nav>
 	<div id="outerDiv">
-		<div id="mainContent">
-		<div id="pagebanner">
-<img src="image/banner_avengers.png">
-</div>
-		<!-- kiezen tussen contactgegevens/openingstijden/bereikbaarheid/tarieven via php -->
-		<div id="infoDiv">
-		
-		<h2>Openingstijden</h2>
-		<table id="openingstijden">
-		<tr class="tijdenTr">
-			<th class="tijdenTh">Maandag t/m vrijdag</th>
-			<td class="tijdenTd">12:00 tot 01:00 uur</td>
-		</tr>
-		<tr class="tijdenTr"> 
-			<th class="tijdenTh">Zaterdag en zondag</th>
-			<td class="tijdenTd">10:00 tot 02:00 uur</td>
-		</tr>
-		<tr class="tijdenTr">
-			<th class="tijdenTh">Vakanties</th>
-			<td class="tijdenTd">Onder voorbehoud</td>
-		</tr>
-		</table>
-		
-		<p style="clear: both; padding-bottom: 25px;"></p>
-		</div>
-		
-		
-		</div> <!-- mainContent -->
-		
-
-
-
-		
+                    <table>  
+            <tr>
+            <td>
+	
 		<div id="sideContent">
 	  <form action="ReserverenStap1.php" method="POST">
                     <h2 class="blockheader">SNELLE TICKETVERKOOP</h2>
@@ -122,7 +93,36 @@ $specials = $dbFunctions->HaalSpecialsOp();
 </ul>
 
 </div>
-		</div> <!-- sideContent -->
+		</div> 	
+            </td><td>
+                <div id="mainContent">
+		<div id="pagebanner">
+<img src="image/banner_avengers.png">
+</div>
+		<!-- kiezen tussen contactgegevens/openingstijden/bereikbaarheid/tarieven via php -->
+		<div id="infoDiv">
+		
+		<h2>Openingstijden</h2>
+		<table id="openingstijden">
+		<tr class="tijdenTr">
+			<th class="tijdenTh">Maandag t/m vrijdag</th>
+			<td class="tijdenTd">12:00 tot 01:00 uur</td>
+		</tr>
+		<tr class="tijdenTr"> 
+			<th class="tijdenTh">Zaterdag en zondag</th>
+			<td class="tijdenTd">10:00 tot 02:00 uur</td>
+		</tr>
+		<tr class="tijdenTr">
+			<th class="tijdenTh">Vakanties</th>
+			<td class="tijdenTd">Onder voorbehoud</td>
+		</tr>
+		</table>
+		
+		<p style="clear: both; padding-bottom: 25px;"></p>
+		</div>
+		
+		
+		</div> </td></tr></table>
 <footer>
 <p>Contact</p>
 <ul>

@@ -57,6 +57,9 @@ else
         </nav>
 
         <div id="outerDiv">
+                    <table>  
+            <tr>
+            <td>
             <div id="sideContent">
    <form action="ReserverenStap1.php" method="POST">
                     <h2 class="blockheader">SNELLE TICKETVERKOOP</h2>
@@ -90,6 +93,7 @@ else
                 </div>
 
             </div>
+            </td><td>
             <div id="mainContent">
                 <div id="ZoekResultaten">
                     <p class="blockheader">Zoekresultaten</p>
@@ -99,7 +103,7 @@ else
                 <?php $specialsAccordionView = new SpecialAccordionView(); $specialsAccordionView->Render(); ?>
             </div>
             </div>
-     	
+            </td></tr></table>
         <footer>
             <p>Contact</p>
             <ul>

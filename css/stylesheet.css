@@ -9,15 +9,17 @@ a, a:visited
     color: white;
 }
 
+table td
+{
+    vertical-align: top;
+}
+
 #sideContent  {
     width: 400px;
-    float: left;
-
 }
 
 #mainContent {
     width: 675px;
-    float: right;
     padding-top: 0px;
 }
 header {
@@ -28,6 +30,18 @@ header {
     text-align: center;
     background-image: url("../image/header2.png");
     height: 169px;
+}
+
+#idealLogo
+{
+    color: white;
+    display: block;
+    float: left;
+    font-family: arial;
+    font-weight: bold;
+    left: 15px;
+    position: relative;
+    top: 0;
 }
 
 header a
@@ -768,6 +782,9 @@ li.clearfix {
     font-family: arial;
     color: #FFFFFF;
     padding-bottom: 10px;
+    width: 50%;
+    float: left;
+    display: block;
 
 }
 
@@ -794,6 +811,8 @@ li.clearfix {
     font-family: arial;
     color: #FFFFFF;
     padding-bottom: 15px;
+    display: block;
+    clear: both;
 }
 
 #StoelPrijzen h3

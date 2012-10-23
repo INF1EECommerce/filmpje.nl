@@ -82,10 +82,14 @@ try {
         </nav>
 
         <div id="outerDiv">
+                    <table>  
+            <tr>
+            <td>
             <div id="sideContent">
             <?php $filmPoosterEnInfoView = new FilmPoosterEnInfoView();
             $filmPoosterEnInfoView->Render($voorstelling); ?>
             </div>
+            </td><td>
             <div id="mainContent">
                 <div id="ss">
                     <p class="blockheader"><?php echo strtoupper($modus) ?> STAP3 - <?php echo $stapnaam ?></p>
@@ -93,6 +97,7 @@ try {
                         </iframe>
                 </div>
             </div>
+            </td></tr></table>
             <footer>
                 <p>Contact</p>
                 <ul>

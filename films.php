@@ -62,6 +62,9 @@ exit;
             </ul>
         </nav>
 	<div id="outerDiv">
+                    <table>  
+            <tr>
+            <td>
         <div id="sideContent">
           <?php $filmPoosterEnInfoView = new FilmPoosterEnInfoView(); $filmPoosterEnInfoView->RenderVoorFilm($film); ?>
             
@@ -70,6 +73,7 @@ exit;
                           <?php $top10view = new Top10View(); $top10view->Render(); ?>
             </div>
         </div>
+            </td><td>
         <div id="mainContent">
                  
                 <div id="trailer">
@@ -96,6 +100,7 @@ exit;
                 <?php $filmtijdenview = new FilmTijdenView(); $filmtijdenview->Render($filmid); ?>    
                     </div>
         </div>
+            </td></tr></table>
 		
 <footer>
         <p>Contact</p>

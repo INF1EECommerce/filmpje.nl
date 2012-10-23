@@ -54,6 +54,9 @@ $specials = $dbFunctions->HaalSpecialsOp();
             </ul>
         </nav>
 	<div id="outerDiv">
+                    <table>  
+            <tr>
+            <td>
 			<div id="sideContent">
   <form action="ReserverenStap1.php" method="POST">
                     <h2 class="blockheader">SNELLE TICKETVERKOOP</h2>
@@ -90,6 +93,7 @@ $specials = $dbFunctions->HaalSpecialsOp();
 </div>
 
 </div>
+            </td><td>
 <div id="mainContent">
 		<div id="pagebanner">
 <img src="image/<?php echo $specialItem['HeaderImage']; ?>">
@@ -114,7 +118,8 @@ $specials = $dbFunctions->HaalSpecialsOp();
 </form>
 </div>	
  <?php $specialGallery = new SpecialGalleryView(); $specialGallery->Render($specialItem['SpecialID']); ?>
-</div>		
+</div>
+            </td></tr></table>
 <footer>
 <p>Contact</p>
 <ul>
