@@ -36,7 +36,6 @@ class Bestellingen {
         
         return $result;
     }
-    
     public function BestaatKenmerk($kenmerk)
     {
          $this->connection->dbConnect();
@@ -62,7 +61,6 @@ class Bestellingen {
             return false;
         }
     }
-    
     public function UpdateKenmerk($kenmerk)
     {
         $referenceGenerator = new ReferenceGenerator();
@@ -79,7 +77,6 @@ class Bestellingen {
         
         return $newKenmerk;
     }
-
     public function BestellingStatusIDForStatus($status) {
 
         if (!isset($status)) {
@@ -118,8 +115,7 @@ class Bestellingen {
         $this->UpdateBeschikbareStoelen($result[0]['VoorstellingID'],$result[0]['AantalStoelen'] , '+', FALSE);
         
         $this->connection->dbClose();
-    }
-    
+    } 
     public function UpdateBeschikbareStoelen($voorstelling, $aantalstoelen, $plusmin, $closeConnection)
     {
        $this -> connection -> dbConnect();
@@ -137,6 +133,10 @@ class Bestellingen {
         //kijk of we een bestelling binnen hebben gekregen.
         if (!isset($bestelling)) {
             throw new Exception("Bestelling is NULL, error.");
+        }
+        
+        if ($this->BestaatKenmerk($bestelling->kenmerk)) {
+            return;
         }
        
         //Connectie openen.
@@ -156,7 +156,6 @@ class Bestellingen {
 
         $this->connection->dbClose();
     }
-    
     
     private function SlaBestellingStoelenOp($stoelen, $bestellingID, $closeConnection)
     {
@@ -180,9 +179,7 @@ class Bestellingen {
         }
         
         return count($stoelen);
-    }
-    
-    
+    } 
     private function SlaBestellingOp(Bestelling $bestelling, $closeConnection)
     {
         $this->connection->dbConnect();
@@ -200,9 +197,7 @@ class Bestellingen {
         if ($closeConnection) {
             $this->connection->dbClose();
         }
-    }
-    
-    
+    }    
     private function BestellingIDVoorkenmerk($kenmerk, $closeConnection)
     {
         $this->connection->dbConnect();
@@ -224,10 +219,6 @@ class Bestellingen {
         return  $result[0]['BestellingID'];
         
     }
-
-
-
-
     public function BestellingStatusVoorID($id)
     {
      $this->connection->dbConnect();
@@ -246,8 +237,7 @@ class Bestellingen {
         }
         $this->connection->dbClose();
         return $result[0]['BestellingStatus'];
-    }
-    
+    }    
     public function SlaStatusOp($status, $kenmerk)
     {
        $statusid = 0;

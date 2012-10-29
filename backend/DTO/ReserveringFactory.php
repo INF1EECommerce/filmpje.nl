@@ -5,6 +5,7 @@ class ReserveringFactory
   {
      include_once('backend/DTO/Reservering.php');
      include_once('backend/Reserveringen.php');
+     include_once 'backend/TotaalPrijsCalculatie.php';
      
 //     include_once('/backend/DTO/Bestelling.php');
 //     include_once('/backend/Bestellingen.php');
@@ -18,10 +19,10 @@ class ReserveringFactory
      $reservering->adres = $postvalues['adres'];
      $reservering->email = $postvalues['email'];
      $reservering->telefoonnummer = $postvalues['telefoon'];
-     $reservering->totaalPrijs = $postvalues['amount'];
+     $reservering->totaalPrijs = TotaalPrijsCalculatie::Calculeer($postvalues['geselecteerdestoelen']);
      $reservering->kenmerk = $postvalues['reference'];
      $reservering->ReserveringStatus = $reserveringen->ReserveringStatusIDForStatus("Ingediend");
-     $reservering->stoelen = $postvalues['stoelen'];
+     $reservering->stoelen = $postvalues['geselecteerdestoelen'];
      $reservering->postcode = $postvalues['postcode'];
      $reservering->plaats = $postvalues['plaats'];
      

@@ -2,8 +2,7 @@
 require_once('Views/VandaagMorgenOvermorgenView.php'); 
 include_once 'backend/DBFunctions.php';
 include_once 'Views/Top10View.php';
-$dbfunctions = new DBFunctions();
-$specials = $dbfunctions->HaalSpecialsOp();
+include_once 'Views/SpecialsMenuItemsView.php';
 ?>
 <!DOCTYPE html>
 <html>
@@ -32,13 +31,7 @@ $specials = $dbfunctions->HaalSpecialsOp();
                                 <li><a href="#">Info</a>                     <ul>                         <li><a href="bereikbaarheid.php">Bereikbaarheid</a></li>                         <li><a href="openingstijden.php">Openingstijden</a></li>                     </ul>                 </li>
                 <li><a href="contact.php">Contact</a></li>
                 <li id="lastLi">Specials
-                    <ul>
-                        <?php
-                        foreach ($specials as $special) {
-                            echo ("<li><a href=\"specials.php?SpecialID=" . $special['SpecialID'] . "\">" . $special['Naam'] . "</a></li>");
-                        }
-                        ?>
-                    </ul>
+                <?php $specialsMenuitems = new SpecialsMenuItemsView(); $specialsMenuitems->Render(); ?>
                 </li>
                                <li>
                     <form style="width: 250px;" action="zoeken.php" method="GET"><input id="qtext" type="text" name="qtext" autocomplete="off"><input class="ZoekSubmitButton" type="submit" value="Zoek"></form>
@@ -89,7 +82,7 @@ $specials = $dbfunctions->HaalSpecialsOp();
 </div></td><td>
 		<div id="mainContent">
 		<div id="pagebanner">
-<img src="image/banner_avengers.png">
+<img src="image/bereikbaarheid.png">
 </div>
 <div id="infoDiv">
 		

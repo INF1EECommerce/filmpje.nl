@@ -1,18 +1,21 @@
 <?php 
-//TO DO: Valideren
-$specialID = intval($_GET['SpecialID']);
+include_once 'Helpers/ExceptionHelper.php';
+set_exception_handler('ExceptionHelper::exception_handler');
 require_once('Views/SpecialFilmTijdenView.php'); 
 require_once 'backend/DBFunctions.php';
 include_once 'Views/Top10View.php';
 include_once 'Views/SpecialGalleryView.php';
-$dbFunctions =  new DBFunctions();
-$specialItem = $dbFunctions->HaalSpecialOp($specialID);
-$specials = $dbFunctions->HaalSpecialsOp();
+include_once 'Views/SpecialsMenuItemsView.php';
+include_once 'backend/validatie/SpecialGetValidatie.php';
+
+$validatie =  new SpecialGetValidatie();
+$getWaardes = $validatie->Valideer($_GET);
+
 ?>
 <!DOCTYPE html>
 <html>
 <head>
-<title>Filmpje - Specials - <?php echo $specialItem['Naam'] ?></title>
+<title>Filmpje - Specials - <?php echo $getWaardes['SpecialInfo']['Naam'] ?></title>
 <link rel="shortcut icon" href="favicon.ico">
 <link rel="stylesheet" href="css/stylesheet.css">
 <link rel="stylesheet" href="css/mocha.css">
@@ -39,13 +42,7 @@ $specials = $dbFunctions->HaalSpecialsOp();
                                 <li><a href="#">Info</a>                     <ul>                         <li><a href="bereikbaarheid.php">Bereikbaarheid</a></li>                         <li><a href="openingstijden.php">Openingstijden</a></li>                     </ul>                 </li>
                 <li><a href="contact.php">Contact</a></li>
                 <li id="lastLi">Specials
-                    <ul>
-                        <?php
-                        foreach ($specials as $special) {
-                            echo ("<li><a href=\"specials.php?SpecialID=" . $special['SpecialID'] . "\">" . $special['Naam'] . "</a></li>");
-                        }
-                        ?>
-                    </ul>
+                    <?php $specialsMenuitems = new SpecialsMenuItemsView(); $specialsMenuitems->Render(); ?>
                 </li>
                                <li>
                     <form style="width: 250px;" action="zoeken.php" method="GET"><input id="qtext" type="text" name="qtext" autocomplete="off"><input class="ZoekSubmitButton" type="submit" value="Zoek"></form>
@@ -96,12 +93,12 @@ $specials = $dbFunctions->HaalSpecialsOp();
             </td><td>
 <div id="mainContent">
 		<div id="pagebanner">
-<img src="image/<?php echo $specialItem['HeaderImage']; ?>">
+<img src="image/<?php echo $getWaardes['SpecialInfo']['HeaderImage']; ?>">
 </div>
     <div id="specialBeschrijving">
-      <p class="blockheader"><?php echo $specialItem['Naam'] ?></p>  
+      <p class="blockheader"><?php echo $getWaardes['SpecialInfo']['Naam'] ?></p>  
      <div class="specialBeschrijvingText">
-      <?php echo $specialItem['Beschrijving']; ?>
+      <?php echo $getWaardes['SpecialInfo']['Beschrijving']; ?>
      </div>
     </div>
     <div id="schedule">
@@ -109,7 +106,7 @@ $specials = $dbFunctions->HaalSpecialsOp();
 
 
 <?php $specialFilmTijdenView = new SpecialFilmTijdenView();
-      $specialFilmTijdenView ->Render($specialID);
+      $specialFilmTijdenView ->Render($getWaardes['SpecialID']);
 ?>
 
 <form method="post" id="voorstellingForm" action="ReserverenStap1.php">
@@ -117,7 +114,7 @@ $specials = $dbFunctions->HaalSpecialsOp();
     <input type="hidden" id="voorstelling" name="voorstelling" value="">
 </form>
 </div>	
- <?php $specialGallery = new SpecialGalleryView(); $specialGallery->Render($specialItem['SpecialID']); ?>
+ <?php $specialGallery = new SpecialGalleryView(); $specialGallery->Render($getWaardes['SpecialID']); ?>
 </div>
             </td></tr></table>
 <footer>

@@ -1,19 +1,19 @@
 <?php
+include_once 'Helpers/ExceptionHelper.php';
+set_exception_handler('ExceptionHelper::exception_handler');
 include_once 'Views/FilmPoosterEnInfoView.php';
 include_once 'Views/FacebookEventView.php';
 include_once 'backend/DBFunctions.php';
-$dbfunctions = new DBFunctions();
-$specials = $dbfunctions->HaalSpecialsOp();
-$voorstelling = intval($_POST['voorstelling']);
-if ($voorstelling == 0 || !isset($_POST['modus'])) {
-    header('Location: index.php');
-}
-$modus = $_POST['modus'];
+include_once 'Views/SpecialsMenuItemsView.php';
+include_once 'backend/validatie/ReserverenPostValidatie.php';
+
+$validatie =  new ReserverenPostValidatie();
+$postWaardes = $validatie->ValideerStap1($_POST);
 ?>
 <!DOCTYPE html>
 <html>
     <head>
-        <title>Filmje - <?php echo $modus; ?> - Stap 1</title>
+        <title>Filmje - <?php echo $postWaardes['Modus']; ?> - Stap 1</title>
         <link rel="shortcut icon" href="favicon.ico">
         <link rel="stylesheet" href="css/stylesheet.css">
         <link rel="stylesheet" href="css/stoelselectie.css">
@@ -31,7 +31,7 @@ $modus = $_POST['modus'];
         <?php
         echo ("
 <script>    
-var Voorstelling = " . $voorstelling . ";
+var Voorstelling = " . $postWaardes['Voorstelling'] . ";
 </script>");
         ?>
     </head>
@@ -47,13 +47,7 @@ var Voorstelling = " . $voorstelling . ";
                                 <li><a href="#">Info</a>                     <ul>                         <li><a href="bereikbaarheid.php">Bereikbaarheid</a></li>                         <li><a href="openingstijden.php">Openingstijden</a></li>                     </ul>                 </li>
                 <li><a href="contact.php">Contact</a></li>
                 <li id="lastLi">Specials
-                    <ul>
-                        <?php
-                        foreach ($specials as $special) {
-                            echo ("<li><a href=\"specials.php?SpecialID=" . $special['SpecialID'] . "\">" . $special['Naam'] . "</a></li>");
-                        }
-                        ?>
-                    </ul>
+                <?php $specialsMenuitems = new SpecialsMenuItemsView(); $specialsMenuitems->Render(); ?>
                 </li>
                                <li>
                     <form style="width: 250px;" action="zoeken.php" method="GET"><input id="qtext" type="text" name="qtext" autocomplete="off"><input class="ZoekSubmitButton" type="submit" value="Zoek"></form>
@@ -68,12 +62,12 @@ var Voorstelling = " . $voorstelling . ";
             <td>
             <div id="sideContent">
                 <?php $filmPoosterEnInfoView = new FilmPoosterEnInfoView();
-                $filmPoosterEnInfoView->Render($voorstelling); ?>
+                $filmPoosterEnInfoView->Render($postWaardes['Voorstelling']); ?>
             </div>
             </td><td>
             <div id="mainContent">
                 <div id="ss">
-                    <p class="blockheader"><?php echo strtoupper($modus) ?> STAP1 - Stoelselectie</p>
+                    <p class="blockheader"><?php echo strtoupper($postWaardes['Modus']) ?> STAP1 - Stoelselectie</p>
                     <div id="StoelSelectieHeader">
                         Filmpje hanteert prijzen gebaseerd op de stoelen die u voor de voorstelling selecteert. <br> Zou u zo vriendelijk willen zijn hieronder uw zitplaats(en) te kiezen? <br>
                         Onder het stoeloverzicht vindt u een legenda en een overzicht van uw selectie.
@@ -129,15 +123,14 @@ var Voorstelling = " . $voorstelling . ";
                             </tfoot>
                         </table>
                         <form method="post" action="ReserverenStap2.php" name="GeselecteerdeStoelenForm">
-                            <input type="hidden" id="gs" name="GeselecteerdeStoelen" value="">
-                            <input type="hidden" id="voortsellingid" name="voorstellingid" value="<?php echo $voorstelling; ?>">
-                            <input type="hidden" id="modusip" name="modus" value="<?php echo $modus ?>">
+                            <input type="hidden" id="gs" name="geselecteerdestoelen" value="">
+                            <input type="hidden" id="voortsellingid" name="voorstelling" value="<?php echo $postWaardes['Voorstelling']; ?>">
+                            <input type="hidden" id="modusip" name="modus" value="<?php echo $postWaardes['Modus']; ?>">
                             <input type="submit" disabled="disabled" class="buttonLight" name="submitB" id="submitB" value="Volgene Stap">
                         </form>
 
                     </div>
                 </div>
-
             </div>
             </td><tr></table>
             <footer>

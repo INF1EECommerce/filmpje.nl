@@ -1,35 +1,12 @@
 <?php
 class FilmpjeIdeal
 {
-
- var $amount;
- var $orderId;
- var $issuer;
- var $description;
- var $reference;
     
-public function ParseReservernPostValues($postvalues)
-{
-        try
-        {
-        
-        $this -> amount = intval($postvalues['amount']) * 100;
-        $this ->orderId = $postvalues['reference'];
-        $this ->issuer = $postvalues['issuer'];
-        $this ->description = $postvalues['description'];
-        $this ->reference = $postvalues['reference'];
-        return true;
-        }
-        catch(Exception $ex)
-        {
-            return FALSE;
-        }
-
-}
-    
-public function GenereerOrderEnGeefUrl($voorstelling) 
+public function GenereerOrderEnGeefUrl(Bestelling $bestelling) 
 {
 
+try {
+    
 define('MERCHANTID',17164);//<--- Change this into your own merchant ID
 define('SECRETCODE',"Ty84RqXj79BtNa65Awf3J4Qxr7E8Scs5GDb93Ygm");//<--- Change this into your own merchant ID
 
@@ -52,14 +29,14 @@ $issuers = $ideal->getSupportedIssuers();
     /* Set the payment */
     $paymentObj = new Icepay_PaymentObject();
     $paymentObj->setPaymentMethod($ideal->getCode())
-                ->setAmount($this->amount)
+                ->setAmount($bestelling->totaalPrijs * 100)
                 ->setCountry("NL")
                 ->setLanguage("NL")
-                ->setReference($this->reference)
-                ->setDescription($this->description)
+                ->setReference($bestelling->kenmerk)
+                ->setDescription("Uw bestelling bij Filmpje.nl")
                 ->setCurrency("EUR")
-                ->setIssuer($issuers[$this->issuer])
-                ->setOrderID($this->orderId);
+                ->setIssuer($issuers[$bestelling->banknummer])
+                ->setOrderID($bestelling->kenmerk);
     // Merchant Settings
     $basicmode = Icepay_Basicmode::getInstance();
     $basicmode->setMerchantID(MERCHANTID)
@@ -67,9 +44,14 @@ $issuers = $ideal->getSupportedIssuers();
             ->setProtocol('http')
             //->useWebservice() // <--- Want to make a call using the webservices? You can using by using this method
             ->validatePayment($paymentObj); // <--- Required!
-    $basicmode->setSuccessURL("http://chivan.com/filmpje.nl/icepay/bedankt.php?vs=".$voorstelling);
-    $basicmode->setErrorURL("http://chivan.com/filmpje.nl/icepay/betaalerror.php");
+    $basicmode->setSuccessURL("http://chivan.com/filmpje.nl/bedankt.php?voorstelling=".$bestelling->voorstellingID."&modus=bestellen&referentie=".$bestelling->kenmerk);
+    $basicmode->setErrorURL("http://chivan.com/filmpje.nl/betaalerror.php");
     return $basicmode->getURL();
+}
+ catch (Exception $ex)
+ {
+     throw new Exception("Er is een probleem opgetreden bij het communiceren met de betalingserver.");
+ }
     
 }
 }

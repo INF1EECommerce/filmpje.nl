@@ -1,7 +1,6 @@
 <?php 
-include_once 'backend/DBFunctions.php';
-$dbFunctions =  new DBFunctions();
-$specials = $dbFunctions->HaalSpecialsOp();
+include_once 'Views/SpecialsMenuItemsView.php';
+include_once 'Views/Top10View.php';
 ?>
 <!DOCTYPE html>
 <html>
@@ -29,13 +28,7 @@ $specials = $dbFunctions->HaalSpecialsOp();
                                 <li><a href="#">Info</a>                     <ul>                         <li><a href="bereikbaarheid.php">Bereikbaarheid</a></li>                         <li><a href="openingstijden.php">Openingstijden</a></li>                     </ul>                 </li>
                 <li><a href="contact.php">Contact</a></li>
                 <li id="lastLi">Specials
-                    <ul>
-                        <?php
-                        foreach ($specials as $special) {
-                            echo ("<li><a href=\"specials.php?SpecialID=" . $special['SpecialID'] . "\">" . $special['Naam'] . "</a></li>");
-                        }
-                        ?>
-                    </ul>
+                    <?php $specialsMenuitems = new SpecialsMenuItemsView(); $specialsMenuitems->Render(); ?>
                 </li>
                                <li>
                     <form style="width: 250px;" action="zoeken.php" method="GET"><input id="qtext" type="text" name="qtext" autocomplete="off"><input class="ZoekSubmitButton" type="submit" value="Zoek"></form>
@@ -76,28 +69,13 @@ $specials = $dbFunctions->HaalSpecialsOp();
 
 
 <div id="top10">
-
-<ul id="top10">
-	<li id="top10header"><p>Top 10 films</p></li>
-	<li id="firstLi"><button>1</button>Ted</li>
-	<li><button>2</button>The Possession</li>
-	<li><button>3</button>The Bourne Legacy</li>
-	<li><button>4</button>De Verbouwing</li>
-	<li><button>5</button>Bait</li>
-	<li><button>6</button>The Expendables 2</li>
-	<li><button>7</button>The Dark Knight Rises</li>
-	<li><button>8</button>The Watch</li>
-	<li><button>9</button>Intouchables</li>
-	<li><button>10</button>Detachment</li>
-	<button id="reviews">Top 10 Filmreviews</button>
-</ul>
-
+<?php $top10view = new Top10View(); $top10view->Render(); ?>
 </div>
 		</div> 	
             </td><td>
                 <div id="mainContent">
 		<div id="pagebanner">
-<img src="image/banner_avengers.png">
+<img src="image/open.png">
 </div>
 		<!-- kiezen tussen contactgegevens/openingstijden/bereikbaarheid/tarieven via php -->
 		<div id="infoDiv">

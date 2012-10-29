@@ -5,6 +5,7 @@ class BestellingFactory
   {
      include_once('backend/DTO/Bestelling.php');
      include_once('backend/Bestellingen.php');
+     include_once 'backend/TotaalPrijsCalculatie.php';
      
 //     include_once('/backend/DTO/Bestelling.php');
 //     include_once('/backend/Bestellingen.php');
@@ -19,10 +20,10 @@ class BestellingFactory
      $bestelling->email = $postvalues['email'];
      $bestelling->telefoonnummer = $postvalues['telefoon'];
      $bestelling->banknummer = $postvalues['issuer'];
-     $bestelling->totaalPrijs = $postvalues['amount'];
+     $bestelling->totaalPrijs = TotaalPrijsCalculatie::Calculeer($postvalues['geselecteerdestoelen']);
      $bestelling->kenmerk = $postvalues['reference'];
      $bestelling->BestellingStatus = $bestellingen->BestellingStatusIDForStatus("New");
-     $bestelling->stoelen = $postvalues['stoelen'];
+     $bestelling->stoelen = $postvalues['geselecteerdestoelen'];
      $bestelling->postcode = $postvalues['postcode'];
      $bestelling->plaats = $postvalues['plaats'];
      

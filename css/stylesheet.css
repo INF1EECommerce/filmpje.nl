@@ -2,6 +2,8 @@ body {
     margin: 0;
     padding: 0;
     background: #660000;
+    color: white;
+    font-family: Arial;
 }
 
 a, a:visited
@@ -782,7 +784,6 @@ li.clearfix {
     font-family: arial;
     color: #FFFFFF;
     padding-bottom: 10px;
-    width: 50%;
     float: left;
     display: block;
 
@@ -997,7 +998,7 @@ li.clearfix {
 
 .icepayframe
 {
-    height: 800px;
+    height: 830px;
     width: 100%;
     border: 0px;
     margin: 0px;
@@ -1028,7 +1029,7 @@ li.clearfix {
 #bedankt img
 {
     float: right;
-    top: 10px;
+ margin-top: 25px;
     cursor: pointer;
     -webkit-border-radius: 5px;
 -moz-border-radius: 5px;
@@ -1300,6 +1301,8 @@ border-radius: 5px;
     font-size: 10px;
     padding-bottom: 5px;
     padding-left: 5px;
+    zoom:1; /* IE 7 Hack starts here*/
+    *display:inline;
 }
 
 .filmoverzichtposter img
@@ -1382,6 +1385,7 @@ border-radius: 5px;
 {
     border: 1px;
     border-style: solid;
+    border-color: black;
     width: 250px;
     position: relative;
     top: 200px;
@@ -1536,6 +1540,7 @@ border-bottom-left-radius: 5px;
 {
     padding-left: 15px;
     padding-right: 15px;
+    padding-bottom: 15px;
 }
 
 
@@ -1559,7 +1564,6 @@ border-bottom-left-radius: 5px;
 }
 
 #openingstijden th, #openingstijden td{
-    border-bottom: 1px solid #220000;
     text-align: left;
 }
 

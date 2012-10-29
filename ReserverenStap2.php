@@ -1,28 +1,21 @@
 <?php 
-
+include_once 'Helpers/ExceptionHelper.php';
+set_exception_handler('ExceptionHelper::exception_handler');
 include_once 'Views/FilmPoosterEnInfoView.php'; 
 include_once 'Views/BestellingOverzichtView.php';
 include_once 'Views/BestellingOverzichtHeaderView.php';
+include_once 'Views/SpecialsMenuItemsView.php';
 include_once 'Helpers/ReferenceGenerator.php';
-include_once 'backend/DBFunctions.php';
-$dbfunctions = new DBFunctions();
-$specials = $dbfunctions->HaalSpecialsOp();
-$voorstelling = intval($_POST['voorstellingid']);
-$geselecteerdeStoelen = $_POST['GeselecteerdeStoelen'];
-if ($voorstelling == 0 || strlen($geselecteerdeStoelen) == 0 || !isset($_POST['modus'])) {
-    header('Location: index.php');
-}
-$modus = $_POST['modus'];
-ob_start();
-$bestellingOverzichtView = new BestellingOverzichtView();
-$bestellingOverzichtView->Render($geselecteerdeStoelen);
-$stoelenTabel = ob_get_contents();
-ob_end_clean();
+include_once 'backend/validatie/ReserverenPostValidatie.php';
+include_once 'backend/TotaalPrijsCalculatie.php';
+
+$validatie = new ReserverenPostValidatie();
+$postWaardes = $validatie->ValideerStap2($_POST);
 ?>
 <!DOCTYPE html>
 <html>
 <head>
-<title>Filmje - <?php echo $modus; ?> - Stap 2</title>
+<title>Filmje - <?php echo $postWaardes['Modus']; ?> - Stap 2</title>
 <link rel="shortcut icon" href="favicon.ico">
 <link rel="stylesheet" href="css/stylesheet.css">
 <link href="css/SpryValidationTextField.css" rel="stylesheet" type="text/css">
@@ -53,9 +46,7 @@ ob_end_clean();
                 <li id="lastLi">Specials
                     <ul>
                         <?php
-                        foreach ($specials as $special) {
-                            echo ("<li><a href=\"specials.php?SpecialID=" . $special['SpecialID'] . "\">" . $special['Naam'] . "</a></li>");
-                        }
+                        $specialsMenuitems = new SpecialsMenuItemsView();  $specialsMenuitems->Render();
                         ?>
                     </ul>
                 </li>
@@ -71,14 +62,14 @@ ob_end_clean();
             <tr>
             <td>
         <div id="sideContent">
-        <?php $filmPoosterEnInfoView = new FilmPoosterEnInfoView(); $filmPoosterEnInfoView ->Render($voorstelling); ?>
+        <?php $filmPoosterEnInfoView = new FilmPoosterEnInfoView(); $filmPoosterEnInfoView ->Render($postWaardes['Voorstelling']); ?>
          </div>
             </td><td>
         <div id="mainContent">
        <div id="ss">
-           <p class="blockheader"><?php echo strtoupper($modus); ?> STAP2 - Uw gegevens</p>
+           <p class="blockheader"><?php echo strtoupper($postWaardes['Modus']); ?> STAP2 - Uw gegevens</p>
            <div id="ReserverenHeader">
-            <?php $bestellingOverzichtHeader = new BestellingOverzichtHeaderView(); $bestellingOverzichtHeader ->Render($voorstelling); ?>    
+            <?php $bestellingOverzichtHeader = new BestellingOverzichtHeaderView(); $bestellingOverzichtHeader ->Render($postWaardes['Voorstelling']); ?>    
         </div>
         <div id="formulier">
             
@@ -86,7 +77,7 @@ ob_end_clean();
             <table>
                 <caption>Uw contactinformatie</caption>
                 <tr>
-                    <td><label>Voornaam:</label></td>
+                    <td style="width: 120px;"><label>Voornaam:</label></td>
                     <td><span id="voornaamText">
                       <input type="text" value="" name="voornaam">
                       <span class="textfieldRequiredMsg">Voornaam is verplicht.</span></span>
@@ -108,7 +99,7 @@ ob_end_clean();
                 <td><label>Postcode:</label></td>
                 <td><span id="postcodeText">
                 <input type="text" value="" name="postcode">
-                <span class="textfieldRequiredMsg">Postcode is verplicht.</span><span class="textfieldMinCharsMsg">Postcode moet minimaal 7 karakters lang zijn.</span><span class="textfieldMaxCharsMsg">Postcode mag maximaal 7 karakters lang zijn.</span></span></td>
+                <span class="textfieldRequiredMsg">Postcode is verplicht.</span><span class="textfieldMinCharsMsg">Postcode moet minimaal 7 karakters lang zijn.</span><span class="textfieldMaxCharsMsg">Postcode mag maximaal 7 karakters lang zijn.</span><span class="textfieldInvalidFormatMsg">v.b. 1234 AA</span></span></td>
             </tr>
             <tr>
                 <td><label>Plaats:</label></td>
@@ -120,16 +111,16 @@ ob_end_clean();
                 <td><label>Email:</label></td>
                 <td><span id="emailText">
                   <input type="text" value="" name="email">
-                  <span class="textfieldRequiredMsg">Email is verplicht.</span><span class="textfieldInvalidFormatMsg">Dit is geen email adres.</span></td>
+                  <span class="textfieldRequiredMsg">Email is verplicht.</span><span class="textfieldInvalidFormatMsg">v.b. info@filmpje.nl</span></td>
             </tr>
             <tr>
                 <td><label>Telefoonnummer:</label></td>
                 <td><span id="telefoonnummerText">
                 <input type="text" value="" name="telefoon">
-                <span class="textfieldRequiredMsg">Telefoonnummer is verplicht.</span><span class="textfieldMinCharsMsg">Telefoonnummer moet 10 cijfers lang zijn.</span><span class="textfieldMaxCharsMsg">Telefoonnummer mag maximaal 10 cijfers lang zijn.</span></span></td>
+                <span class="textfieldRequiredMsg">Telefoonnummer is verplicht.</span><span class="textfieldMinCharsMsg">Telefoonnummer moet 10 cijfers lang zijn.</span><span class="textfieldMaxCharsMsg">Telefoonnummer mag maximaal 10 cijfers lang zijn.</span><span class="textfieldInvalidFormatMsg">v.b. 0101234567</span></span></td>
             </tr>
             <tr><td>&nbsp;</td></tr>
-            <?php if($modus=="bestellen")
+            <?php if($postWaardes['Modus'] =="bestellen")
             { ?>
             <tr>
             
@@ -151,26 +142,23 @@ ob_end_clean();
             </tr>
             <tr><td>&nbsp;</td></tr>
             <?php } ?>
-            <tr><td>
-                    <input type="hidden" name="amount" value="<?php echo $bestellingOverzichtView -> totaalPrijs; ?>">
+            <tr><td colspan="2" style="width: 400px;">
                     <input type="hidden" name="reference" value ="<?php echo ReferenceGenerator::Genereer(); ?>">
-                    <input type="hidden" name="stoelen" value="<?php echo $geselecteerdeStoelen; ?>">
-                    <input type="hidden" name="voorstelling" value="<?php echo $voorstelling; ?>">
-                    <input type="hidden" name="description" value="Uw bestelling bij Filmpje.">
-                    <input type="hidden" name="modus" value="<?php echo $modus; ?>">
-                    <?php if($modus=="bestellen")
+                    <input type="hidden" name="geselecteerdestoelen" value="<?php echo $postWaardes['GeslecteerdeStoelen']; ?>">
+                    <input type="hidden" name="voorstelling" value="<?php echo $postWaardes['Voorstelling']; ?>">
+                    <input type="hidden" name="modus" value="<?php echo $postWaardes['Modus']; ?>">
+                    <?php if($postWaardes['Modus'] == "bestellen")
                     { ?>
-                    <input type="submit" class="buttonLight" value="Bestelling plaatsen">
+                    <input type="submit" style="float: left; margin-top: 3px;" class="buttonLight" value="Bestelling plaatsen"><img style="margin-left: 10px; float: left;" src="image/ideal.png" alt="ideallogo"><span style="float: left; margin-top: 10px; margin-left: 10px;"> Veilig betalen met IDeal.</span>
                     <?php } else {  ?>
-                    <input type="submit" class="buttonLight" value="Reserveren">
+                    <input type="submit" style="float: left" class="buttonLight" value="Reserveren">
                     <?php } ?>
                 </td>
         </table>
         </form>
         </div>
-           <span id="idealLogo"><img src="image/ideal.png" alt="ideallogo"></span>
           <div id="StoelPrijzen">
-         <?php echo $stoelenTabel; ?> 
+         <?php $bestellingOverzichtView = new BestellingOverzichtView(); $bestellingOverzichtView->Render($postWaardes['GeslecteerdeStoelen']) ?> 
         </div>
             </div>
         </div>
@@ -190,11 +178,11 @@ ob_end_clean();
 var voornaamText = new Spry.Widget.ValidationTextField("voornaamText", "none", {validateOn:["change"], hint:"Uw voornaam"});
 var achternaamText = new Spry.Widget.ValidationTextField("achternaamText", "none", {validateOn:["change"], hint:"Uw achternaam"});
 var adresText = new Spry.Widget.ValidationTextField("adresText", "none", {hint:"b.v. Dorpsweg 18", validateOn:["change"]});
-var postcodeText = new Spry.Widget.ValidationTextField("postcodeText", "none", {minChars:7, maxChars:7, hint:"b.v. 1234 AA", validateOn:["change"]});
+var postcodeText = new Spry.Widget.ValidationTextField("postcodeText", "zip_code", {hint:"b.v. 1234 AA", validateOn:["change"], format:"zip_custom", pattern:"0000 AA"});
 var emailText = new Spry.Widget.ValidationTextField("emailText", "email", {validateOn:["change"], hint:"b.v. info@filmpje.nl"});
-var telefoonnummerText = new Spry.Widget.ValidationTextField("telefoonnummerText", "none", {minChars:10, maxChars:10, hint:"b.v. 0612345678", validateOn:["change"]});
-var plaatsText = new Spry.Widget.ValidationTextField("plaatsText", "none", {hint:"b.v. 0612345678", validateOn:["change"]});
-<?php if($modus=="bestellen")
+var telefoonnummerText = new Spry.Widget.ValidationTextField("telefoonnummerText", "phone_number", {hint:"b.v. 0612345678", validateOn:["change"], format:"phone_custom", pattern:"0000000000"});
+var plaatsText = new Spry.Widget.ValidationTextField("plaatsText", "none", {hint:"b.v. Amsterdam", validateOn:["change"]});
+<?php if($postWaardes['Modus'] == "bestellen")
 { ?>
 var bankSelect = new Spry.Widget.ValidationSelect("bankSelect", { invalidValue:"-1", validateOn:["change"] });
 <?php } ?>

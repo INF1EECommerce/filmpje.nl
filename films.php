@@ -1,26 +1,21 @@
 <?php 
-if (!isset($_GET['filmid']))
-{
-   header("Location: index.php");
-   die;
-}
-$filmid = intval($_GET['filmid']);        
+include_once 'Helpers/ExceptionHelper.php';
+set_exception_handler('ExceptionHelper::exception_handler');
 include_once 'Views/FilmPoosterEnInfoView.php';
 include_once 'backend/DBFunctions.php';
 include_once 'Views/FilmTijdenView.php';
 include_once 'Views/Top10View.php';
-$dbfunctions = new DBFunctions();
-$specials = $dbfunctions->HaalSpecialsOp();
-try { $film = $dbfunctions ->FilmInfo($filmid); } catch(Exception $ex) { if ($ex->getMessage() == "Film niet gevonden.") {
-header("HTTP/1.0 404 Not Found");
-exit;
-}}
+include_once 'Views/SpecialsMenuItemsView.php';
+include_once 'backend/validatie/FilmGetValidatie.php';
+
+$validatie = new FilmGetValidatie();
+$getWaardes = $validatie->Valideer($_GET);
 ?>
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="utf-8">
-<title>Filmpje.nl - <?php echo $film['Naam'] ?></title>
+<title>Filmpje.nl - <?php echo $getWaardes['Filminfo']['Naam'] ?></title>
 <link rel="shortcut icon" href="favicon.ico">
 <link rel="stylesheet" href="css/stylesheet.css">
 <script src="javascript/jquery.js" type="text/javascript"></script>
@@ -47,13 +42,7 @@ exit;
                                 <li><a href="#">Info</a>                     <ul>                         <li><a href="bereikbaarheid.php">Bereikbaarheid</a></li>                         <li><a href="openingstijden.php">Openingstijden</a></li>                     </ul>                 </li>
                 <li><a href="contact.php">Contact</a></li>
                 <li id="lastLi">Specials
-                    <ul>
-                        <?php
-                        foreach ($specials as $special) {
-                            echo ("<li><a href=\"specials.php?SpecialID=" . $special['SpecialID'] . "\">" . $special['Naam'] . "</a></li>");
-                        }
-                        ?>
-                    </ul>
+                  <?php $specialsMenuitems = new SpecialsMenuItemsView(); $specialsMenuitems->Render(); ?>
                 </li>
                                <li>
                     <form style="width: 250px;" action="zoeken.php" method="GET"><input id="qtext" type="text" name="qtext" autocomplete="off"><input class="ZoekSubmitButton" type="submit" value="Zoek"></form>
@@ -66,7 +55,7 @@ exit;
             <tr>
             <td>
         <div id="sideContent">
-          <?php $filmPoosterEnInfoView = new FilmPoosterEnInfoView(); $filmPoosterEnInfoView->RenderVoorFilm($film); ?>
+          <?php $filmPoosterEnInfoView = new FilmPoosterEnInfoView(); $filmPoosterEnInfoView->RenderVoorFilm($getWaardes['Filminfo']); ?>
             
             <div id="top10">
 
@@ -79,25 +68,25 @@ exit;
                 <div id="trailer">
                <p class="blockheader">Trailer</p>
                     <video controls  width="620" height="360">
-                        <source src="trailers/<?php echo $film['Trailer'] ?>.mp4"type="video/mp4" />
-                        <source src="trailers/<?php echo $film['Trailer'] ?>.webmvp8.webm" type="video/webm" />
-                        <source src="trailers/<?php echo $film['Trailer'] ?>.theora.ogv"  type="video/ogg" />
+                        <source src="trailers/<?php echo $getWaardes['Filminfo']['Trailer'] ?>.mp4"type="video/mp4" />
+                        <source src="trailers/<?php echo $getWaardes['Filminfo']['Trailer'] ?>.webmvp8.webm" type="video/webm" />
+                        <source src="trailers/<?php echo $getWaardes['Filminfo']['Trailer'] ?>.theora.ogv"  type="video/ogg" />
                         <object type="application/x-shockwave-flash" data="http://releases.flowplayer.org/swf/flowplayer-3.2.1.swf" height="360" width="620">
                         <param name="movie" value="http://releases.flowplayer.org/swf/flowplayer-3.2.1.swf" />
                         <param name="allowFullScreen" value="true" />
                         <param name="wmode" value="transparent" />
-                        <param name="flashVars" value="config={'playlist':['http%3A%2F%2Fchivan.com%2Ffilmpje.nl%2Fimage%2FtrailerLogo.png',{'url':'http%3A%2F%2Fchivan.com%2Ffilmpje.nl%2Ftrailers%2F<?php echo $film['Trailer'] ?>.mp4','autoPlay':false}]}" />
+                        <param name="flashVars" value="config={'playlist':['http%3A%2F%2Fchivan.com%2Ffilmpje.nl%2Fimage%2FtrailerLogo.png',{'url':'http%3A%2F%2Fchivan.com%2Ffilmpje.nl%2Ftrailers%2F<?php echo $getWaardes['Filminfo']['Trailer'] ?>.mp4','autoPlay':false}]}" />
                     </object>
                     </video>
 			</div>
              
             <div id="filmomschrijvingHeader">
             <p class="blockheader">Filmomschrijving</p>            
-            <p class="filmbeschrijving"><?php print $film['Beschrijving']; ?></p><p class="filmbeschrijving"><strong>Hoofdrolspelers: </strong><?php echo $film['Acteurs']; ?></p>
+            <p class="filmbeschrijving"><?php print $getWaardes['Filminfo']['Beschrijving']; ?></p><p class="filmbeschrijving"><strong>Hoofdrolspelers: </strong><?php echo $getWaardes['Filminfo']['Acteurs']; ?></p>
             </div>
                 <div id ="filmtijden">
                 <p class="blockheader" style="margin-bottom: 0px;">Tijden</p>    
-                <?php $filmtijdenview = new FilmTijdenView(); $filmtijdenview->Render($filmid); ?>    
+                <?php $filmtijdenview = new FilmTijdenView(); $filmtijdenview->Render($getWaardes['FilmID']); ?>    
                     </div>
         </div>
             </td></tr></table>

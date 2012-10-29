@@ -11,6 +11,50 @@ class DBFunctions
       $this-> connection = new DBConnection();
   }
   
+  public function BestaatFilm($filmId, $closeConnection)
+  {
+      $this -> connection -> dbConnect();
+      $query = mysql_query("
+        SELECT FilmID FROM films WHERE FilmID = ".$filmId."
+        ");
+      
+       $result = array();
+
+        while ($row = mysql_fetch_array($query)) {
+
+            $result[] = $row;
+        }
+        
+        if ($closeConnection) {
+            $this->connection->dbClose();
+        }
+        
+        if (count($result) > 0) {
+            return true;
+        }
+        else 
+        {
+            return false;
+        }
+      
+  }
+  
+  public function HaalVoorstellingOp($voorstelling, $closeConnection)
+  {
+      $this -> connection -> dbConnect();
+      $query = mysql_query("
+        SELECT * FROM voorstellingen WHERE voorstellingen.VoorstellingID = ".$voorstelling."
+        ");
+      
+      $row = mysql_fetch_array($query);
+      
+      if ($closeConnection) {
+          $this -> connection -> dbClose();
+      }
+ 
+      return $row;
+  }
+       
   public function HaalTop10FilmsOp()
   {
       $this -> connection -> dbConnect();
@@ -438,7 +482,32 @@ class DBFunctions
       
       return $result;
   }
+
+    public function BestaatSpecial($specialId, $closeConnection) {
+          $this -> connection -> dbConnect();
+      $query = mysql_query("
+        SELECT SpecialID FROM specials WHERE SpecialID = ".$specialId."
+        ");
       
+       $result = array();
+
+        while ($row = mysql_fetch_array($query)) {
+
+            $result[] = $row;
+        }
+        
+        if ($closeConnection) {
+            $this->connection->dbClose();
+        }
+        
+        if (count($result) > 0) {
+            return true;
+        }
+        else 
+        {
+            return false;
+        }
+    }
 
 }
 

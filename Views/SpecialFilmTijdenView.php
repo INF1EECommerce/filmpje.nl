@@ -33,7 +33,7 @@ class SpecialFilmTijdenView {
         {
         //lus door de datum groepen heen en maak div aan.
         echo ("
-                <table class=\"timeHeaderTable\">
+                <table class=\"timeHeaderTable\" style=\"margin-bottom: 0px;\">
                 <tr class=\"dateRow\">
                     <th id=\"dateTh\">".$this->specal['Naam']." - ".DateHelper::VertaalDatumNaarVandaagMorgenOvermorgen($voorstellingen[0]['VoorstellingDatum'])."
                     </th>
