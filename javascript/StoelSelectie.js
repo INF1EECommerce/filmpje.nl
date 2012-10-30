@@ -28,7 +28,7 @@ function RenderStoelSelectie()
                                                    
     //haal de zaalinfo op
     // Voorstelling komt uit PGP (db);
-    $.getJSON('backend/zaalinfo.php', {
+    $.getJSON('backend/JSON/Zaalinfo.php', {
         voorstelling : Voorstelling
     }, function(data)
 {
@@ -37,7 +37,7 @@ function RenderStoelSelectie()
 //        Stoelen = data[0].MaxStoelenPerRij;
 
         //na callback haal de beschikbare stoelen op
-        $.getJSON('backend/beschikbarestoelen.php', {
+        $.getJSON('backend/JSON/BeschikbareStoelen.php', {
             voorstelling : Voorstelling
         }, function(data)
 {     

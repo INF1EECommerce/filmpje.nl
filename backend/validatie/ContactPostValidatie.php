@@ -1,11 +1,6 @@
 <?php
 
 class ContactPostValidatie {
-    
-    public function ContactPostValidatie()
-    {
-        include_once 'backend/Mail/SendEmail.php';
-    }
 
     public function Valideer($postWaardes)
     {

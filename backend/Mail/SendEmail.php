@@ -4,6 +4,7 @@ class SendEmail
 {
     public function SendEmail()
     {
+        //moet het volledige pad zijn omdat deze class als onderdeel van een extern aangeroepen script kan worden uitegevoerd.
         include_once '/var/www/filmpje.nl/backend/Mail/Templates/TemplateParser.php';
         include_once '/var/www/filmpje.nl/backend/Bestellingen.php';
         include_once '/var/www/filmpje.nl/backend/Reserveringen.php';
@@ -13,14 +14,15 @@ class SendEmail
     
     public function ZendEmailForSuccesBetaling($kenmerk)
     {
+        try {
         $bestellingen = new Bestellingen();
-        $data = $bestellingen->HaalBestellingOp($kenmerk);
+        $data = $bestellingen->HaalBestellingOp($kenmerk, TRUE);
         $emailTo = $data[0]['Email'];
         $bov = new BestellingOverzichtView();
         $stoelen = array();
         
          foreach ($data as $stoel) {
-            $stoelen[] = $stoel['StoelID'];
+             $stoelen[] = $stoel['StoelID'];
 
         }
         
@@ -54,11 +56,18 @@ class SendEmail
         
         $this->SendTemplatedEmail($emailTo, 'Bestelling', "Uw bestelling bij Filmpje", $templateData);
         $this->SendTemplatedEmail("chivan@chivan.com", 'BestellingBioscoop', "Bestelling op Filmpje.nl", $templateData);
+        }
+        catch (Exception $ex)
+        {
+            throw new Exception("Er is is misgegaan tijdens het verzenden van success betaling email. ".$kenmerk." ".$ex->getMessage());
+        }
         
     }
     
         public function ZendEmailForSuccesReservering($data)
     {
+        try
+        {
         $emailTo = $data[0]['Email'];
         $bov = new BestellingOverzichtView();
         $stoelen = array();
@@ -98,12 +107,19 @@ class SendEmail
         
         $this->SendTemplatedEmail($emailTo, 'Reservering', "Uw reservering bij Filmpje", $templateData);
         $this->SendTemplatedEmail("chivan@chivan.com", 'ReserveringBioscoop', "Reservering op Filmpje.nl", $templateData);
+        }
+        catch (Exception $ex)
+        {
+            throw new Exception("Er is is misgegaan tijdens het verzenden van success reservering email. ".$data[0]['Kenmerk']." ".$ex->getMessage());
+        }
         
     }
     
     public function ZendEmailContactFormulier($data)
     {
-         $templateData = array(
+        try 
+        {
+        $templateData = array(
           
             "achternaam" => $data['achternaam'],
             "voornaam" => $data['voornaam'],
@@ -113,6 +129,12 @@ class SendEmail
         );
          
         $this->SendTemplatedEmail("chivan@chivan.com", "Contact", "Contactformulier - Filmpje.nl", $templateData);
+        
+                }
+        catch (Exception $ex)
+        {
+            throw new Exception("Er is is misgegaan tijdens het verzenden van het contact formulier. ".$ex->getMessage());
+        }
     }
     
     

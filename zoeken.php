@@ -1,17 +1,15 @@
 <?php 
+include_once 'Helpers/ExceptionHelper.php';
+set_exception_handler('ExceptionHelper::exception_handler');
 include_once 'Views/ZoekresultatenView.php'; 
 include_once 'Views/SpecialAccordionView.php';
 include_once 'Views/Top10View.php';
-include_once 'backend/DBFunctions.php';
-$dbfunctions = new DBFunctions();
-$specials = $dbfunctions->HaalSpecialsOp();
-if (isset($_GET['qtext'])) {
-    $query = urldecode($_GET['qtext']);
-}
-else
-{
-    header("Location: index.php");
-}
+include_once 'Views/SpecialsMenuItemsView.php';
+include_once 'backend/validatie/ZoekenGetValidatie.php';
+
+$validatie = new ZoekenGetValidatie();
+$query = $validatie->Valideer($_GET);
+
 ?>
 <!DOCTYPE html>
 <html>
@@ -41,13 +39,7 @@ else
                                 <li><a href="#">Info</a>                     <ul>                         <li><a href="bereikbaarheid.php">Bereikbaarheid</a></li>                         <li><a href="openingstijden.php">Openingstijden</a></li>                     </ul>                 </li>
                 <li><a href="contact.php">Contact</a></li>
                 <li id="lastLi">Specials
-                    <ul>
-                        <?php
-                        foreach ($specials as $special) {
-                            echo ("<li><a href=\"specials.php?SpecialID=" . $special['SpecialID'] . "\">" . $special['Naam'] . "</a></li>");
-                        }
-                        ?>
-                    </ul>
+                    <?php $specialsMenuitems = new SpecialsMenuItemsView(); $specialsMenuitems->Render(); ?>
                 </li>
                                <li>
                     <form style="width: 250px;" action="zoeken.php" method="GET"><input id="qtext" type="text" name="qtext" autocomplete="off"><input class="ZoekSubmitButton" type="submit" value="Zoek"></form>

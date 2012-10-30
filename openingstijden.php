@@ -1,4 +1,6 @@
 <?php 
+include_once 'Helpers/ExceptionHelper.php';
+set_exception_handler('ExceptionHelper::exception_handler');
 include_once 'Views/SpecialsMenuItemsView.php';
 include_once 'Views/Top10View.php';
 ?>

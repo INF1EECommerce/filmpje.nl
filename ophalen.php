@@ -7,7 +7,7 @@ include_once 'backend/Reserveringen.php';
 $reserveringen = new Reserveringen();
 try
 {
-$reserveringen->ReserveringOphalen($_GET['km']);
+$reserveringen->ReserveringOphalen($_GET['km'], TRUE);
 header("Location: index.php?m=".  urlencode("Reservering succesvol gemarkeerd als opgehaald."));
 } catch (Exception $ex)
 {

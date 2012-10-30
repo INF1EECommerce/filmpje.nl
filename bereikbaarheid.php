@@ -1,6 +1,7 @@
 <?php 
+include_once 'Helpers/ExceptionHelper.php';
+set_exception_handler('ExceptionHelper::exception_handler');
 require_once('Views/VandaagMorgenOvermorgenView.php'); 
-include_once 'backend/DBFunctions.php';
 include_once 'Views/Top10View.php';
 include_once 'Views/SpecialsMenuItemsView.php';
 ?>

@@ -16,9 +16,17 @@ class TemplateParser
    
    public function GetTemplateTextAndRender($templateNaam, $templateData)
    {
+       try {
+           
        $templateText = file_get_contents(dirname(__FILE__) . "/". $templateNaam . ".txt");
        
        return $this->Render($templateData, $templateText);
+       
+       }
+       catch (Exception $ex)
+       {
+           throw new Exception("Het templatebestand kon niet worden gevonden. ".$templateNaam);
+       }
    }
 
 }

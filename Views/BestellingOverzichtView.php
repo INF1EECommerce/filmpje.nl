@@ -2,18 +2,16 @@
 
 class BestellingOverzichtView {
 
-    var $totaalPrijs;
-
     public function BestellingOverzichtView() {
-        require_once('/var/www/filmpje.nl/backend/DBFunctions.php');
-        //require_once('/backend/DBFunctions.php');
-        $this->totaalPrijs = 0.00;
+        //moet het volledige pad zijn omdat deze class wordt aangeroepen als onderdeel van een externe call.
+        include_once('/var/www/filmpje.nl/backend/Stoelen.php');
+        include_once('/var/www/filmpje.nl/backend/TotaalPrijsCalculatie.php');
     }
 
     public function Render($geselecteerdeStoelen) {
 
-        $dbfunctions = new DBFunctions();
-        $stoelInfo = $dbfunctions->StoelInfo($geselecteerdeStoelen);
+        $stoelen = new Stoelen();
+        $stoelInfo = $stoelen->StoelInfo($geselecteerdeStoelen, TRUE);
 
         echo("
                 <table>
@@ -25,7 +23,6 @@ class BestellingOverzichtView {
                 ");
 
         foreach ($stoelInfo as $stoel) {
-            $this->totaalPrijs = $this->totaalPrijs + floatval($stoel['StoelPrijs']);
             echo ("
                     <tr><td>" . $stoel['RijNummer'] . "</td><td>" . $stoel['StoelNummer'] . "</td><td>" . $stoel['StoelType'] . "</td><td>&euro; " . number_format((float) floatval($stoel['StoelPrijs']), 2, ',', '') . "</td></tr>      
                    ");
@@ -33,16 +30,16 @@ class BestellingOverzichtView {
         echo ("        
                </tbody>
                 <tfoot>
-                    <tr><td>Totaal:</td><td></td><td></td><td>&euro; " . number_format((float)$this->totaalPrijs, 2, ',', '') . "</td></tr>
+                    <tr><td>Totaal:</td><td></td><td></td><td>&euro; " . number_format(TotaalPrijsCalculatie::Calculeer($geselecteerdeStoelen), 2, ',', '') . "</td></tr>
                 </tfoot>
             </table>
             ");
     }
-    
-     public function RenderVoorEmail($geselecteerdeStoelen) {
 
-        $dbfunctions = new DBFunctions();
-        $stoelInfo = $dbfunctions->StoelInfo($geselecteerdeStoelen);
+    public function RenderVoorEmail($geselecteerdeStoelen) {
+
+        $stoelen = new Stoelen();
+        $stoelInfo = $stoelen->StoelInfo($geselecteerdeStoelen, TRUE);
 
         echo("
                 <table>
@@ -52,17 +49,17 @@ class BestellingOverzichtView {
             ");
 
         foreach ($stoelInfo as $stoel) {
-            $this->totaalPrijs = $this->totaalPrijs + floatval($stoel['StoelPrijs']);
             echo ("
                     <tr><td>" . $stoel['RijNummer'] . "</td><td>" . $stoel['StoelNummer'] . "</td><td>" . $stoel['StoelType'] . "</td><td>&euro; " . number_format((float) floatval($stoel['StoelPrijs']), 2, ',', '') . "</td></tr>      
                    ");
         }
         echo ("        
 
-                    <tr><td><strong>Totaal:</strong></td><td></td><td></td><td><strong>&euro; " . number_format((float)$this->totaalPrijs, 2, ',', '') . "</strong></td></tr>
+                    <tr><td><strong>Totaal:</strong></td><td></td><td></td><td><strong>&euro; " . number_format(TotaalPrijsCalculatie::Calculeer($geselecteerdeStoelen), 2, ',', '') . "</strong></td></tr>
             </table>
             ");
     }
 
 }
+
 ?>

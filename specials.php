@@ -2,7 +2,6 @@
 include_once 'Helpers/ExceptionHelper.php';
 set_exception_handler('ExceptionHelper::exception_handler');
 require_once('Views/SpecialFilmTijdenView.php'); 
-require_once 'backend/DBFunctions.php';
 include_once 'Views/Top10View.php';
 include_once 'Views/SpecialGalleryView.php';
 include_once 'Views/SpecialsMenuItemsView.php';

@@ -19,14 +19,14 @@ $bestellingen = new Bestellingen();
 
     if($icepay->validate()){
         // In this example the ICEPAY OrderID is identical to the Order ID used in our project
-        $status = $bestellingen->BestellingStatusVoorID($icepay->getOrderID());
+        $status = $bestellingen->BestellingStatusVoorID($icepay->getOrderID(), FALSE);
 
         /* Only update the status if it's a new order (NEW)
          * or update the status if the statuscode allowes it.
          * In this example the project order status is an ICEPAY statuscode.
          */
         if ($status == "New" || $status="Open"){
-            $bestellingen->SlaStatusOp($icepay->getStatus(), $icepay->getOrderID()); //Update the status of your order
+            $bestellingen->SlaStatusOp($icepay->getStatus(), $icepay->getOrderID(), TRUE); //Update the status of your order
             
             if ($icepay->getStatus() == "OK") {
 
@@ -37,7 +37,7 @@ $bestellingen = new Bestellingen();
             
             if ($icepay->getStatus() == "ERR") {
             //even aan het bestelsysteem doorgeven dat de stoelen weer vrijgegeven kunnen worden;
-            $bestellingen->UpdateBeschikbareStoelenBetaalProbleem($icepay->getOrderID());    
+            $bestellingen->UpdateBeschikbareStoelenBetaalProbleem($icepay->getOrderID(), TRUE);    
             }
             
         }

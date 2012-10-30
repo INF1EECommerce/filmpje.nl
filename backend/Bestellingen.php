@@ -10,10 +10,15 @@ class Bestellingen {
         $this->connection = new DBConnection();
     }
     
-    public function HaalBestellingOp($kenmerk)
+    public function HaalBestellingOp($kenmerk, $closeConnection)
     {
-         $this->connection->dbConnect();   
-        $idQuery = mysql_query("
+      if (strlen($kenmerk) == 0) {
+            throw new Exception("Kenmerk kan niet leeg zijn");
+      }
+        
+      $this->connection->dbConnect();   
+      
+      $query = mysql_query("
       SELECT bestellingen.Voornaam, bestellingen.Adres, bestellingen.Postcode, bestellingen.Plaats, bestellingen.Telefoonnummer, bestellingen.Achternaam, bestellingen.Email, bestellingen.Kenmerk, stoelen.Nummer AS StoelNummer, stoelen.StoelID, films.Naam AS FilmNaam, stoeltypes.Naam AS StoelType, stoeltypes.Prijs AS StoelPrijs, rijen.Nummer AS RijNummer, voorstellingen.Datum AS VoorstellingDatum, voorstellingen.Tijd AS VoorstellingTijd, zalen.Naam AS ZaalNaam
           FROM filmpje.bestellingen 
 		  INNER JOIN voorstellingen on voorstellingen.VoorstellingID = bestellingen.VoorstellingID
@@ -23,35 +28,50 @@ class Bestellingen {
 		  INNER JOIN stoelen on stoelen.StoelID = bestellingstoelen.StoelID 
 		  INNER JOIN rijen on rijen.RijID = stoelen.RijID
 		   INNER JOIN stoeltypes on stoeltypes.StoelTypeID = stoelen.StoelTypeID
-          WHERE bestellingen.Kenmerk = '" . $kenmerk . "'") or die(mysql_error());
-        
+          WHERE bestellingen.Kenmerk = '" . $kenmerk . "'");
+      
+      if (!$query) {
+          throw new Exception("Er is een fout opgetreden bij het ophalen van de bestelling. ".$kenmerk);
+      }
        
        $result = array();
 
-        while ($row = mysql_fetch_array($idQuery)) {
+        while ($row = mysql_fetch_array($query)) {
 
             $result[] = $row;
         }
-        $this->connection->dbClose();
         
+        if($closeConnection){
+        $this->connection->dbClose();
+        }
         return $result;
     }
-    public function BestaatKenmerk($kenmerk)
+    public function BestaatKenmerk($kenmerk, $closeConnection)
     {
-         $this->connection->dbConnect();
-     
-        $idQuery = mysql_query("SELECT BestellingID
-          FROM filmpje.bestellingen 
-          WHERE Kenmerk = '" . $kenmerk . "'") or die(mysql_error());
+        if (strlen($kenmerk) == 0) {
+            throw new Exception("Kenmerk kan niet leeg zijn");
+        }
         
-       
+       $this->connection->dbConnect();
+     
+        $query = mysql_query("SELECT BestellingID
+          FROM filmpje.bestellingen 
+          WHERE Kenmerk = '" . $kenmerk . "'");
+        
+        if (!$query) {
+            throw new Exception("Er is een fout opgetreden bij het ophalen van het kenmerk. ".$kenmerk);
+        }
+        
        $result = array();
 
-        while ($row = mysql_fetch_array($idQuery)) {
+        while ($row = mysql_fetch_array($query)) {
 
             $result[] = $row;
         }
+        
+        if($closeConnection){
         $this->connection->dbClose();
+        }
         
         if (count($result) > 0) {
             return true;
@@ -61,81 +81,87 @@ class Bestellingen {
             return false;
         }
     }
-    public function UpdateKenmerk($kenmerk)
-    {
-        $referenceGenerator = new ReferenceGenerator();
-        $newKenmerk = $referenceGenerator ->Genereer();
-        
-       $this->connection->dbConnect();
-     
-       
-        mysql_query("UPDATE bestellingen
-          SET bestellingen.Kenmerk = ". $newKenmerk ."
-          WHERE Kenmerk = '" . $kenmerk . "'") or die(mysql_error());
-        
-        $this->connection->dbClose();      
-        
-        return $newKenmerk;
-    }
-    public function BestellingStatusIDForStatus($status) {
 
-        if (!isset($status)) {
-            throw new Exception("status kan niet leeg zijn.");
+    public function BestellingStatusIDForStatus($status, $closeConnection) {
+
+        if (strlen($status) == 0) {
+            throw new Exception("Status kan niet leeg zijn.");
         }
 
         $this->connection->dbConnect();
         $query = mysql_query("SELECT  BestellingStatusID
           FROM bestellingstatussen 
-          WHERE Naam = '" . $status . "'") or die(mysql_error());
-        $result = array();
-
-        while ($row = mysql_fetch_array($query)) {
-
-            $result[] = $row;
+          WHERE Naam = '" . $status . "'");
+        
+        if (!$query) {
+            throw new Exception("Er is iets misgegaan bij het ophalen van de statusid. ".$status);
         }
+
+        $result = mysql_fetch_array($query); 
+        
+        if ($closeConnection)
+        {
         $this->connection->dbClose();
-        return $result[0]['BestellingStatusID'];
+        }
+        
+        return $result['BestellingStatusID'];
     }
     
-    public function UpdateBeschikbareStoelenBetaalProbleem($kenmerk)
+    public function UpdateBeschikbareStoelenBetaalProbleem($kenmerk, $closeConnection)
     {
+        if (strlen($kenmerk) == 0) {
+            throw new Exception("Kenmerk is niet gezet.");
+        }
+        
         $this->connection->dbConnect();
         
         $query = mysql_query("SELECT VoorstellingID,  COUNT(*) AS AantalStoelen
           FROM bestellingen
           INNER JOIN bestellingstoelen on bestellingstoelen.BestellingID = bestellingen.BestellingID
-          WHERE bestellingen.Kenmerk = '" . $kenmerk . "'") or die(mysql_error());
-        $result = array();
-
-        while ($row = mysql_fetch_array($query)) {
-
-            $result[] = $row;
+          WHERE bestellingen.Kenmerk = '" . $kenmerk . "'");
+        
+        if (!$query) {
+            throw new Exception("Er is iets mis gegeaan bij het updaten van de beschikbare stoelen. ".$kenmerk);
         }
+
+        $result = mysql_fetch_array($query);
+
+        $this->UpdateBeschikbareStoelen($result['VoorstellingID'],$result['AantalStoelen'] , '+', FALSE);
         
-        $this->UpdateBeschikbareStoelen($result[0]['VoorstellingID'],$result[0]['AantalStoelen'] , '+', FALSE);
-        
+        if ($closeConnection)
+        {
         $this->connection->dbClose();
+        }
     } 
     public function UpdateBeschikbareStoelen($voorstelling, $aantalstoelen, $plusmin, $closeConnection)
     {
-       $this -> connection -> dbConnect();
+       
+        if (!is_numeric($voorstelling) || !is_numeric($aantalstoelen) || strlen($plusmin) != 1) {
+            throw new Exception("Parameters zijn niet juist gezet om de beschikbare stoelen te updaten.");
+        }
+        
+        $this -> connection -> dbConnect();
               
-        mysql_query("UPDATE voorstellingen
+        $query = mysql_query("UPDATE voorstellingen
           SET voorstellingen.BeschikbareStoelen = voorstellingen.BeschikbareStoelen ". $plusmin . " " . $aantalstoelen ."
-          WHERE voorstellingen.VoorstellingID = '" . $voorstelling . "'") or die(mysql_error());
+          WHERE voorstellingen.VoorstellingID = '" . $voorstelling . "'");
+        
+        if (!$query) {
+            throw new Exception("Er is is mis gegaan bij het uodaten van de beschikbare stoelebn.");
+        }
        
         if ($closeConnection) {
             $this->connection->dbClose();
         }
     }
-    public function MaakBestellingAan(Bestelling $bestelling) {
+    public function MaakBestellingAan(Bestelling $bestelling, $closeConnection) {
         
         //kijk of we een bestelling binnen hebben gekregen.
         if (!isset($bestelling)) {
-            throw new Exception("Bestelling is NULL, error.");
+            throw new Exception("Bestelling is niet gezet.");
         }
         
-        if ($this->BestaatKenmerk($bestelling->kenmerk)) {
+        if ($this->BestaatKenmerk($bestelling->kenmerk, TRUE)) {
             return;
         }
        
@@ -153,12 +179,19 @@ class Bestellingen {
         
         //update de beschikbare stoelen in de voorstellingen tabel.
         $this->UpdateBeschikbareStoelen($bestelling->voorstellingID, $stoelenCount, '-', FALSE);
-
+        
+        if ($closeConnection)
+        {
         $this->connection->dbClose();
+        }
     }
     
     private function SlaBestellingStoelenOp($stoelen, $bestellingID, $closeConnection)
     {
+        if (strlen($stoelen) == 0 || !is_numeric($bestellingID)) {
+            throw new Exception("Parameters zijn niet goed gezet voor het opslaan van bestelling stoelen.");
+        }
+        
         $this->connection->dbConnect();
         
         $stoelen = explode(",", $stoelen);
@@ -170,7 +203,7 @@ class Bestellingen {
         ('$bestellingID','$stoel')";
 
             if (!mysql_query($sql, $this->connection->connection)) {
-                die('Error: ' . mysql_error());
+                throw new Exception("Er gig iets mis met het opslaan van de bestlling stoelen.");
             }
         }
         
@@ -182,6 +215,10 @@ class Bestellingen {
     } 
     private function SlaBestellingOp(Bestelling $bestelling, $closeConnection)
     {
+        if (!isset($bestelling)) {
+            throw new Exception("Bestelling is niet gezet.");
+        }
+        
         $this->connection->dbConnect();
         
         mysql_select_db("my_db", $this->connection->connection);
@@ -191,7 +228,7 @@ class Bestellingen {
         ('$bestelling->voorstellingID','$bestelling->totaalPrijs','$bestelling->BestellingStatus', '$bestelling->voornaam', '$bestelling->achternaam', '$bestelling->adres', '$bestelling->postcode', '$bestelling->email', '$bestelling->telefoonnummer', '$bestelling->bank', '$bestelling->banknummer', '$bestelling->kenmerk', '$bestelling->plaats')";
 
         if (!mysql_query($sql, $this->connection->connection)) {
-            die('Error: ' . mysql_error());
+            throw new Exception("Er ging iets mis bij het opslaan van de bestelling in de database.");
         }
         
         if ($closeConnection) {
@@ -200,48 +237,62 @@ class Bestellingen {
     }    
     private function BestellingIDVoorkenmerk($kenmerk, $closeConnection)
     {
-        $this->connection->dbConnect();
-        
-        $idQuery = mysql_query("SELECT MAX(BestellingID) AS BestellingID
-          FROM filmpje.bestellingen 
-          WHERE Kenmerk = '" .$kenmerk. "'") or die(mysql_error());
-        $result = array();
-
-        while ($row = mysql_fetch_array($idQuery)) {
-
-            $result[] = $row;
+        if (strlen($kenmerk) == 0) {
+            throw new Exception("Kenmerk is niet gezet.");
         }
         
+        $this->connection->dbConnect();
+        
+        $query = mysql_query("SELECT MAX(BestellingID) AS BestellingID
+          FROM filmpje.bestellingen 
+          WHERE Kenmerk = '" .$kenmerk. "'");
+
+        if (!$query) {
+            throw new Exception("Er is iets mis gegaan bij het ophalen van het bestellingid. ".$kenmerk);  
+        } 
+        
+       $result = mysql_fetch_array($query);
+
         if ($closeConnection) {
             $this->connection->dbClose();
         }
         
-        return  $result[0]['BestellingID'];
+        return  $result['BestellingID'];
         
     }
-    public function BestellingStatusVoorID($id)
+    public function BestellingStatusVoorID($kenmerk, $closeConnection)
     {
+     
+        if (strlen($kenmerk) == 0) {
+            throw new Exception("Kenmerk kan niet leeg zijn.");
+        } 
+        
      $this->connection->dbConnect();
      
-        $idQuery = mysql_query("SELECT bestellingstatussen.Naam AS BestellingStatus
+        $query = mysql_query("SELECT bestellingstatussen.Naam AS BestellingStatus
           FROM filmpje.bestellingen 
           INNER JOIN bestellingstatussen on bestellingstatussen.BestellingStatusID = bestellingen.BestellingStatusID
-          WHERE Kenmerk = '" . $id . "'") or die(mysql_error());
+          WHERE Kenmerk = '" . $id . "'");
         
+        if (!$query) {
+            throw new Exception("Er is iets mis gegaan bij ophalen van de status voor id. ".$id);
+        } 
+
+       $result = mysql_fetch_array($query);
+
+       if ($closeConnection) {
+       $this->connection->dbClose(); 
+       }
        
-       $result = array();
-
-        while ($row = mysql_fetch_array($idQuery)) {
-
-            $result[] = $row;
-        }
-        $this->connection->dbClose();
-        return $result[0]['BestellingStatus'];
+        return $result['BestellingStatus'];
     }    
-    public function SlaStatusOp($status, $kenmerk)
+    public function SlaStatusOp($status, $kenmerk, $closeConnection)
     {
+        if (strlen($status) == 0 || strlen($kenmerk) == 0) {
+            throw new Exception("Parameters voor het opslaan van de status niet juist gezet.");
+        }
+       
        $statusid = 0;
-
 
        switch ($status) {
            case "OPEN":
@@ -262,11 +313,17 @@ class Bestellingen {
         
        $this->connection->dbConnect();
      
-        mysql_query("UPDATE bestellingen
+        $query = mysql_query("UPDATE bestellingen
           SET bestellingen.BestellingStatusID = ". $statusid ."
-          WHERE Kenmerk = '" . $kenmerk . "'") or die(mysql_error());
+          WHERE Kenmerk = '" . $kenmerk . "'");
         
-        $this->connection->dbClose();      
+        if (!$query) {
+            throw new Exception ("Er is iets mis gegaan bij het opslaan van de nieuwe bestellingstatus.");
+        }
+        
+        if ($closeConnection) {
+        $this->connection->dbClose();
+        }
     }
 
 }

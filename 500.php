@@ -9,7 +9,7 @@ include_once 'Views/Top10View.php';
         <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
         <link rel="shortcut icon" href="favicon.ico">
         <link rel="stylesheet" href="css/stylesheet.css">
-                <link rel="stylesheet" href="css/jquery.tweet.css">
+        <link rel="stylesheet" href="css/jquery.tweet.css">
         <script src="javascript/jquery.js" type="text/javascript"></script>
         <script src="javascript/jquery-ui.js" type="text/javascript"></script>
         <script src="javascript/Zoeken.js" type="text/javascript"></script>

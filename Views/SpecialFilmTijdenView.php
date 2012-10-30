@@ -2,68 +2,63 @@
 
 class SpecialFilmTijdenView {
 
-    var $specal;
+    var $special;
     var $datums = array();
-    
+
     public function SpecialFilmTijdenView() {
         require_once('Helpers/DateHelper.php');
         require_once('Helpers/ArrayGrouper.php');
-        require_once('backend/DBFunctions.php');
-        
-//        require_once('/Helpers/DateHelper.php');
-//        require_once('/Helpers/ArrayGrouper.php');
-//        require_once('/backend/DBFunctions.php');
+        require_once('backend/Voorstellingen.php');
+        require_once('backend/Specials.php');
     }
 
     public function Render($specialID) {
-        
+
         //ducks in a row
-         $dbfunctions = new DBFunctions();
-         $this->specal = $dbfunctions->HaalSpecialOp($specialID);
-        
+        $specials = new Specials();
+        $this->special = $specials->HaalSpecialOp($specialID, TRUE);
+
         //haal voortstellingen op uit de DB
-       
-        $voorstellingen = $dbfunctions->VoorstellingenVoorSpecial($specialID);
-        
+        $voorstellingenDB =  new Voorstellingen();
+        $voorstellingen = $voorstellingenDB->VoorstellingenVoorSpecial($specialID, TRUE);
+
         //check of we voorstellingen terug hebben gekregen.
         if (count($voorstellingen) == 0) {
             echo ("<div id=\"MeldingDiv\" class=\"GeenFilmsGevonden\">Er zijn geen voorstellingen gevonden voor dezer special.</div>");
-        }
-        else
-        {
-        //lus door de datum groepen heen en maak div aan.
-        echo ("
+        } else {
+            //lus door de datum groepen heen en maak div aan.
+            echo ("
                 <table class=\"timeHeaderTable\" style=\"margin-bottom: 0px;\">
                 <tr class=\"dateRow\">
-                    <th id=\"dateTh\">".$this->specal['Naam']." - ".DateHelper::VertaalDatumNaarVandaagMorgenOvermorgen($voorstellingen[0]['VoorstellingDatum'])."
+                    <th id=\"dateTh\">" . $this->special['Naam'] . " - " . DateHelper::VertaalDatumNaarVandaagMorgenOvermorgen($voorstellingen[0]['VoorstellingDatum']) . "
                     </th>
                   </tr>  
                 </table>
                 ");
 
-                //Groepeer deze op datum
-        $datumGroepen = array_slice(ArrayGrouper::GroupArray($voorstellingen, 'VoorstellingDatum'), 0 , 1);
+            //Groepeer deze op datum
+            $datumGroepen = array_slice(ArrayGrouper::GroupArray($voorstellingen, 'VoorstellingDatum'), 0, 1);
 
-        foreach ($datumGroepen as $datum) {
-            $display = "none;";
-            $vertaaldeDatum = DateHelper::VertaalDatumNaarVandaagMorgenOvermorgen($datum['KeyItem']);
-            $this->datums[$vertaaldeDatum] = $vertaaldeDatum;
-            if (array_search($datum, array_keys($datumGroepen)) == 0) {
-                $display = "block;";
-            }
+            foreach ($datumGroepen as $datum) {
+                $display = "none;";
+                $vertaaldeDatum = DateHelper::VertaalDatumNaarVandaagMorgenOvermorgen($datum['KeyItem']);
+                $this->datums[$vertaaldeDatum] = $vertaaldeDatum;
+                if (array_search($datum, array_keys($datumGroepen)) == 0) {
+                    $display = "block;";
+                }
 
-            echo ("    
+                echo ("    
                 <div id =\"" . $vertaaldeDatum . "films\" style=\"display:" . $display . "\">
                 <table class=\"timeTable\">    
                 ");
 
-            //groupeer de fims op titel
-            $films = ArrayGrouper::GroupArray($datum['items'], "FilmNaam");
+                //groupeer de fims op titel
+                $films = ArrayGrouper::GroupArray($datum['items'], "FilmNaam");
 
-            //lus door de films
-            foreach ($films as $film) {
+                //lus door de films
+                foreach ($films as $film) {
 
-                echo ("  
+                    echo ("  
 
                         <tr>
                         <th><a href=\"films.php?filmid=" . $film['items'][0]['FilmID'] . "\">
@@ -72,38 +67,38 @@ class SpecialFilmTijdenView {
                         <td class=\"timeClass\">
 
                         ");
-                //lus door de voortstellingen
-                foreach ($film['items'] as $voorstelling) {
-                    $knopclass = "";
-                    $reserveren = 0;
-                    $filmTijd = strtotime($voorstelling['VoorstellingDatum'] . " " . $voorstelling['VoorstellingTijd']);
-                    $morgen = DateHelper::Plus24uur();
+                    //lus door de voortstellingen
+                    foreach ($film['items'] as $voorstelling) {
+                        $knopclass = "";
+                        $reserveren = 0;
+                        $filmTijd = strtotime($voorstelling['VoorstellingDatum'] . " " . $voorstelling['VoorstellingTijd']);
+                        $morgen = DateHelper::Plus24uur();
 
-                    if ($filmTijd > $morgen) {
-                        $reserveren = 1;
-                    }
+                        if ($filmTijd > $morgen) {
+                            $reserveren = 1;
+                        }
 
-                    if (intval($voorstelling['BeschikbareStoelen']) == 0) {
-                        $knopclass = "uitverkocht";
-                    }
+                        if (intval($voorstelling['BeschikbareStoelen']) == 0) {
+                            $knopclass = "uitverkocht";
+                        }
 
-                    echo ("
+                        echo ("
                                 <button id=\"timeb\" class=\"" . $knopclass . "\" onClick=\"TijdKlik(" . $voorstelling['VoorstellingID'] . ", this, " . $reserveren . "," . $voorstelling['BeschikbareStoelen'] . ");\">" . substr($voorstelling['VoorstellingTijd'], 0, 5) . "</button>
                                 ");
-                }
+                    }
 
-                //film tr afsluiten
-                echo ("
+                    //film tr afsluiten
+                    echo ("
                         </td>
                         </tr>
                         ");
-            }
-            //datum div afsluiten
-            echo ("
+                }
+                //datum div afsluiten
+                echo ("
                 </table>
                 </div>
                 ");
-        }
+            }
         }
     }
 

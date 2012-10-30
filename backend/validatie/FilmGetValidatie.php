@@ -3,7 +3,7 @@ class FilmGetValidatie {
 
     public function FilmGetValidatie()
     {
-        include_once 'backend/DBFunctions.php';
+        include_once 'backend/Films.php';
     }
     
     public function Valideer($getWaardes)
@@ -12,15 +12,15 @@ class FilmGetValidatie {
             throw new Exception("FilmID is niet gezet of is geen nummer.");
         }
         
-       $dbFunctions = new DBFunctions();
+       $films = new Films();
        
-       if (!$dbFunctions->BestaatFilm($getWaardes['filmid'], TRUE)) {
+       if (!$films->BestaatFilm($getWaardes['filmid'], TRUE)) {
            throw new Exception("Deze film komt niet voor in de database.");
        }
        
        $result = array();
        $result['FilmID'] = intval($getWaardes['filmid']);
-       $result['Filminfo'] = $dbFunctions->FilmInfo(intval($getWaardes['filmid']));
+       $result['Filminfo'] = $films->FilmInfo(intval($getWaardes['filmid']), TRUE);
        
        return $result;
     }

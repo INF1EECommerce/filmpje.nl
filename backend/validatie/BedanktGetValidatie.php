@@ -6,7 +6,7 @@ class BedanktGetValidatie {
     {
         include_once 'backend/Bestellingen.php';
         include_once 'backend/Reserveringen.php';
-        include_once 'backend/DBFunctions.php';
+        include_once 'backend/Films.php';
     }   
          
     
@@ -29,7 +29,7 @@ class BedanktGetValidatie {
         switch ($getWaardes['modus']) {
             case "bestellen":
                 $bestellingen = new Bestellingen();
-                if(!$bestellingen->BestaatKenmerk($getWaardes['referentie']))
+                if(!$bestellingen->BestaatKenmerk($getWaardes['referentie'], TRUE))
                 {
                     throw new Exception ("Dit is geen bestaande bestelling.");
                 }
@@ -37,7 +37,7 @@ class BedanktGetValidatie {
 
             case "reserveren":
                 $reserveringen = new Reserveringen();
-                if(!$reserveringen->BestaatReservering($getWaardes['referentie']))
+                if(!$reserveringen->BestaatReservering($getWaardes['referentie'], TRUE))
                 {
                     throw new Exception("Dit is geen bestaande reservering.");
                 }
@@ -49,8 +49,8 @@ class BedanktGetValidatie {
         
         $result['Referentie']= $getWaardes['referentie'];
          
-        $dbFunctions = new DBFunctions();
-        $result['VoorstellingData'] = $dbFunctions->FilmInfoVanVoorstelling(intval($getWaardes['voorstelling']));
+        $films = new Films();
+        $result['VoorstellingData'] = $films->FilmInfoVanVoorstelling(intval($getWaardes['voorstelling']), TRUE);
         
         return $result;
     }

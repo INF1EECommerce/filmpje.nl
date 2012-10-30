@@ -17,12 +17,12 @@ switch ($postWaardes['Modus'])
         $filmpjeIdeal = new FilmpjeIdeal();
         $iframeUrl = $filmpjeIdeal->GenereerOrderEnGeefUrl($postWaardes['Bestelling']);
         $bestellingen = new Bestellingen();
-        $bestellingen->MaakBestellingAan($postWaardes['Bestelling']);
+        $bestellingen->MaakBestellingAan($postWaardes['Bestelling'], TRUE);
         $stapnaam = "Ideal";
         break;
     case "reserveren":
         $reserveringen = new Reserveringen();
-        $reserveringen->MaakReserveringAan($postWaardes['Reservering']);
+        $reserveringen->MaakReserveringAan($postWaardes['Reservering'], TRUE);
         $iframeUrl = "bedankt.php?voorstelling=".$postWaardes['Voorstelling']."&referentie=".$postWaardes['Referentie']."&modus=".$postWaardes['Modus'];
         $stapnaam = "Reservering afgerond";
         break;

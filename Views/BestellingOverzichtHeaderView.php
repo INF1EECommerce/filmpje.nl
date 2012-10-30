@@ -2,23 +2,20 @@
 
 class BestellingOverzichtHeaderView {
 
-    var $totaalPrijs;
-
     public function BestellingOverzichtHeaderView() {
-        require_once('backend/DBFunctions.php');
-        //require_once('/backend/DBFunctions.php');
-        $this->totaalPrijs = 0.00;
+        require_once('backend/Films.php');
     }
 
     public function Render($voorstelling) {
 
-        $dbfunctions = new DBFunctions();
-        $filmInfo = $dbfunctions->FilmInfoVanVoorstelling($voorstelling);
+        $films = new Films();
+        $filmInfo = $films->FilmInfoVanVoorstelling($voorstelling, TRUE);
 
         echo("
-                <h2>" . $filmInfo['Naam'] ." - ". $filmInfo['Datum'] ." - ". substr($filmInfo['Tijd'], 0, 5) ." UUR</h2>
+                <h2>" . $filmInfo['Naam'] . " - " . $filmInfo['Datum'] . " - " . substr($filmInfo['Tijd'], 0, 5) . " UUR</h2>
             ");
     }
 
 }
+
 ?>

@@ -6,13 +6,13 @@ class SpecialAccordionView {
     
     public function SpecialAccordionView()
     {
-        include_once 'backend/DBFunctions.php';
+        include_once 'backend/Specials.php';
     }
     
     public function Render()
     {
-    $dbFunctions = new DBFunctions();
-    $this->specials = $dbFunctions->HaalSpecialsOp();
+    $specials = new Specials();
+    $this->specials = $specials->HaalSpecialsOp(TRUE);
      
     echo ("
     <div id=\"SpecialAccordion\">

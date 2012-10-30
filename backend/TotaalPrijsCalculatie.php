@@ -5,18 +5,19 @@ class TotaalPrijsCalculatie {
    
     public static function Calculeer($stoelen)
     {
-        require_once 'backend/DBFunctions.php';
+        //moet volledig pad zijn.
+        require_once '/var/www/filmpje.nl/backend/Stoelen.php';
         
-        $dbFunctions = new DBFunctions();
-        $stoelenInfo = $dbFunctions->StoelInfo($stoelen);
+        $stoelenDB = new Stoelen();
+        $stoelenInfo = $stoelenDB->StoelInfo($stoelen, TRUE);
         
         $result = 0;
         
         foreach ($stoelenInfo as $stoel) {
-            $result += $stoel['StoelPrijs'];
+            $result += floatval($stoel['StoelPrijs']);
         }
         
-        return $result;
+        return floatval($result);
         
     }
     

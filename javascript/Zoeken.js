@@ -19,7 +19,7 @@ $(document).ready(function() {
 
         if (ZoekString.length >= 3) {
 
-            $.getJSON('backend/zoeken.php', {
+            $.getJSON('backend/JSON/Zoeken.php', {
                 q : ZoekString
             }, function(data)
             {                                 

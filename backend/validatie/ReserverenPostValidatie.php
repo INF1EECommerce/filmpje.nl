@@ -127,13 +127,13 @@ class ReserverenPostValidatie {
     private function ValideerReserveringModus($voorstelling)
     {
             //database en helpers erbij halen
-            include_once 'backend/DBFunctions.php';
+            include_once 'backend/Voorstellingen.php';
             include_once 'Helpers/DateHelper.php';
             
-            $dbFunctions = new DBFunctions();
+            $voorstellingen = new Voorstellingen();
             
             //voorstelling info uit DB
-            $voorstellingInfo = $dbFunctions->HaalVoorstellingOp($voorstelling, TRUE);
+            $voorstellingInfo = $voorstellingen->HaalVoorstellingOp($voorstelling, TRUE);
 
             //morgen en voorstelling tijd bepalen
             $filmTijd = strtotime($voorstellingInfo['Datum'] . " ". $voorstellingInfo['Tijd']);
@@ -156,13 +156,13 @@ class ReserverenPostValidatie {
 
     private function ValideerBestellingModus($voorstelling) {
            //database en helpers erbij halen
-            include_once 'backend/DBFunctions.php';
+            include_once 'backend/Voorstellingen.php';
             include_once 'Helpers/DateHelper.php';
             
-            $dbFunctions = new DBFunctions();
+            $voorstellingen = new Voorstellingen();
             
             //voorstelling info uit DB
-            $voorstellingInfo = $dbFunctions->HaalVoorstellingOp($voorstelling, TRUE);
+            $voorstellingInfo = $voorstellingen->HaalVoorstellingOp($voorstelling, TRUE);
 
             //morgen en voorstelling tijd bepalen
             $filmTijd = strtotime($voorstellingInfo['Datum'] . " ". $voorstellingInfo['Tijd']);

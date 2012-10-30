@@ -1,28 +1,20 @@
 <?php
-/**
- * Description of CarouselView
- *
- * @author Chivan
- */
+
 class CarouselView {
-    //put your code here
 
     var $banners;
-    
-    
-    public function CarouselView()
-    {
-        include_once 'backend/DBFunctions.php';
-        $dbFunctions = new DBFunctions();
-        $this->banners = $dbFunctions->HaalBannersOp();
+
+    public function CarouselView() {
+        include_once 'backend/Films.php';
+        $films = new Films();
+        $this->banners = $films->HaalBannersOp(TRUE);
     }
-    
-    
+
     public function Render() {
-        
+
         if (count($this->banners) != 0) {
-         
-        echo ("    
+
+            echo ("    
         <div class=\"container\">
             <div class=\"wt-rotator\">
                 <div class=\"screen\">
@@ -34,20 +26,20 @@ class CarouselView {
                 <div class=\"c-panel\">
                         <div class=\"thumbnails\">
                         <ul>");
-        
-        foreach ($this->banners as $banner) {
-            
-        echo("
+
+            foreach ($this->banners as $banner) {
+
+                echo("
                             <li>
-                                <a href=\"image/Rotator/".$banner['Banner']."\" title=\"".$banner['Naam']."\"></a>
-                                <a href=\"films.php?filmid=".$banner['FilmID']."\"></a>                        
+                                <a href=\"image/Rotator/" . $banner['Banner'] . "\" title=\"" . $banner['Naam'] . "\"></a>
+                                <a href=\"films.php?filmid=" . $banner['FilmID'] . "\"></a>                        
                                 <div style=\"top:160px; left:0px; width:640px; color:#FFF; background-color:#000;\">
-                                   <h1><a href=\"films.php?filmid=".$banner['FilmID']."\">".$banner['Naam']."</a></h1>
+                                   <h1><a href=\"films.php?filmid=" . $banner['FilmID'] . "\">" . $banner['Naam'] . "</a></h1>
                                 </div>
                             </li> 
              ");
-        }
-        echo ("
+            }
+            echo ("
                         </ul>
                         </div>     
                        <div class=\"buttons\">
@@ -58,14 +50,9 @@ class CarouselView {
                 </div>
             </div>	
         </div>");
-            
-            
-            
         }
-        
     }
-    
-    
+
 }
 
 ?>

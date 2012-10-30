@@ -1,5 +1,6 @@
 <?php
-include_once 'backend/DBFunctions.php';
+include_once 'Helpers/ExceptionHelper.php';
+set_exception_handler('ExceptionHelper::exception_handler');
 include_once 'backend/Mail/SendEmail.php';
 include_once 'Views/Top10View.php';
 include_once 'Views/SpecialsMenuItemsView.php';

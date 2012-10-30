@@ -3,7 +3,6 @@ include_once 'Helpers/ExceptionHelper.php';
 set_exception_handler('ExceptionHelper::exception_handler');
 include_once 'Views/FilmPoosterEnInfoView.php';
 include_once 'Views/FacebookEventView.php';
-include_once 'backend/DBFunctions.php';
 include_once 'Views/SpecialsMenuItemsView.php';
 include_once 'backend/validatie/ReserverenPostValidatie.php';
 
@@ -105,10 +104,10 @@ var Voorstelling = " . $postWaardes['Voorstelling'] . ";
                             </th>
                             </thead>
                             <tbody>
-                                <tr><td><image src="image/seatnormal.png"></td><td>Normaal</td><td>&euro; 10,00</td></tr>
-                                <tr><td><image src="image/seatpremium.png"></td><td>Premium</td><td>&euro; 15,00</td></tr>
-                                <tr><td><image src="image/seatvip.png"></td><td>VIP</td><td>&euro; 20,00</td></tr>
-                                <tr><td><image src="image/seatunavailable.png"></td><td>Gereserveerd</td><td></td></tr>
+                                <tr><td><image src="image/StoelSelectie/seatnormal.png"></td><td>Normaal</td><td>&euro; 10,00</td></tr>
+                                <tr><td><image src="image/StoelSelectie/seatpremium.png"></td><td>Premium</td><td>&euro; 15,00</td></tr>
+                                <tr><td><image src="image/StoelSelectie/seatvip.png"></td><td>VIP</td><td>&euro; 20,00</td></tr>
+                                <tr><td><image src="image/StoelSelectie/seatunavailable.png"></td><td>Gereserveerd</td><td></td></tr>
                             </tbody>
                         </table>
 
