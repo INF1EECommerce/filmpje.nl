@@ -149,7 +149,7 @@ $postWaardes = $validatie->ValideerStap2($_POST);
                     <input type="hidden" name="modus" value="<?php echo $postWaardes['Modus']; ?>">
                     <?php if($postWaardes['Modus'] == "bestellen")
                     { ?>
-                    <input type="submit" style="float: left; margin-top: 3px;" class="buttonLight" value="Bestelling plaatsen"><img style="margin-left: 10px; float: left;" src="image/ideal.png" alt="ideallogo"><span style="float: left; margin-top: 10px; margin-left: 10px;"> Veilig betalen met IDeal.</span>
+                    <input type="submit" style="float: left; margin-top: 3px;" class="buttonLight" value="Bestelling plaatsen"><img style="margin-left: 10px; float: left;" src="image/Misc/ideal.png" alt="ideallogo"><span style="float: left; margin-top: 10px; margin-left: 10px;"> Veilig betalen met IDeal.</span>
                     <?php } else {  ?>
                     <input type="submit" style="float: left" class="buttonLight" value="Reserveren">
                     <?php } ?>

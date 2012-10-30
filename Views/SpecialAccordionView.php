@@ -23,7 +23,7 @@ class SpecialAccordionView {
     <h3>".$special['Naam']."</h3>
     <div>
     <a href=\"specials.php?SpecialID=".$special['SpecialID']."\">
-    <img src=\"image/".$special['BlockImage']."\" alt=\"".$special['Naam']."\"></a>
+    <img src=\"image/Specials/Banners/".$special['BlockImage']."\" alt=\"".$special['Naam']."\"></a>
         <p>
         ".$special['Beschrijving']."
         </p>

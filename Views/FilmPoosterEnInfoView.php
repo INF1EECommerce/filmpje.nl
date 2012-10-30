@@ -18,7 +18,7 @@ class FilmPoosterEnInfoView
         $kijkwijzerhtml = "";
         
         foreach ($kijwijzericonen as $icon) {
-            $kijkwijzerhtml .= "<img class=\"kijkwijzer\" src=\"image/".$icon.".png\"/>";
+            $kijkwijzerhtml .= "<img class=\"kijkwijzer\" src=\"image/Kijkwijzer/".$icon.".png\"/>";
         }
         
         
@@ -53,7 +53,7 @@ class FilmPoosterEnInfoView
         $kijkwijzerhtml = "";
         
         foreach ($kijwijzericonen as $icon) {
-            $kijkwijzerhtml .= "<img class=\"kijkwijzer\" src=\"image/".$icon.".png\"/>";
+            $kijkwijzerhtml .= "<img class=\"kijkwijzer\" src=\"image/Kijkwijzer/".$icon.".png\"/>";
         }
         
         

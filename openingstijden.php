@@ -75,7 +75,7 @@ include_once 'Views/Top10View.php';
             </td><td>
                 <div id="mainContent">
 		<div id="pagebanner">
-<img src="image/open.png">
+<img src="image/PageBanners/open.png">
 </div>
 		<!-- kiezen tussen contactgegevens/openingstijden/bereikbaarheid/tarieven via php -->
 		<div id="infoDiv">

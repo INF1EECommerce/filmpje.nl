@@ -82,7 +82,7 @@ include_once 'Views/SpecialsMenuItemsView.php';
 </div></td><td>
 		<div id="mainContent">
 		<div id="pagebanner">
-<img src="image/bereikbaarheid.png">
+<img src="image/PageBanners/bereikbaarheid.png">
 </div>
 <div id="infoDiv">
 		

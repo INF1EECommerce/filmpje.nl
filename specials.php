@@ -93,7 +93,7 @@ $getWaardes = $validatie->Valideer($_GET);
             </td><td>
 <div id="mainContent">
 		<div id="pagebanner">
-<img src="image/<?php echo $getWaardes['SpecialInfo']['HeaderImage']; ?>">
+<img src="image/Specials/PageBanners/<?php echo $getWaardes['SpecialInfo']['HeaderImage']; ?>">
 </div>
     <div id="specialBeschrijving">
       <p class="blockheader"><?php echo $getWaardes['SpecialInfo']['Naam'] ?></p>  

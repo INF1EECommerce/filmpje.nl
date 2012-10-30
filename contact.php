@@ -94,7 +94,7 @@ if ('POST' == $_SERVER['REQUEST_METHOD']) {
                     </td><td>
                         <div id="mainContent">
                             <div id="pagebanner">
-                                <img src="image/contact.png">
+                                <img src="image/PageBanners/contact.png">
                             </div>
                             <!-- kiezen tussen contactgegevens/openingstijden/bereikbaarheid/tarieven via php -->
                             <div id="infoDiv">

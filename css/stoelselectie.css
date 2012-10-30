@@ -1,6 +1,6 @@
     .NormaalStoel
      {
-         background-image: url('../image/seatnormal.png');
+         background-image: url('../image/StoelSelectie/seatnormal.png');
          background-repeat: no-repeat;
          background-size: 19px 19px;
 	 height:19px;
@@ -9,7 +9,7 @@
          
       .PrimiumStoel
       {
-         background-image: url('../image/seatpremium.png');
+         background-image: url('../image/StoelSelectie/seatpremium.png');
          background-repeat: no-repeat;
          background-size: 19px 19px;
 	 height:19px;
@@ -18,7 +18,7 @@
       
       .VIPStoel
       {
-         background-image: url('../image/seatvip.png');
+         background-image: url('../image/StoelSelectie/seatvip.png');
 		 min-height:19px;
          min-width: 18px;
                   background-repeat: no-repeat;
@@ -26,7 +26,7 @@
       }
       .onbeschikbaar
       { 
-          background-image: url('../image/seatunavailable.png');
+          background-image: url('../image/StoelSelectie/seatunavailable.png');
          height:19px;
          min-width: 18px; 
          background-repeat: no-repeat;

@@ -64,7 +64,7 @@ $getWaardes = $validatie->Valideer($_GET);
 
                         <h2>Hoe komt u bij Filmpje?</h2>
                         <p>Hier helpen wij u graag mee. U kunt uw adres opgeven bij "van" en klikt u dan op "ga".</br> Wij vertellen u hoe u moet rijden!</p>
-                    </td><td><img  src="image/dofb.png" onclick="openFBPopup();">
+                    </td><td><img  src="image/Facebook/dofb.png" onclick="openFBPopup();">
                             <button class="buttonLight" style="margin-top: 15px;" onclick="window.parent.location='index.php'">Naar de Homepage</button></td></tr><tr><td colspan="2">
 
                         <script src="//www.gmodules.com/ig/ifr?url=http://hosting.gmodules.com/ig/gadgets/file/114281111391296844949/driving-directions.xml&amp;up_fromLocation=&amp;up_myLocations=West-Kruiskade%2026%2C%203014%20AS%20in%20Rotterdam&amp;up_defaultDirectionsType=&amp;up_autoExpand=&amp;synd=open&amp;w=595&amp;h=500&amp;title=&amp;brand=light&amp;lang=nl&amp;country=ALL&amp;border=%23ffffff%7C3px%2C1px+solid+%23999999&amp;output=js"></script>
